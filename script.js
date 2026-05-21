@@ -336,39 +336,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ================================================================
-  // 7. FORMULÁRIO DE CONTATO
-  // Simula o envio com feedback visual (alerta bonito)
-  // GUSTAVO: Para funcionar de verdade, você precisaria usar um
-  // serviço como Formspree, EmailJS ou criar um backend
+  // 7. FORMULÁRIO DE CONTATO (envio real via Formspree)
+  // O formulário envia os dados para o Formspree, que repassa a
+  // mensagem para o e-mail do Gustavo. O ID fica no atributo
+  // "action" do <form> no index.html.
   // ================================================================
-  
+
   const formulario = document.getElementById('contato-form');
-  
-  formulario.addEventListener('submit', (e) => {
-    e.preventDefault(); // Impede o envio padrão (reload da página)
-    
+
+  formulario.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Impede o reload padrão da página
+
     const botao = formulario.querySelector('button[type="submit"]');
     const textoOriginal = botao.innerHTML;
-    
+
     // Feedback visual: mostra que está "enviando"
     botao.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
     botao.disabled = true;
     botao.style.opacity = '0.7';
-    
-    // Simula um tempo de envio (2 segundos)
-    setTimeout(() => {
+
+    try {
+      // Envia os dados do formulário para o Formspree
+      const resposta = await fetch(formulario.action, {
+        method: 'POST',
+        body: new FormData(formulario),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (!resposta.ok) throw new Error('Falha no envio');
+
+      // Sucesso: mensagem enviada de verdade
       botao.innerHTML = '<i class="fas fa-check"></i> Enviado!';
       botao.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
-      
-      // Volta ao normal após 3 segundos
-      setTimeout(() => {
-        botao.innerHTML = textoOriginal;
-        botao.disabled = false;
-        botao.style.opacity = '1';
-        botao.style.background = '';
-        formulario.reset(); // Limpa o formulário
-      }, 3000);
-    }, 2000);
+      formulario.reset(); // Limpa o formulário
+    } catch (erro) {
+      // Erro: algo deu errado no envio
+      botao.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Erro ao enviar';
+      botao.style.background = 'linear-gradient(135deg, #ef4444, #b91c1c)';
+    }
+
+    // Volta o botão ao normal após 3 segundos
+    setTimeout(() => {
+      botao.innerHTML = textoOriginal;
+      botao.disabled = false;
+      botao.style.opacity = '1';
+      botao.style.background = '';
+    }, 3000);
   });
 
 
