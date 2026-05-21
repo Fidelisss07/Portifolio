@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ====================================================================
+       META TAGS — Informações básicas da página
+       Essas tags dizem ao navegador como interpretar o conteúdo
+  ==================================================================== -->
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres (acentos, ç, etc) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Faz o site funcionar bem no celular -->
+    <meta name="description"
+        content="Portfólio de Gustavo Fidelis — Desenvolvedor Full Stack. SaaS com IA, e-commerces e aplicações web em produção. Confira meus projetos e entre em contato!">
+    <meta name="author" content="Gustavo Fidelis de Souza e Silva">
+
+    <title>Gustavo Fidelis | Desenvolvedor Full Stack</title>
+
+    <!-- ====================================================================
+       FONTES E ÍCONES EXTERNOS
+       Estamos importando a fonte "Inter" do Google Fonts e os ícones
+       do Font Awesome (para ícones de GitHub, LinkedIn, etc)
+  ==================================================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Nosso arquivo de estilos -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==================================================================
+       NAVBAR — Barra de navegação fixa no topo
+       Fica sempre visível enquanto você rola a página
+  ================================================================== -->
+    <nav id="navbar" class="navbar">
+        <div class="navbar-container">
+            <!-- Logo: suas iniciais "GF" estilizadas -->
+            <a href="#hero" class="navbar-logo">GF<span class="logo-dot">.</span></a>
+
+            <!-- Links de navegação (cada um aponta para uma seção da página) -->
+            <ul class="navbar-menu" id="navbar-menu">
+                <li><a href="#sobre" class="navbar-link">Sobre</a></li>
+                <li><a href="#projetos" class="navbar-link">Projetos</a></li>
+                <li><a href="#skills" class="navbar-link">Skills</a></li>
+                <li><a href="#experiencia" class="navbar-link">Experiência</a></li>
+                <li><a href="#contato" class="navbar-link">Contato</a></li>
+                <li>
+                    <a href="curriculo_gustavo_fidelis_final.pdf" class="navbar-cv" target="_blank"
+                        rel="noopener noreferrer">
+                        <i class="fas fa-file-pdf"></i> Currículo
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Botão hamburger para celular (3 linhas que viram X) -->
+            <button class="navbar-toggle" id="navbar-toggle" aria-label="Abrir menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+
+    <!-- ==================================================================
+       HERO — Primeira coisa que a pessoa vê ao abrir o site
+       Ocupa a tela inteira. Tem seu nome grande e uma animação de digitação
+  ================================================================== -->
+    <section id="hero" class="hero">
+        <!-- Canvas: é um "quadro de pintura" onde o JavaScript desenha as partículas animadas -->
+        <canvas id="particles-canvas"></canvas>
+
+        <div class="hero-content">
+            <!-- Saudação pequena acima do nome -->
+            <p class="hero-greeting">Olá, eu sou</p>
+
+            <!-- Seu nome com efeito de gradiente roxo -->
+            <h1 class="hero-name">Gustavo <span class="text-gradient">Fidelis</span></h1>
+
+            <!-- Texto que simula estar sendo digitado -->
+            <div class="hero-typing">
+                <span class="typing-text" id="typing-text"></span>
+                <span class="typing-cursor">|</span>
+            </div>
+
+            <!-- Breve descrição -->
+            <p class="hero-description">
+                Transformando ideias em experiências digitais com código limpo e design moderno.
+            </p>
+
+            <!-- Botões de ação (CTA = Call to Action) -->
+            <div class="hero-buttons">
+                <a href="#projetos" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> Ver Projetos
+                </a>
+                <a href="curriculo_gustavo_fidelis_final.pdf" class="btn btn-outline" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fas fa-file-pdf"></i> Meu Currículo
+                </a>
+                <a href="#contato" class="btn btn-ghost">
+                    <i class="fas fa-envelope"></i> Contato
+                </a>
+            </div>
+        </div>
+
+        <!-- Seta animada indicando para rolar para baixo -->
+        <a href="#sobre" class="scroll-indicator">
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </a>
+    </section>
+
+
+    <!-- ==================================================================
+       SOBRE MIM — Apresentação pessoal
+       Aqui você conta quem é, o que faz e o que te motiva
+  ================================================================== -->
+    <section id="sobre" class="section sobre">
+        <div class="container">
+            <!-- Título da seção (todas as seções seguem esse padrão) -->
+            <div class="section-header">
+                <p class="section-subtitle">Conheça um pouco</p>
+                <h2 class="section-title">Sobre <span class="text-gradient">Mim</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="sobre-content">
+                <!-- Lado esquerdo: sua foto -->
+                <div class="sobre-image-wrapper">
+                    <div class="sobre-image">
+                        <!-- GUSTAVO: Troque o src pela sua foto real depois! -->
+                        <div class="foto-placeholder">
+                            <i class="fas fa-user"></i>
+                            <span>Sua foto aqui</span>
+                        </div>
+                    </div>
+                    <!-- Decoração ao redor da foto -->
+                    <div class="sobre-image-decoration"></div>
+                </div>
+
+                <!-- Lado direito: texto + cards de destaque -->
+                <div class="sobre-text">
+                    <h3 class="sobre-heading">Desenvolvedor Full Stack</h3>
+
+                    <p>
+                        Olá! Sou Gustavo Fidelis, desenvolvedor Full Stack apaixonado por transformar ideias em
+                        produtos reais. Já entreguei um SaaS com IA e dois e-commerces completos em produção —
+                        com autenticação, pagamentos, painéis administrativos e integrações de terceiros.
+                    </p>
+                    <p>
+                        Trabalho com React, Next.js, TypeScript, Node.js, Supabase e Firebase. Sou autodidata e
+                        proativo, com vivência também em montagem e manutenção de computadores de alta performance
+                        sob prazos críticos.
+                    </p>
+
+                    <!-- Cards com destaques rápidos -->
+                    <div class="sobre-cards">
+                        <div class="sobre-card glass-card">
+                            <div class="sobre-card-icon"><i class="fas fa-code"></i></div>
+                            <div class="sobre-card-info">
+                                <span class="sobre-card-number">10+</span>
+                                <span class="sobre-card-label">Tecnologias</span>
+                            </div>
+                        </div>
+                        <div class="sobre-card glass-card">
+                            <div class="sobre-card-icon"><i class="fas fa-rocket"></i></div>
+                            <div class="sobre-card-info">
+                                <span class="sobre-card-number">3</span>
+                                <span class="sobre-card-label">Projetos no Ar</span>
+                            </div>
+                        </div>
+                        <div class="sobre-card glass-card">
+                            <div class="sobre-card-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="sobre-card-info">
+                                <span class="sobre-card-number">Full</span>
+                                <span class="sobre-card-label">Stack Dev Club</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================================
+       PROJETOS — Seus trabalhos
+       Cards com efeito hover 3D. Troque pelos seus projetos reais!
+  ================================================================== -->
+    <section id="projetos" class="section projetos">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Meus trabalhos</p>
+                <h2 class="section-title"><span class="text-gradient">Projetos</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="projetos-grid">
+                <!-- PROJETO 1 — WeekFlow -->
+                <article class="projeto-card glass-card" data-tilt>
+                    <div class="projeto-image">
+                        <div class="projeto-placeholder">
+                            <i class="fas fa-calendar-week"></i>
+                        </div>
+                        <div class="projeto-overlay">
+                            <div class="projeto-links">
+                                <a href="https://weekflow.space" class="projeto-link" title="Ver demo ao vivo"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="projeto-info">
+                        <h3 class="projeto-titulo">WeekFlow</h3>
+                        <p class="projeto-descricao">
+                            SaaS de planejamento semanal com IA: sugestões de tarefas, rede social colaborativa
+                            (FlowCircle), planos de assinatura e suporte a 3 idiomas.
+                        </p>
+                        <div class="projeto-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Supabase</span>
+                            <span class="tag">Stripe</span>
+                            <span class="tag">Groq AI</span>
+                            <span class="tag">Tailwind</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROJETO 2 — BaLu 3D -->
+                <article class="projeto-card glass-card" data-tilt>
+                    <div class="projeto-image">
+                        <div class="projeto-placeholder">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="projeto-overlay">
+                            <div class="projeto-links">
+                                <a href="https://balu3d.com.br" class="projeto-link" title="Ver demo ao vivo"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="projeto-info">
+                        <h3 class="projeto-titulo">BaLu 3D</h3>
+                        <p class="projeto-descricao">
+                            E-commerce de impressão 3D com catálogo, checkout duplo (PIX + cartão), painel admin e
+                            e-mails transacionais. Projeto freelance entregue para cliente real.
+                        </p>
+                        <div class="projeto-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Firebase</span>
+                            <span class="tag">Stripe</span>
+                            <span class="tag">Cloudinary</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROJETO 3 — AMXWatch -->
+                <article class="projeto-card glass-card" data-tilt>
+                    <div class="projeto-image">
+                        <div class="projeto-placeholder">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="projeto-overlay">
+                            <div class="projeto-links">
+                                <a href="https://amxwatch.com.br" class="projeto-link" title="Ver demo ao vivo"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="projeto-info">
+                        <h3 class="projeto-titulo">AMXWatch</h3>
+                        <p class="projeto-descricao">
+                            E-commerce premium de relógios com frete via Melhor Envio, painel admin, conformidade
+                            LGPD, avaliações, favoritos, cupons e SEO avançado.
+                        </p>
+                        <div class="projeto-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Supabase</span>
+                            <span class="tag">GSAP</span>
+                            <span class="tag">Melhor Envio</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================================
+       SKILLS — Suas habilidades técnicas
+       Barras de progresso animadas quando a seção aparece na tela
+  ================================================================== -->
+    <section id="skills" class="section skills">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Minhas habilidades</p>
+                <h2 class="section-title"><span class="text-gradient">Skills</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="skills-container">
+                <!-- Categoria: Front-End -->
+                <div class="skills-category">
+                    <h3 class="skills-category-title">
+                        <i class="fas fa-laptop-code"></i> Front-End
+                    </h3>
+                    <div class="skills-list">
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fab fa-react"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">React</span>
+                                    <span class="skill-percent">88%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="88"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-forward"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Next.js</span>
+                                    <span class="skill-percent">82%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="82"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-code"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">TypeScript</span>
+                                    <span class="skill-percent">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="80"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fab fa-js-square"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">JavaScript</span>
+                                    <span class="skill-percent">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="85"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-wind"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Tailwind CSS</span>
+                                    <span class="skill-percent">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="90"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">HTML5 &amp; CSS3</span>
+                                    <span class="skill-percent">92%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="92"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categoria: Back-End & Ferramentas -->
+                <div class="skills-category">
+                    <h3 class="skills-category-title">
+                        <i class="fas fa-server"></i> Back-End &amp; Ferramentas
+                    </h3>
+                    <div class="skills-list">
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Node.js</span>
+                                    <span class="skill-percent">78%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="78"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Supabase</span>
+                                    <span class="skill-percent">82%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="82"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-fire"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Firebase</span>
+                                    <span class="skill-percent">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="80"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-credit-card"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Stripe &amp; Pagamentos</span>
+                                    <span class="skill-percent">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="80"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Git &amp; GitHub</span>
+                                    <span class="skill-percent">82%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="82"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-microchip"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Hardware &amp; Infra</span>
+                                    <span class="skill-percent">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="90"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================================
+       EXPERIÊNCIA / FORMAÇÃO — Timeline vertical
+       Uma linha do tempo bonita mostrando sua trajetória
+  ================================================================== -->
+    <section id="experiencia" class="section experiencia">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Minha trajetória</p>
+                <h2 class="section-title"><span class="text-gradient">Experiência</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="timeline">
+                <!-- Item 1: Formação -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-badge">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <span class="timeline-date">Até Maio/2026 (Previsão)</span>
+                        <h3 class="timeline-title">Desenvolvimento Web Full Stack</h3>
+                        <p class="timeline-description">
+                            Dev Club. Formação completa em desenvolvimento web Full Stack: HTML, CSS, JavaScript,
+                            React, Node.js e bancos de dados, com foco em boas práticas de código e aplicações
+                            reais em produção.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 2: Experiência Profissional -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-badge">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <span class="timeline-date">Ago/2025 — Out/2025</span>
+                        <h3 class="timeline-title">Técnico de Informática (SNE Eventos)</h3>
+                        <p class="timeline-description">
+                            Responsável pela gestão e manutenção de máquinas da empresa. Configuração e montagem de
+                            computadores de
+                            alta performance para uso em eventos, garantindo o funcionamento do hardware e sistema
+                            operacionais sob prazos críticos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================================
+       CONTATO — Formulário para entrarem em contato com você
+       Também tem links para suas redes sociais
+  ================================================================== -->
+    <section id="contato" class="section contato">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Fale comigo</p>
+                <h2 class="section-title"><span class="text-gradient">Contato</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="contato-wrapper">
+                <!-- Lado esquerdo: informações de contato -->
+                <div class="contato-info">
+                    <h3>Vamos conversar!</h3>
+                    <p>
+                        Estou sempre aberto a novas oportunidades, colaborações e conversas sobre
+                        tecnologia. Sinta-se à vontade para entrar em contato!
+                    </p>
+
+                    <div class="contato-links">
+                        <!-- GUSTAVO: Coloque seus links reais aqui! -->
+                        <a href="https://github.com/SEU-USUARIO" class="contato-link glass-card" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                            <div>
+                                <span class="contato-link-label">GitHub</span>
+                                <span class="contato-link-value">github.com/SEU-USUARIO</span>
+                            </div>
+                        </a>
+
+                        <a href="https://linkedin.com/in/gustavo-fidelis" class="contato-link glass-card"
+                            target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                            <div>
+                                <span class="contato-link-label">LinkedIn</span>
+                                <span class="contato-link-value">linkedin.com/in/gustavo-fidelis</span>
+                            </div>
+                        </a>
+
+                        <a href="mailto:gufidelis116@gmail.com" class="contato-link glass-card">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <span class="contato-link-label">E-mail</span>
+                                <span class="contato-link-value">gufidelis116@gmail.com</span>
+                            </div>
+                        </a>
+
+                        <div class="contato-link glass-card">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <span class="contato-link-label">Telefone</span>
+                                <span class="contato-link-value">(11) 97068-4205 | SP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lado direito: formulário -->
+                <form class="contato-form glass-card" id="contato-form">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================================
+       FOOTER — Rodapé do site
+  ================================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <a href="#hero" class="footer-logo">GF<span class="logo-dot">.</span></a>
+                <p class="footer-text">
+                    Feito com <span class="footer-heart">💜</span> por Gustavo Fidelis
+                </p>
+                <div class="footer-social">
+                    <a href="https://github.com/SEU-USUARIO" target="_blank" rel="noopener noreferrer"
+                        aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/gustavo-fidelis" target="_blank" rel="noopener noreferrer"
+                        aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Gustavo Fidelis. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Nosso arquivo de JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
