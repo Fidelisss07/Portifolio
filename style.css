@@ -591,6 +591,11 @@ img {
   transform: scale(1.05);
 }
 
+/* Variante para logos com elementos escuros (precisam de fundo claro) */
+.projeto-logo--light {
+  background: #ffffff;
+}
+
 /* Overlay que aparece no hover */
 .projeto-overlay {
   position: absolute;
