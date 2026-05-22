@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Adiciona a classe "reveal" em todos os elementos que devem animar
   const elementosParaAnimar = document.querySelectorAll(
     '.section-header, .sobre-content, .projeto-card, .skills-category, ' +
-    '.timeline-item, .contato-wrapper'
+    '.timeline-item, .certificado-card, .contato-wrapper'
   );
   
   elementosParaAnimar.forEach(el => el.classList.add('reveal'));
