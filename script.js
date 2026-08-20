@@ -3,7 +3,7 @@
    
    O QUE ESSE ARQUIVO FAZ:
    1. Partículas animadas no fundo do Hero (usando Canvas)
-   2. Animação de digitação ("Desenvolvedor Front-End")
+   2. Animação de digitação (formação, stack e projetos)
    3. Navbar que muda ao rolar a página
    4. Menu hamburger no celular
    5. Animações de entrada ao scrollar (Scroll Reveal)
@@ -171,9 +171,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // GUSTAVO: Mude os textos abaixo para o que quiser!
   const textos = [
-    'Desenvolvedor Full Stack',
+    'Ciência da Computação · FIAP',
     'React • Next.js • Node.js',
-    'Construindo SaaS e E-commerces',
+    'Construindo E-commerces completos',
+    'Desenvolvendo com Claude Code',
     'Apaixonado por Tecnologia'
   ];
   
@@ -282,6 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Adiciona a classe "reveal" em todos os elementos que devem animar
   const elementosParaAnimar = document.querySelectorAll(
     '.section-header, .sobre-content, .projeto-card, .skills-category, ' +
+    '.ia-intro, .ia-card, ' +
     '.timeline-item, .certificado-card, .contato-wrapper'
   );
   

@@ -9,10 +9,10 @@
     <meta charset="UTF-8"> <!-- Define a codificação de caracteres (acentos, ç, etc) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Faz o site funcionar bem no celular -->
     <meta name="description"
-        content="Portfólio de Gustavo Fidelis — Desenvolvedor Full Stack. SaaS com IA, e-commerces e aplicações web em produção. Confira meus projetos e entre em contato!">
+        content="Portfólio de Gustavo Fidelis — estudante de Ciência da Computação na FIAP. Desenvolvo com React, Next.js e TypeScript, e uso Claude Code no fluxo diário. Lojas virtuais completas no ar. Confira meus projetos!">
     <meta name="author" content="Gustavo Fidelis de Souza e Silva">
 
-    <title>Gustavo Fidelis | Desenvolvedor Full Stack</title>
+    <title>Gustavo Fidelis | Ciência da Computação — FIAP</title>
 
     <!-- ====================================================================
        FONTES E ÍCONES EXTERNOS
@@ -44,6 +44,7 @@
             <ul class="navbar-menu" id="navbar-menu">
                 <li><a href="#sobre" class="navbar-link">Sobre</a></li>
                 <li><a href="#projetos" class="navbar-link">Projetos</a></li>
+                <li><a href="#ia" class="navbar-link">IA</a></li>
                 <li><a href="#skills" class="navbar-link">Skills</a></li>
                 <li><a href="#experiencia" class="navbar-link">Experiência</a></li>
                 <li><a href="#contato" class="navbar-link">Contato</a></li>
@@ -88,7 +89,8 @@
 
             <!-- Breve descrição -->
             <p class="hero-description">
-                Transformando ideias em experiências digitais com código limpo e design moderno.
+                Transformando ideias em experiências digitais com código limpo, design moderno
+                e <strong>Claude Code</strong> como par de programação.
             </p>
 
             <!-- Botões de ação (CTA = Call to Action) -->
@@ -132,11 +134,8 @@
                 <!-- Lado esquerdo: sua foto -->
                 <div class="sobre-image-wrapper">
                     <div class="sobre-image">
-                        <!-- GUSTAVO: Troque o src pela sua foto real depois! -->
-                        <div class="foto-placeholder">
-                            <i class="fas fa-user"></i>
-                            <span>Sua foto aqui</span>
-                        </div>
+                        <img src="foto-gustavo.webp" alt="Gustavo Fidelis, estudante de Ciência da Computação na FIAP"
+                            class="sobre-foto" width="800" height="800" loading="lazy">
                     </div>
                     <!-- Decoração ao redor da foto -->
                     <div class="sobre-image-decoration"></div>
@@ -144,17 +143,23 @@
 
                 <!-- Lado direito: texto + cards de destaque -->
                 <div class="sobre-text">
-                    <h3 class="sobre-heading">Desenvolvedor Full Stack</h3>
+                    <h3 class="sobre-heading">Ciência da Computação na FIAP</h3>
 
                     <p>
-                        Olá! Sou Gustavo Fidelis, desenvolvedor Full Stack apaixonado por transformar ideias em
-                        produtos reais. Já entreguei um SaaS com IA e dois e-commerces completos em produção —
-                        com autenticação, pagamentos, painéis administrativos e integrações de terceiros.
+                        Olá! Sou Gustavo Fidelis, estudante de Ciência da Computação na FIAP e apaixonado por
+                        transformar ideias em produtos reais. Já coloquei no ar duas lojas virtuais completas —
+                        com catálogo, checkout, pagamentos, painel administrativo e integrações de terceiros.
+                        Uma delas foi entregue como freelance para um cliente externo.
                     </p>
                     <p>
-                        Trabalho com React, Next.js, TypeScript, Node.js, Supabase e Firebase. Sou autodidata e
-                        proativo, com vivência também em montagem e manutenção de computadores de alta performance
-                        sob prazos críticos.
+                        Trabalho com React, Next.js, TypeScript, Node.js, Supabase e Firebase — e uso
+                        <strong>Claude Code</strong> como ferramenta de trabalho diária, de par de programação a
+                        revisão de código. Acredito que saber operar IA com critério é hoje tão importante quanto
+                        conhecer a linguagem: ela acelera a entrega, mas a decisão técnica continua sendo minha.
+                    </p>
+                    <p>
+                        Sou autodidata e proativo, com vivência também em montagem e manutenção de computadores
+                        de alta performance sob prazos críticos.
                     </p>
 
                     <!-- Cards com destaques rápidos -->
@@ -169,15 +174,22 @@
                         <div class="sobre-card glass-card">
                             <div class="sobre-card-icon"><i class="fas fa-rocket"></i></div>
                             <div class="sobre-card-info">
-                                <span class="sobre-card-number">3</span>
-                                <span class="sobre-card-label">Projetos no Ar</span>
+                                <span class="sobre-card-number">2</span>
+                                <span class="sobre-card-label">Lojas no Ar</span>
                             </div>
                         </div>
                         <div class="sobre-card glass-card">
                             <div class="sobre-card-icon"><i class="fas fa-graduation-cap"></i></div>
                             <div class="sobre-card-info">
-                                <span class="sobre-card-number">Full</span>
-                                <span class="sobre-card-label">Stack Dev Club</span>
+                                <span class="sobre-card-number">CC</span>
+                                <span class="sobre-card-label">FIAP</span>
+                            </div>
+                        </div>
+                        <div class="sobre-card glass-card">
+                            <div class="sobre-card-icon"><i class="fas fa-terminal"></i></div>
+                            <div class="sobre-card-info">
+                                <span class="sobre-card-number">Claude</span>
+                                <span class="sobre-card-label">Code no fluxo</span>
                             </div>
                         </div>
                     </div>
@@ -200,37 +212,7 @@
             </div>
 
             <div class="projetos-grid">
-                <!-- PROJETO 1 — WeekFlow -->
-                <article class="projeto-card glass-card" data-tilt>
-                    <div class="projeto-image">
-                        <img src="weekflow-logo.webp" alt="Logo WeekFlow" class="projeto-logo projeto-logo--light"
-                            loading="lazy">
-                        <div class="projeto-overlay">
-                            <div class="projeto-links">
-                                <a href="https://weekflow.space" class="projeto-link" title="Ver demo ao vivo"
-                                    target="_blank" rel="noopener noreferrer">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projeto-info">
-                        <h3 class="projeto-titulo">WeekFlow</h3>
-                        <p class="projeto-descricao">
-                            SaaS de planejamento semanal com IA: sugestões de tarefas, rede social colaborativa
-                            (FlowCircle), planos de assinatura e suporte a 3 idiomas.
-                        </p>
-                        <div class="projeto-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Supabase</span>
-                            <span class="tag">Stripe</span>
-                            <span class="tag">Groq AI</span>
-                            <span class="tag">Tailwind</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- PROJETO 2 — BaLu 3D -->
+                <!-- PROJETO 1 — BaLu 3D -->
                 <article class="projeto-card glass-card" data-tilt>
                     <div class="projeto-image">
                         <img src="balu3d-logo.webp" alt="Logo BaLu 3D" class="projeto-logo" loading="lazy">
@@ -259,7 +241,7 @@
                     </div>
                 </article>
 
-                <!-- PROJETO 3 — AMXWatch -->
+                <!-- PROJETO 2 — AMXWatch -->
                 <article class="projeto-card glass-card" data-tilt>
                     <div class="projeto-image">
                         <img src="amxwatch-logo.webp" alt="Logo AMXWatch" class="projeto-logo" loading="lazy">
@@ -286,6 +268,68 @@
                             <span class="tag">Melhor Envio</span>
                         </div>
                     </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================================
+       IA NO FLUXO — Como eu trabalho com Claude Code
+       Diferencial competitivo: saber operar IA com critério técnico
+  ================================================================== -->
+    <section id="ia" class="section ia">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Como eu trabalho</p>
+                <h2 class="section-title">IA no meu <span class="text-gradient">fluxo</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+            <p class="ia-intro">
+                Uso o <strong>Claude Code</strong> — a CLI de IA da Anthropic — como par de programação no dia a
+                dia, dos meus projetos em produção a este próprio portfólio. Não é atalho para pular o
+                aprendizado: é a ferramenta que me deixa iterar mais rápido, revisar meu código com mais rigor e
+                entregar mais em menos tempo. <strong>Todo código que eu entrego, eu leio, entendo e sei
+                    defender.</strong>
+            </p>
+
+            <div class="ia-grid">
+                <article class="ia-card glass-card">
+                    <div class="ia-card-icon"><i class="fas fa-terminal"></i></div>
+                    <h3 class="ia-card-titulo">Claude Code no dia a dia</h3>
+                    <p class="ia-card-texto">
+                        Par de programação real: implementação de features, refatoração, caça a bugs e code
+                        review. A IA propõe, eu avalio, testo e decido o que entra no projeto.
+                    </p>
+                </article>
+
+                <article class="ia-card glass-card">
+                    <div class="ia-card-icon"><i class="fas fa-sitemap"></i></div>
+                    <h3 class="ia-card-titulo">Engenharia de contexto</h3>
+                    <p class="ia-card-texto">
+                        Sei fornecer o contexto certo ao agente — arquivos relevantes, convenções do projeto e
+                        regras em <code>CLAUDE.md</code> / <code>AGENTS.md</code> — para obter resultados
+                        consistentes em vez de código genérico.
+                    </p>
+                </article>
+
+                <article class="ia-card glass-card">
+                    <div class="ia-card-icon"><i class="fas fa-robot"></i></div>
+                    <h3 class="ia-card-titulo">Fluxos agênticos</h3>
+                    <p class="ia-card-texto">
+                        Configuro e opero ferramentas agênticas: CLIs próprias, skills e slash commands que
+                        automatizam etapas repetitivas do meu processo de desenvolvimento.
+                    </p>
+                </article>
+
+                <article class="ia-card glass-card">
+                    <div class="ia-card-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3 class="ia-card-titulo">Revisão crítica sempre</h3>
+                    <p class="ia-card-texto">
+                        IA acelera, não substitui julgamento. Nada vai para produção sem eu ler, testar e
+                        entender — inclusive as implicações de segurança e performance.
+                    </p>
                 </article>
             </div>
         </div>
@@ -478,6 +522,67 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Categoria: IA no Desenvolvimento (ocupa a linha inteira) -->
+                <div class="skills-category skills-category--full">
+                    <h3 class="skills-category-title">
+                        <i class="fas fa-wand-magic-sparkles"></i> IA no Desenvolvimento
+                    </h3>
+                    <div class="skills-list skills-list--grid">
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-terminal"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Claude Code</span>
+                                    <span class="skill-percent">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="85"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-sitemap"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Engenharia de Contexto</span>
+                                    <span class="skill-percent">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="80"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-robot"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Fluxos Agênticos &amp; CLIs</span>
+                                    <span class="skill-percent">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="75"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">IA aplicada ao código</span>
+                                    <span class="skill-percent">82%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="82"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -503,17 +608,32 @@
                         <div class="timeline-badge">
                             <i class="fas fa-graduation-cap"></i>
                         </div>
-                        <span class="timeline-date">Em andamento — Conclusão prevista: Jul/Ago 2026</span>
-                        <h3 class="timeline-title">Desenvolvimento Web Full Stack — Dev Club</h3>
+                        <span class="timeline-date">Ago/2026 — Conclusão prevista: Jul/2030</span>
+                        <h3 class="timeline-title">Bacharelado em Ciência da Computação — FIAP</h3>
                         <p class="timeline-description">
-                            Dev Club. Formação completa em desenvolvimento web Full Stack: HTML, CSS, JavaScript,
-                            React, Node.js e bancos de dados, com foco em boas práticas de código e aplicações
-                            reais em produção.
+                            Graduação em andamento na FIAP, em São Paulo. Formação em fundamentos de computação,
+                            algoritmos, estruturas de dados e engenharia de software.
                         </p>
                     </div>
                 </div>
 
-                <!-- Item 2: Experiência Profissional -->
+                <!-- Item 2: Emprego atual -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-badge">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <span class="timeline-date">Atual — contrato até Ago/2027</span>
+                        <h3 class="timeline-title">Jovem Aprendiz — Gestão, Qualidade e Atendimento</h3>
+                        <p class="timeline-description">
+                            Associação de Ensino Social Profissionalizante, São Paulo. Contrato de aprendizagem
+                            (CLT) com formação técnico-profissional em gestão, qualidade, atendimento e serviços.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 3: Experiência anterior -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content glass-card">
@@ -593,7 +713,6 @@
                     </p>
 
                     <div class="contato-links">
-                        <!-- GUSTAVO: Coloque seus links reais aqui! -->
                         <a href="https://github.com/Fidelisss07" class="contato-link glass-card" target="_blank"
                             rel="noopener noreferrer">
                             <i class="fab fa-github"></i>
@@ -603,12 +722,12 @@
                             </div>
                         </a>
 
-                        <a href="https://linkedin.com/in/gustavo-fidelis" class="contato-link glass-card"
+                        <a href="https://www.linkedin.com/in/gustavo-fidelis-b17051387/" class="contato-link glass-card"
                             target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-linkedin"></i>
                             <div>
                                 <span class="contato-link-label">LinkedIn</span>
-                                <span class="contato-link-value">linkedin.com/in/gustavo-fidelis</span>
+                                <span class="contato-link-value">linkedin.com/in/gustavo-fidelis-b17051387</span>
                             </div>
                         </a>
 
@@ -663,14 +782,15 @@
             <div class="footer-content">
                 <a href="#hero" class="footer-logo">GF<span class="logo-dot">.</span></a>
                 <p class="footer-text">
-                    Feito com <span class="footer-heart">💜</span> por Gustavo Fidelis
+                    Feito com <span class="footer-heart">💜</span> e <strong>Claude Code</strong> por Gustavo
+                    Fidelis
                 </p>
                 <div class="footer-social">
                     <a href="https://github.com/Fidelisss07" target="_blank" rel="noopener noreferrer"
                         aria-label="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://linkedin.com/in/gustavo-fidelis" target="_blank" rel="noopener noreferrer"
+                    <a href="https://www.linkedin.com/in/gustavo-fidelis-b17051387/" target="_blank" rel="noopener noreferrer"
                         aria-label="LinkedIn">
                         <i class="fab fa-linkedin"></i>
                     </a>

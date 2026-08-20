@@ -456,23 +456,12 @@ img {
   border: 2px solid var(--borda);
 }
 
-.foto-placeholder {
+.sobre-foto {
+  display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 1; /* Quadrado */
-  background: linear-gradient(135deg, var(--bg-secundario), var(--bg-card));
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  color: var(--texto-terciario);
-  font-size: 0.9rem;
-}
-
-.foto-placeholder i {
-  font-size: 3rem;
-  color: var(--roxo-primario);
-  opacity: 0.5;
+  object-fit: cover;
 }
 
 /* Decoração roxa atrás da foto */
@@ -502,7 +491,7 @@ img {
 
 .sobre-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   margin-top: 24px;
 }
@@ -919,6 +908,88 @@ img {
 
 
 /* ====================================================================
+   IA NO FLUXO — Seção "Como eu trabalho com Claude Code"
+==================================================================== */
+.ia-intro {
+  max-width: 780px;
+  margin: 0 auto 50px;
+  text-align: center;
+  color: var(--texto-secundario);
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+.ia-intro strong {
+  color: var(--texto-principal);
+  font-weight: 600;
+}
+
+.ia-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.ia-card {
+  padding: 28px 26px;
+  transition: var(--transicao);
+}
+
+.ia-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--borda-hover);
+}
+
+.ia-card-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: var(--roxo-bg);
+  border: 1px solid var(--borda-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--roxo-claro);
+  margin-bottom: 16px;
+}
+
+.ia-card-titulo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--texto-principal);
+}
+
+.ia-card-texto {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--texto-secundario);
+}
+
+.ia-card-texto code {
+  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
+  font-size: 0.85em;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--roxo-bg);
+  color: var(--roxo-brilhante);
+  white-space: nowrap;
+}
+
+/* Categoria de skills que ocupa a linha inteira do grid */
+.skills-category--full {
+  grid-column: 1 / -1;
+}
+
+.skills-list--grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+
+/* ====================================================================
    CONTATO
 ==================================================================== */
 .contato-wrapper {
@@ -1169,6 +1240,20 @@ img {
   /* Skills: uma coluna */
   .skills-container {
     grid-template-columns: 1fr;
+  }
+
+  .skills-list--grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* IA no fluxo: cards empilhados */
+  .ia-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ia-intro {
+    text-align: left;
+    margin-bottom: 36px;
   }
 
   /* Contato: empilhado */
