@@ -1,0 +1,22 @@
+# Imagens originais dos certificados.
+# O site usa apenas as versoes otimizadas em .webp (cert-*.webp), que sao
+# versionadas. Os PNGs originais ficam na maquina local como backup.
+Certificado*.png
+Certificado*.lnk
+cert-*-intermediario.png
+
+# Arquivos de sistema do Windows/macOS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.code-workspace
+
+# Dependencias e build (caso o projeto cresca)
+node_modules/
+dist/
+.env
+.env.local
