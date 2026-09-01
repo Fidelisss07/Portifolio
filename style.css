@@ -1,8 +1,7 @@
 /* ====================================================================
    PORTFÓLIO — Gustavo Fidelis
-   O site é um editor de código: barra de título, explorador de
-   arquivos, abas, painel e barra de status. Cada assunto é um arquivo,
-   e o formato do arquivo combina com o conteúdo.
+   Estrutura de projeto: uma lista de assuntos na lateral e um painel
+   que troca de conteúdo. Sem rolagem de seções empilhadas.
 ==================================================================== */
 
 :root {
@@ -115,17 +114,6 @@ body::after {
   padding: 6px;
 }
 
-.semaforo { display: flex; gap: 7px; }
-
-.semaforo span {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: var(--linha);
-}
-
-.semaforo span:first-child { background: #3a3350; }
-
 .titulo-arquivo {
   font-family: var(--mono);
   font-size: 0.8rem;
@@ -165,32 +153,17 @@ body::after {
 .explorer {
   background: var(--painel);
   border-right: 1px solid var(--linha);
-  padding: 16px 0 0;
+  padding: 14px 0 0;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
 
-.explorer-titulo {
-  font-family: var(--mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--fraco);
-  padding: 0 16px 12px;
-}
 
-.explorer-pasta {
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  color: var(--texto);
-  padding: 0 16px 6px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
 
-.explorer-pasta i { font-size: 0.62rem; color: var(--fraco); }
+
+
+
 
 .explorer-lista { display: flex; flex-direction: column; }
 
@@ -199,7 +172,7 @@ body::after {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 7px 16px 7px 30px;
+  padding: 8px 16px;
   background: none;
   border: none;
   border-left: 2px solid transparent;
@@ -262,107 +235,80 @@ body::after {
 
 
 /* ====================================================================
-   PAINEL, ABAS E CONTEÚDO
+   PAINEL E CONTEÚDO
 ==================================================================== */
 .painel { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
-
-.abas {
-  display: flex;
-  overflow-x: auto;
-  background: var(--painel);
-  border-bottom: 1px solid var(--linha);
-  scrollbar-width: none;
-}
-
-.abas::-webkit-scrollbar { display: none; }
-
-.aba {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 9px 14px;
-  background: none;
-  border: none;
-  border-right: 1px solid var(--linha);
-  border-bottom: 1px solid transparent;
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  color: var(--fraco);
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-
-.aba:hover { color: var(--apagado); }
-
-.aba.ativa {
-  background: var(--fundo);
-  color: var(--texto);
-  border-bottom-color: var(--roxo);
-}
-
-.aba-fechar {
-  font-size: 0.9rem;
-  line-height: 1;
-  color: var(--gutter);
-  padding: 0 2px;
-  border-radius: 3px;
-}
-
-.aba-fechar:hover { color: var(--texto); background: var(--linha); }
 
 .conteudo {
   flex: 1;
   overflow-y: auto;
-  padding: 34px clamp(20px, 4vw, 52px) 80px clamp(56px, 7vw, 96px);
+  padding: 30px clamp(20px, 4vw, 48px) 80px;
 }
 
-/* Numeração de linha no estilo editor, à esquerda de cada bloco */
-.arq {
-  counter-reset: ln;
-  max-width: 76ch;
-  animation: entra 0.32s ease both;
+
+/* Cabeçalho do painel: diz onde você está, sem virar aba de editor */
+.painel-topo {
+  padding: 22px clamp(20px, 4vw, 48px) 16px;
+  border-bottom: 1px solid var(--linha);
 }
 
-@keyframes entra {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
-}
-
-.arq > *, .md > * {
-  position: relative;
-  counter-increment: ln;
-}
-
-.arq > *::before, .md > *::before {
-  content: counter(ln);
-  position: absolute;
-  left: -3.1em;
-  top: 0.15em;
-  width: 2em;
-  text-align: right;
+.painel-nome {
   font-family: var(--mono);
-  font-size: 0.72rem;
-  color: var(--gutter);
-  user-select: none;
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--texto);
 }
 
-/* O .md já numera os filhos; evita numerar o contêiner duas vezes */
-.arq > .md::before { content: none; }
+.painel-desc {
+  font-size: 0.85rem;
+  color: var(--fraco);
+  margin-top: 2px;
+}
 
+/* Nota de contexto no topo de um assunto */
+.nota {
+  font-size: 0.88rem;
+  color: var(--fraco);
+  max-width: 60ch;
+  margin-bottom: 26px;
+}
+
+.titulo-md {
+  font-family: var(--mono);
+  font-size: clamp(1.4rem, 3.6vw, 1.9rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* ---- stack: agrupada por função, sem parede de código ---- */
+.stack { display: flex; flex-direction: column; }
+
+.stack-grupo {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 8px 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--linha);
+}
+
+.stack-grupo--idiomas { border-bottom: none; margin-top: 8px; }
+
+.stack-rot {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  color: var(--fraco);
+  padding-top: 3px;
+}
+
+.stack-itens { display: flex; flex-wrap: wrap; gap: 7px; }
 
 /* ====================================================================
    ARQUIVOS .md
 ==================================================================== */
 .md { display: flex; flex-direction: column; gap: 18px; counter-reset: ln; }
 
-.md-h1 {
-  font-family: var(--mono);
-  font-size: clamp(1.5rem, 4vw, 2.1rem);
-  font-weight: 600;
-  color: var(--texto);
-  letter-spacing: -0.02em;
-}
+
 
 .md-meta {
   font-family: var(--mono);
@@ -373,13 +319,9 @@ body::after {
 .md p { color: var(--apagado); }
 .md strong { color: var(--texto); font-weight: 600; }
 
-.md-cmt, .cod-cmt {
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  color: var(--sin-cmt);
-}
 
-.cod-cmt { margin-bottom: 26px; }
+
+
 
 .sobre-linha {
   display: flex;
@@ -556,24 +498,11 @@ body::after {
 
 
 /* ====================================================================
-   stack.json
+   stack — agrupada por função
 ==================================================================== */
-.json {
-  font-family: var(--mono);
-  font-size: clamp(0.76rem, 1.9vw, 0.9rem);
-  line-height: 2;
-  color: var(--texto);
-  border: 1px solid var(--linha);
-  border-radius: 8px;
-  background: var(--painel);
-  padding: 20px 22px;
-  overflow-x: auto;
-  white-space: pre;
-}
 
-.json .k { color: var(--sin-chave); }
-.json .s { color: var(--sin-texto); }
-.json .p { color: var(--sin-pont); }
+
+
 
 
 /* ====================================================================
@@ -798,10 +727,11 @@ a.env-linha:hover { background: var(--roxo-veu); }
    CELULAR — o explorador vira gaveta
 ==================================================================== */
 @media (max-width: 860px) {
+  .stack-grupo { grid-template-columns: 1fr; gap: 6px; }
+
   .editor-corpo { grid-template-columns: 1fr; }
 
   .menu-btn { display: block; }
-  .semaforo { display: none; }
 
   .explorer {
     position: absolute;
@@ -814,7 +744,7 @@ a.env-linha:hover { background: var(--roxo-veu); }
 
   .explorer.aberto { transform: none; }
 
-  .conteudo { padding: 26px 20px 70px 54px; }
+  .conteudo { padding: 22px 20px 70px; }
   .projeto { grid-template-columns: 1fr; }
   .projeto-capa { border-right: none; border-bottom: 1px solid var(--linha); }
   .log-linha { grid-template-columns: 1fr; gap: 5px; }

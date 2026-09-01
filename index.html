@@ -41,13 +41,9 @@
                 <i class="fas fa-bars"></i>
             </button>
 
-            <span class="semaforo" aria-hidden="true">
-                <span></span><span></span><span></span>
-            </span>
-
             <span class="titulo-arquivo">
-                <strong>GF.</strong>
-                <span class="titulo-caminho">gustavo-fidelis</span>
+                <strong>Gustavo Fidelis</strong>
+                <span class="titulo-caminho">Ciência da Computação · FIAP</span>
             </span>
 
             <a class="titulo-acao" href="curriculo_gustavo_fidelis_final.pdf" target="_blank"
@@ -60,46 +56,42 @@
 
             <!-- ---------- EXPLORADOR ---------- -->
             <nav class="explorer" id="explorer" aria-label="Arquivos do portfólio">
-                <p class="explorer-titulo">Explorer</p>
-
-                <p class="explorer-pasta"><i class="fas fa-chevron-down"></i> gustavo-fidelis</p>
-
                 <ul class="explorer-lista">
                     <li>
                         <button class="arquivo ativo" data-arquivo="sobre" id="sobre">
-                            <i class="fab fa-markdown"></i> sobre.md
+                            <i class="fab fa-markdown"></i> sobre
                         </button>
                     </li>
                     <li>
                         <button class="arquivo" data-arquivo="projetos" id="projetos">
-                            <i class="fab fa-react"></i> projetos.tsx
+                            <i class="fab fa-react"></i> projetos
                             <span class="arquivo-selo">2</span>
                         </button>
                     </li>
                     <li>
                         <button class="arquivo" data-arquivo="ia" id="ia">
-                            <i class="fas fa-terminal"></i> ia.md
+                            <i class="fas fa-terminal"></i> ia com critério
                         </button>
                     </li>
                     <li>
                         <button class="arquivo" data-arquivo="stack" id="skills">
-                            <i class="fas fa-code"></i> stack.json
+                            <i class="fas fa-code"></i> stack
                         </button>
                     </li>
                     <li>
                         <button class="arquivo" data-arquivo="certificados" id="certificados">
-                            <i class="fas fa-folder"></i> certificados/
+                            <i class="fas fa-folder"></i> certificados
                             <span class="arquivo-selo">9</span>
                         </button>
                     </li>
                     <li>
                         <button class="arquivo" data-arquivo="experiencia" id="experiencia">
-                            <i class="fas fa-clock-rotate-left"></i> experiencia.log
+                            <i class="fas fa-clock-rotate-left"></i> experiência
                         </button>
                     </li>
                     <li>
                         <button class="arquivo" data-arquivo="contato" id="contato">
-                            <i class="fas fa-key"></i> contato.env
+                            <i class="fas fa-key"></i> contato
                         </button>
                     </li>
                 </ul>
@@ -121,14 +113,17 @@
             <!-- ---------- PAINEL DO EDITOR ---------- -->
             <main class="painel">
 
-                <div class="abas" id="abas" role="tablist" aria-label="Arquivos abertos"></div>
+                <div class="painel-topo">
+                    <h1 class="painel-nome" id="painel-nome">sobre</h1>
+                    <p class="painel-desc" id="painel-desc">quem sou e o que já construí</p>
+                </div>
 
                 <div class="conteudo" id="conteudo">
 
                     <!-- ========== sobre.md ========== -->
                     <article class="arq" data-conteudo="sobre">
                         <div class="md">
-                            <p class="md-h1"># Gustavo Fidelis</p>
+                            <h2 class="titulo-md">Gustavo Fidelis</h2>
                             <p class="md-meta">Ciência da Computação · FIAP · São Paulo, SP</p>
 
                             <div class="sobre-linha">
@@ -173,14 +168,12 @@
                                 Sou autodidata e proativo, com vivência também em montagem e manutenção de
                                 computadores de alta performance sob prazos críticos.
                             </p>
-
-                            <p class="md-cmt">&lt;!-- abra os outros arquivos no explorador ao lado --&gt;</p>
                         </div>
                     </article>
 
                     <!-- ========== projetos.tsx ========== -->
                     <article class="arq" data-conteudo="projetos" hidden>
-                        <p class="cod-cmt">// duas lojas virtuais completas, do zero à produção</p>
+                        <p class="nota">Duas lojas virtuais completas, do zero à produção.</p>
 
                         <div class="projetos">
                             <article class="projeto">
@@ -243,7 +236,7 @@
                     <!-- ========== ia.md ========== -->
                     <article class="arq" data-conteudo="ia" hidden>
                         <div class="md">
-                            <p class="md-h1"># IA no meu fluxo</p>
+                            <h2 class="titulo-md">IA no meu fluxo</h2>
                             <p>
                                 Uso o <strong>Claude Code</strong> — a CLI de IA da Anthropic — como par de
                                 programação no dia a dia, dos meus projetos em produção a este próprio portfólio.
@@ -292,36 +285,79 @@
 
                     <!-- ========== stack.json ========== -->
                     <article class="arq" data-conteudo="stack" hidden>
-                        <p class="cod-cmt">// sem porcentagem inventada: o que eu uso, agrupado por função</p>
+                        <p class="nota">Agrupado pelo que faz, não por nota. Porcentagem de domínio
+                            é número inventado — estas são as ferramentas que eu uso de verdade.</p>
 
-                        <pre class="json"><span class="p">{</span>
-  <span class="k">"linguagens"</span><span class="p">:</span> <span class="p">[</span><span class="s">"TypeScript"</span><span class="p">,</span> <span class="s">"JavaScript (ES6+)"</span><span class="p">,</span> <span class="s">"HTML5"</span><span class="p">,</span> <span class="s">"CSS3"</span><span class="p">,</span> <span class="s">"SQL"</span><span class="p">],</span>
+                        <div class="stack">
+                            <div class="stack-grupo">
+                                <p class="stack-rot">Linguagens</p>
+                                <div class="stack-itens">
+                                    <span class="tag">TypeScript</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">SQL</span>
+                                </div>
+                            </div>
+                            <div class="stack-grupo">
+                                <p class="stack-rot">Interface</p>
+                                <div class="stack-itens">
+                                    <span class="tag">React</span>
+                                <span class="tag">Next.js</span>
+                                <span class="tag">Tailwind CSS</span>
+                                <span class="tag">GSAP</span>
+                                </div>
+                            </div>
+                            <div class="stack-grupo">
+                                <p class="stack-rot">Servidor</p>
+                                <div class="stack-itens">
+                                    <span class="tag">Node.js</span>
+                                <span class="tag">Supabase</span>
+                                <span class="tag">Firebase</span>
+                                <span class="tag">PostgreSQL</span>
+                                </div>
+                            </div>
+                            <div class="stack-grupo">
+                                <p class="stack-rot">Integrações</p>
+                                <div class="stack-itens">
+                                    <span class="tag">Stripe</span>
+                                <span class="tag">PIX</span>
+                                <span class="tag">Melhor Envio</span>
+                                <span class="tag">Cloudinary</span>
+                                <span class="tag">E-mail transacional</span>
+                                </div>
+                            </div>
+                            <div class="stack-grupo">
+                                <p class="stack-rot">Ferramentas</p>
+                                <div class="stack-itens">
+                                    <span class="tag">Git</span>
+                                <span class="tag">GitHub</span>
+                                <span class="tag">Vercel</span>
+                                <span class="tag">Claude Code</span>
+                                </div>
+                            </div>
+                            <div class="stack-grupo">
+                                <p class="stack-rot">Também</p>
+                                <div class="stack-itens">
+                                    <span class="tag">LGPD</span>
+                                <span class="tag">SEO técnico</span>
+                                <span class="tag">Montagem e manutenção de hardware</span>
+                                </div>
+                            </div>
+                        </div>
 
-  <span class="k">"frameworks"</span><span class="p">:</span> <span class="p">[</span><span class="s">"React"</span><span class="p">,</span> <span class="s">"Next.js"</span><span class="p">,</span> <span class="s">"Node.js"</span><span class="p">,</span> <span class="s">"Tailwind CSS"</span><span class="p">,</span> <span class="s">"GSAP"</span><span class="p">],</span>
-
-  <span class="k">"dados"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="k">"supabase"</span><span class="p">:</span> <span class="p">[</span><span class="s">"PostgreSQL"</span><span class="p">,</span> <span class="s">"Auth"</span><span class="p">],</span>
-    <span class="k">"firebase"</span><span class="p">:</span> <span class="p">[</span><span class="s">"Firestore"</span><span class="p">,</span> <span class="s">"Auth"</span><span class="p">,</span> <span class="s">"Storage"</span><span class="p">]</span>
-  <span class="p">},</span>
-
-  <span class="k">"integracoes"</span><span class="p">:</span> <span class="p">[</span><span class="s">"Stripe"</span><span class="p">,</span> <span class="s">"PIX"</span><span class="p">,</span> <span class="s">"Melhor Envio"</span><span class="p">,</span> <span class="s">"Cloudinary"</span><span class="p">],</span>
-
-  <span class="k">"ferramentas"</span><span class="p">:</span> <span class="p">[</span><span class="s">"Git"</span><span class="p">,</span> <span class="s">"GitHub"</span><span class="p">,</span> <span class="s">"Vercel"</span><span class="p">,</span> <span class="s">"Claude Code"</span><span class="p">],</span>
-
-  <span class="k">"praticas"</span><span class="p">:</span> <span class="p">[</span><span class="s">"componentização"</span><span class="p">,</span> <span class="s">"LGPD"</span><span class="p">,</span> <span class="s">"SEO técnico"</span><span class="p">],</span>
-
-  <span class="k">"hardware"</span><span class="p">:</span> <span class="s">"montagem, manutenção e diagnóstico"</span><span class="p">,</span>
-
-  <span class="k">"idiomas"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="k">"portugues"</span><span class="p">:</span> <span class="s">"nativo"</span><span class="p">,</span>
-    <span class="k">"ingles"</span><span class="p">:</span> <span class="s">"intermediário — leitura técnica"</span>
-  <span class="p">}</span>
-<span class="p">}</span></pre>
+                        <div class="stack-grupo stack-grupo--idiomas">
+                            <p class="stack-rot">Idiomas</p>
+                            <div class="stack-itens">
+                                <span class="tag">Português — nativo</span>
+                                <span class="tag">Inglês — intermediário, leitura técnica</span>
+                            </div>
+                        </div>
                     </article>
 
                     <!-- ========== certificados/ ========== -->
                     <article class="arq" data-conteudo="certificados" hidden>
-                        <p class="cod-cmt">// 9 arquivos · os que têm código de autenticidade trazem link de verificação</p>
+                        <p class="nota">Os que têm código de autenticidade trazem link de verificação.</p>
 
                         <p class="grupo-tit"><i class="fas fa-folder-open"></i> FIAP</p>
                         <div class="certs">
@@ -459,7 +495,7 @@
 
                     <!-- ========== experiencia.log ========== -->
                     <article class="arq" data-conteudo="experiencia" hidden>
-                        <p class="cod-cmt">// ordem cronológica inversa · mais recente no topo</p>
+                        <p class="nota">Do mais recente para o mais antigo.</p>
 
                         <div class="log">
                             <div class="log-linha">
@@ -501,7 +537,7 @@
 
                     <!-- ========== contato.env ========== -->
                     <article class="arq" data-conteudo="contato" hidden>
-                        <p class="cod-cmt">// aberto a vagas de estágio e júnior · São Paulo ou remoto</p>
+                        <p class="nota">Aberto a vagas de estágio e júnior, em São Paulo ou remoto.</p>
 
                         <div class="env">
                             <a class="env-linha" href="mailto:gufidelis116@gmail.com">
@@ -556,11 +592,9 @@
 
         <!-- ---------- BARRA DE STATUS ---------- -->
         <footer class="status">
-            <span class="status-item status-ramo"><i class="fas fa-code-branch"></i> main</span>
-            <span class="status-item" id="status-linguagem">Markdown</span>
-            <span class="status-item">UTF-8</span>
-            <span class="status-esp"></span>
             <span class="status-item status-online"><span class="ponto"></span> 2 lojas no ar</span>
+            <span class="status-esp"></span>
+            <a class="status-item" href="mailto:gufidelis116@gmail.com">gufidelis116@gmail.com</a>
             <span class="status-item">© 2026 Gustavo Fidelis</span>
         </footer>
 
