@@ -96,7 +96,7 @@
             </button>
             <button class="lateral-item" data-painel="projetos">
                 <i class="fas fa-rocket"></i> <span>Projetos</span>
-                <span class="lateral-selo">2</span>
+                <span class="lateral-selo">3</span>
             </button>
             <button class="lateral-item" data-painel="demo">
                 <i class="fas fa-play"></i> <span>Demo</span>
@@ -406,6 +406,85 @@
                             <p class="caso-estado caso-estado--ativo"><i class="fas fa-circle"></i> Em produção. A loja está em fase de abertura.</p>
                         </div>
 
+                </article>
+
+                <!-- PROJETO 3 — Radar de Vagas -->
+                <article class="projeto-card projeto-card--largo glass-card">
+                    <div class="projeto-info">
+                        <div class="radar-topo">
+                            <div>
+                                <h3 class="projeto-titulo">Radar de Vagas</h3>
+                                <p class="radar-sub">Agregador de vagas com coleta automática</p>
+                            </div>
+                            <span class="radar-estado">
+                                <i class="fas fa-circle"></i> Em construção · fase 1 de 4
+                            </span>
+                        </div>
+
+                        <div class="radar-blocos">
+                            <div class="radar-bloco">
+                                <p class="radar-rot">O problema</p>
+                                <p class="radar-txt">
+                                    Quem procura estágio abre seis sites por dia e relê as mesmas vagas. Os
+                                    portais não conversam entre si, não avisam quando entra vaga nova e não
+                                    deixam filtrar por contrato de entrada — estágio e Jovem Aprendiz ficam
+                                    perdidos no meio de 80 mil anúncios.
+                                </p>
+                            </div>
+
+                            <div class="radar-bloco">
+                                <p class="radar-rot">Como resolvo</p>
+                                <p class="radar-txt">
+                                    Um coletor roda sozinho de hora em hora e guarda só o que é novo. A API
+                                    trava em 10.000 resultados por consulta, então a varredura é fatiada:
+                                    centenas de buscas estreitas cruzando cargo, cidade e tipo de contrato,
+                                    unidas depois sem repetição. Quem usa filtra por área, lugar, contrato e
+                                    modelo — e salva o filtro para ser avisado.
+                                </p>
+                            </div>
+
+                            <div class="radar-bloco">
+                                <p class="radar-rot">Onde quero chegar</p>
+                                <p class="radar-txt">
+                                    Cobrir todos os setores, não só tecnologia: a base tem vagas de enfermagem
+                                    a motorista, e limitar a TI jogaria fora a maior parte dela. A meta é que
+                                    um estudante configure o filtro uma vez e nunca mais precise abrir portal
+                                    de vaga.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="radar-numeros">
+                            <div><span class="radar-n">80 mil</span><span class="radar-l">vagas na base</span></div>
+                            <div><span class="radar-n">6</span><span class="radar-l">tipos de contrato</span></div>
+                            <div><span class="radar-n">12</span><span class="radar-l">setores mapeados</span></div>
+                            <div><span class="radar-n">27</span><span class="radar-l">estados cobertos</span></div>
+                        </div>
+
+                        <div class="projeto-tags">
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Node</span>
+                            <span class="tag">SQLite</span>
+                            <span class="tag">Next.js</span>
+                            <span class="tag">Supabase</span>
+                            <span class="tag">Coleta agendada</span>
+                        </div>
+
+                        <p class="radar-nota">
+                            Sem dependências externas: roda no TypeScript e no SQLite nativos do Node. Só usa
+                            fonte que permite coleta — portais que bloqueiam robôs ficaram de fora de propósito.
+                        </p>
+
+                        <div class="projeto-acoes">
+                            <span class="projeto-repo projeto-repo--aberto">
+                                <i class="fas fa-unlock"></i> Código aberto
+                            </span>
+                            <a href="https://github.com/Fidelisss07/radar-de-vagas" class="projeto-btn"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i> Ver no GitHub
+                            </a>
+                        </div>
+                    </div>
                 </article>
             </div>
                 </div>
