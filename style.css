@@ -866,12 +866,64 @@ img {
   color: var(--roxo-primario);
 }
 
+/* Cada instituição vira um grupo com cabeçalho próprio */
+.certificados-grupo {
+  max-width: 760px;
+  margin: 0 auto 44px;
+}
+
+.certificados-grupo:last-child {
+  margin-bottom: 0;
+}
+
+.certificados-grupo-header {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--borda);
+}
+
+/* Traço roxo curto sobreposto à borda, ecoando a .section-line */
+.certificados-grupo-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 56px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--roxo-primario), transparent);
+}
+
+.certificados-grupo-nome {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-principal);
+}
+
+.certificados-grupo-meta {
+  font-size: 0.78rem;
+  color: var(--texto-terciario);
+  text-align: right;
+}
+
 .certificados-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
   max-width: 760px;
   margin: 0 auto;
+}
+
+/* Grupo com um único certificado: evita o card esticar por toda a largura */
+.certificados-grid--unico {
+  grid-template-columns: minmax(260px, 370px);
+  justify-content: center;
 }
 
 .certificado-card {

@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const elementosParaAnimar = document.querySelectorAll(
     '.section-header, .sobre-content, .projeto-card, .skills-category, ' +
     '.ia-intro, .ia-card, ' +
-    '.timeline-item, .certificado-card, .contato-wrapper'
+    '.timeline-item, .certificados-grupo-header, .certificado-card, .contato-wrapper'
   );
   
   elementosParaAnimar.forEach(el => el.classList.add('reveal'));
