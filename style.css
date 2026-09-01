@@ -954,8 +954,39 @@ img {
 }
 
 .certificado-emissor {
+  display: block;
   font-size: 0.8rem;
   color: var(--texto-secundario);
+}
+
+/* Link de verificação: prova que o recrutador confere em um clique */
+.certificado-verificar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--roxo-claro);
+  transition: color var(--transicao);
+}
+
+.certificado-verificar:hover {
+  color: var(--roxo-brilhante);
+}
+
+.certificado-verificar i {
+  font-size: 0.9em;
+}
+
+/* A FIAP exige digitar a chave no site dela, então ela fica visível */
+.certificado-chave {
+  display: block;
+  margin-top: 4px;
+  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
+  font-size: 0.66rem;
+  color: var(--texto-terciario);
+  word-break: break-all;
 }
 
 
