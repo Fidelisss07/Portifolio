@@ -77,6 +77,19 @@ body {
   counter-reset: secao; /* Numeração das seções: 01, 02, 03… */
 }
 
+/* Grão de filme sobre o site inteiro.
+   Preto liso parece digital demais; o ruído dá textura de cinema.
+   Fica acima de tudo, mas nunca intercepta clique. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)'/%3E%3C/svg%3E");
+}
+
 a {
   text-decoration: none; /* Remove sublinhado dos links */
   color: inherit; /* Links herdam a cor do pai */
@@ -243,16 +256,71 @@ img {
   justify-content: center;
 }
 
-/* Animação de entrada (usada pelo JavaScript ao scroll) */
+/* Animação de entrada (disparada pelo JavaScript ao scroll).
+   Usamos "animation" e não "transition": vários cards declaram o próprio
+   transition mais adiante no arquivo e zerariam o atraso da cascata.
+   O --atraso-reveal é definido no JS para os irmãos entrarem em sequência.
+   Ao terminar, o JS remove as classes e o elemento volta ao estado natural,
+   deixando os efeitos de hover livres. */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .reveal.active {
-  opacity: 1;
-  transform: translateY(0);
+  animation: revelar-baixo 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--atraso-reveal, 0ms);
+}
+
+/* O título no trilho entra pela esquerda; o conteúdo sobe de baixo.
+   Gestos diferentes para papéis diferentes. */
+.section-header.reveal.active {
+  animation-name: revelar-esquerda;
+}
+
+/* Cards ganham um leve crescimento junto da subida */
+.projeto-card.reveal.active,
+.ia-card.reveal.active,
+.certificado-card.reveal.active {
+  animation-name: revelar-card;
+}
+
+@keyframes revelar-baixo {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes revelar-esquerda {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes revelar-card {
+  from { opacity: 0; transform: translateY(30px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ------------------------------------------------------------------
+   FOCO POR ROLAGEM
+   O card que passa pelo centro da tela acende. Sem depender do mouse,
+   funciona igual no celular.
+------------------------------------------------------------------ */
+.em-foco {
+  border-color: var(--borda-hover);
+  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.12),
+              0 18px 40px rgba(139, 92, 246, 0.10);
+}
+
+/* Quem pediu menos movimento recebe menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.active {
+    opacity: 1;
+    animation: none;
+  }
+
+  .em-foco {
+    box-shadow: none;
+  }
 }
 
 

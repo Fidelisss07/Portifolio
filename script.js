@@ -289,11 +289,32 @@ document.addEventListener('DOMContentLoaded', () => {
   
   elementosParaAnimar.forEach(el => el.classList.add('reveal'));
 
+  // ESCALONAMENTO: irmãos entram em cascata, não todos de uma vez.
+  // Sem isso, oito certificados aparecem juntos e parece um bloco piscando.
+  document.querySelectorAll('.reveal').forEach(el => {
+    const irmaos = Array.from(el.parentElement.children)
+      .filter(filho => filho.classList.contains('reveal'));
+    const posicao = irmaos.indexOf(el);
+    if (posicao > 0) {
+      // 70ms entre cada um, com teto para listas longas não demorarem demais
+      el.style.setProperty('--atraso-reveal', Math.min(posicao * 70, 560) + 'ms');
+    }
+  });
+
   // IntersectionObserver: "observa" quando um elemento entra na tela
   const observadorScroll = new IntersectionObserver((entradas) => {
     entradas.forEach(entrada => {
       if (entrada.isIntersecting) {
-        entrada.target.classList.add('active');
+        const alvo = entrada.target;
+        alvo.classList.add('active');
+        observadorScroll.unobserve(alvo); // anima uma vez só
+
+        // Ao terminar, tira as classes: o elemento volta ao estado natural
+        // e os efeitos de hover do card voltam a funcionar sem disputa.
+        alvo.addEventListener('animationend', () => {
+          alvo.classList.remove('reveal', 'active');
+          alvo.style.removeProperty('--atraso-reveal');
+        }, { once: true });
       }
     });
   }, {
@@ -305,6 +326,28 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.reveal').forEach(el => {
     observadorScroll.observe(el);
   });
+
+
+  // ================================================================
+  // 5b. FOCO POR ROLAGEM
+  // O card que está no centro da tela ganha destaque. Diferente de um
+  // efeito de mouse, isso também funciona no celular.
+  // ================================================================
+
+  const cardsFocaveis = document.querySelectorAll(
+    '.projeto-card, .ia-card, .certificado-card, .skill-item, .timeline-content'
+  );
+
+  const observadorFoco = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      entrada.target.classList.toggle('em-foco', entrada.isIntersecting);
+    });
+  }, {
+    // Faixa estreita no meio da tela: só o que passa por ali acende
+    rootMargin: '-42% 0px -42% 0px'
+  });
+
+  cardsFocaveis.forEach(el => observadorFoco.observe(el));
 
 
   // ================================================================
