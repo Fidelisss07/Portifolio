@@ -84,6 +84,10 @@
                 <i class="fas fa-rocket"></i> <span>Projetos</span>
                 <span class="lateral-selo">2</span>
             </button>
+            <button class="lateral-item" data-painel="demo">
+                <i class="fas fa-play"></i> <span>Demo</span>
+                <span class="lateral-selo">live</span>
+            </button>
             <button class="lateral-item" data-painel="codigo">
                 <i class="fas fa-file-code"></i> <span>Código</span>
             </button>
@@ -394,6 +398,157 @@
         </div>
     </section>
 
+
+    <!-- ==================================================================
+       DEMO — o fluxo de checkout que construí, rodando aqui dentro
+  ================================================================== -->
+    <section id="demo" class="section demo">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Experimente</p>
+                <h2 class="section-title">Demo do <span class="text-gradient">checkout</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="section-body">
+                <p class="demo-aviso">
+                    <i class="fas fa-circle-info"></i>
+                    <span>
+                        <strong>Simulação.</strong> Nenhum pagamento é processado e nenhum dado sai do seu
+                        navegador. É uma reprodução do fluxo que construí na BaLu 3D, para você usar em vez de
+                        só ler sobre. A validação do cartão e o cálculo de frete rodam de verdade.
+                    </span>
+                </p>
+
+                <div class="demo-grid">
+                    <!-- ---------- Produto e frete ---------- -->
+                    <div class="demo-coluna">
+                        <div class="demo-caixa glass-card">
+                            <p class="demo-rot">Produto</p>
+                            <div class="demo-produto">
+                                <div class="demo-thumb"><i class="fas fa-cube"></i></div>
+                                <div>
+                                    <p class="demo-nome">Miniatura em resina 8K</p>
+                                    <p class="demo-preco" id="demo-preco-unit">R$ 149,90</p>
+                                </div>
+                            </div>
+                            <div class="demo-qtd">
+                                <button type="button" id="demo-menos" aria-label="Diminuir quantidade">−</button>
+                                <span id="demo-qtd" aria-live="polite">1</span>
+                                <button type="button" id="demo-mais" aria-label="Aumentar quantidade">+</button>
+                            </div>
+                        </div>
+
+                        <div class="demo-caixa glass-card">
+                            <p class="demo-rot">Entrega</p>
+                            <div class="demo-cep">
+                                <input type="text" id="demo-cep" inputmode="numeric" maxlength="9"
+                                    placeholder="00000-000" aria-label="CEP para calcular o frete">
+                                <button type="button" id="demo-calcular">Calcular</button>
+                            </div>
+                            <p class="demo-frete-res" id="demo-frete-res">
+                                Informe o CEP para calcular o frete.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- ---------- Pagamento ---------- -->
+                    <div class="demo-coluna">
+                        <div class="demo-caixa glass-card">
+                            <p class="demo-rot">Pagamento</p>
+
+                            <div class="demo-metodos" role="tablist">
+                                <button type="button" class="demo-metodo ativo" data-metodo="pix" role="tab"
+                                    aria-selected="true">
+                                    <i class="fas fa-bolt"></i> PIX
+                                    <span class="demo-desconto">−5%</span>
+                                </button>
+                                <button type="button" class="demo-metodo" data-metodo="cartao" role="tab"
+                                    aria-selected="false">
+                                    <i class="fas fa-credit-card"></i> Cartão
+                                </button>
+                            </div>
+
+                            <!-- PIX -->
+                            <div class="demo-painel" id="demo-pix">
+                                <div class="demo-qr" aria-hidden="true">
+                                    <canvas id="demo-qr-canvas" width="132" height="132"></canvas>
+                                    <span class="demo-qr-selo">simulação</span>
+                                </div>
+                                <p class="demo-pix-txt">
+                                    Código expira em <strong id="demo-contador">05:00</strong>
+                                </p>
+                                <button type="button" class="demo-copiar" id="demo-copiar">
+                                    <i class="fas fa-copy"></i> Copiar código
+                                </button>
+                            </div>
+
+                            <!-- Cartão -->
+                            <div class="demo-painel" id="demo-cartao" hidden>
+                                <div class="demo-campo">
+                                    <label for="demo-num">Número do cartão</label>
+                                    <div class="demo-input-bandeira">
+                                        <input type="text" id="demo-num" inputmode="numeric" maxlength="19"
+                                            placeholder="0000 0000 0000 0000" autocomplete="off">
+                                        <span class="demo-bandeira" id="demo-bandeira"></span>
+                                    </div>
+                                    <p class="demo-erro" id="demo-erro-num" hidden>
+                                        Número inválido — não passa na verificação de Luhn.
+                                    </p>
+                                </div>
+                                <div class="demo-linha-campos">
+                                    <div class="demo-campo">
+                                        <label for="demo-val">Validade</label>
+                                        <input type="text" id="demo-val" inputmode="numeric" maxlength="5"
+                                            placeholder="MM/AA" autocomplete="off">
+                                    </div>
+                                    <div class="demo-campo">
+                                        <label for="demo-cvv">CVV</label>
+                                        <input type="text" id="demo-cvv" inputmode="numeric" maxlength="4"
+                                            placeholder="000" autocomplete="off">
+                                    </div>
+                                </div>
+                                <p class="demo-dica">
+                                    Teste com <button type="button" class="demo-preencher" id="demo-preencher">4111
+                                        1111 1111 1111</button> — número público de teste, válido no Luhn.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="demo-caixa glass-card demo-resumo">
+                            <p class="demo-rot">Resumo</p>
+                            <div class="demo-linha"><span>Produtos</span><span id="demo-subtotal">R$ 149,90</span></div>
+                            <div class="demo-linha"><span>Frete</span><span id="demo-frete-val">—</span></div>
+                            <div class="demo-linha demo-linha--desc" id="demo-linha-desc">
+                                <span>Desconto PIX</span><span id="demo-desconto-val">−R$ 7,50</span>
+                            </div>
+                            <div class="demo-linha demo-linha--total">
+                                <span>Total</span><span id="demo-total">R$ 142,41</span>
+                            </div>
+                            <button type="button" class="demo-finalizar" id="demo-finalizar">
+                                <i class="fas fa-lock"></i> Finalizar pedido
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ---------- Confirmação ---------- -->
+                <div class="demo-sucesso glass-card" id="demo-sucesso" hidden>
+                    <div class="demo-check"><i class="fas fa-check"></i></div>
+                    <h3>Pedido confirmado</h3>
+                    <p>
+                        Pedido <strong id="demo-numero">#000000</strong> registrado via
+                        <strong id="demo-metodo-txt">PIX</strong>, total de <strong id="demo-total-final">R$ 0,00</strong>.
+                        Na loja real, é aqui que dispara o e-mail de confirmação e o pedido entra no painel
+                        administrativo.
+                    </p>
+                    <button type="button" class="demo-refazer" id="demo-refazer">
+                        <i class="fas fa-rotate-left"></i> Refazer a simulação
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- ==================================================================
        IA NO FLUXO — Como eu trabalho com Claude Code

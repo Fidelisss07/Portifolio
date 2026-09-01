@@ -596,4 +596,227 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (location.hash === '#codigo') carregarGithub();
 
+
+  // ================================================================
+  // DEMO DO CHECKOUT
+  // Reproduz o fluxo construído na BaLu 3D. Nada é enviado: os
+  // algoritmos rodam no navegador. Luhn, bandeira por prefixo e frete
+  // por região do CEP são as regras reais, não números fingidos.
+  // ================================================================
+
+  const demo = document.getElementById('demo');
+
+  if (demo) {
+    const PRECO = 149.90;
+    const estado = { qtd: 1, frete: null, metodo: 'pix', cartaoOk: false };
+
+    const dinheiro = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const $ = id => document.getElementById(id);
+
+    // ---- Frete: o primeiro dígito do CEP indica a região do país ----
+    const REGIOES = {
+      0: ['Grande São Paulo', 18.90, 2], 1: ['Interior de São Paulo', 22.90, 3],
+      2: ['Rio de Janeiro e Espírito Santo', 26.90, 4], 3: ['Minas Gerais', 27.90, 4],
+      4: ['Bahia e Sergipe', 34.90, 6], 5: ['Nordeste (PE, AL, PB, RN)', 38.90, 7],
+      6: ['Norte e Ceará', 44.90, 9], 7: ['Centro-Oeste e Distrito Federal', 32.90, 5],
+      8: ['Paraná e Santa Catarina', 28.90, 4], 9: ['Rio Grande do Sul', 31.90, 5]
+    };
+
+    function calcularFrete(cep) {
+      const digitos = cep.replace(/\D/g, '');
+      if (digitos.length !== 8) return null;
+      const [regiao, valor, prazo] = REGIOES[digitos[0]];
+      // Acima de 3 unidades o pacote muda de faixa de peso
+      const extra = estado.qtd > 3 ? 9.90 : 0;
+      return { regiao, valor: valor + extra, prazo };
+    }
+
+    // ---- Cartão: Luhn é o algoritmo que os emissores usam de fato ----
+    function passaNoLuhn(numero) {
+      const d = numero.replace(/\D/g, '');
+      if (d.length < 13) return false;
+      let soma = 0, dobra = false;
+      for (let i = d.length - 1; i >= 0; i--) {
+        let n = Number(d[i]);
+        if (dobra) { n *= 2; if (n > 9) n -= 9; }
+        soma += n;
+        dobra = !dobra;
+      }
+      return soma % 10 === 0;
+    }
+
+    function bandeira(numero) {
+      const d = numero.replace(/\D/g, '');
+      if (/^4/.test(d)) return 'Visa';
+      if (/^(5[1-5]|2[2-7])/.test(d)) return 'Mastercard';
+      if (/^3[47]/.test(d)) return 'Amex';
+      if (/^(4011|4312|4389|5041|6277|6362)/.test(d)) return 'Elo';
+      if (/^(606282|3841)/.test(d)) return 'Hipercard';
+      return '';
+    }
+
+    // ---- Totais ----
+    function recalcular() {
+      const subtotal = PRECO * estado.qtd;
+      const frete = estado.frete ? estado.frete.valor : 0;
+      const desconto = estado.metodo === 'pix' ? subtotal * 0.05 : 0;
+      const total = subtotal + frete - desconto;
+
+      $('demo-qtd').textContent = estado.qtd;
+      $('demo-subtotal').textContent = dinheiro(subtotal);
+      $('demo-frete-val').textContent = estado.frete ? dinheiro(frete) : '—';
+      $('demo-desconto-val').textContent = '−' + dinheiro(desconto);
+      $('demo-linha-desc').hidden = estado.metodo !== 'pix';
+      $('demo-total').textContent = dinheiro(total);
+
+      const pronto = estado.frete && (estado.metodo === 'pix' || estado.cartaoOk);
+      $('demo-finalizar').disabled = !pronto;
+      return total;
+    }
+
+    // ---- Quantidade ----
+    $('demo-mais').addEventListener('click', () => {
+      estado.qtd = Math.min(9, estado.qtd + 1);
+      if (estado.frete) atualizarFrete($('demo-cep').value);
+      recalcular();
+    });
+
+    $('demo-menos').addEventListener('click', () => {
+      estado.qtd = Math.max(1, estado.qtd - 1);
+      if (estado.frete) atualizarFrete($('demo-cep').value);
+      recalcular();
+    });
+
+    // ---- CEP ----
+    $('demo-cep').addEventListener('input', evento => {
+      const d = evento.target.value.replace(/\D/g, '').slice(0, 8);
+      evento.target.value = d.length > 5 ? d.slice(0, 5) + '-' + d.slice(5) : d;
+    });
+
+    function atualizarFrete(cep) {
+      const r = calcularFrete(cep);
+      const saida = $('demo-frete-res');
+
+      if (!r) {
+        estado.frete = null;
+        saida.textContent = 'CEP incompleto — precisa de 8 dígitos.';
+        saida.classList.add('erro');
+      } else {
+        estado.frete = r;
+        saida.classList.remove('erro');
+        saida.textContent = `${r.regiao} · ${dinheiro(r.valor)} · chega em até ${r.prazo} dias úteis`;
+      }
+      recalcular();
+    }
+
+    $('demo-calcular').addEventListener('click', () => atualizarFrete($('demo-cep').value));
+    $('demo-cep').addEventListener('keydown', e => { if (e.key === 'Enter') atualizarFrete(e.target.value); });
+
+    // ---- Método de pagamento ----
+    document.querySelectorAll('.demo-metodo').forEach(botao => {
+      botao.addEventListener('click', () => {
+        estado.metodo = botao.dataset.metodo;
+        document.querySelectorAll('.demo-metodo').forEach(b => {
+          const ativo = b === botao;
+          b.classList.toggle('ativo', ativo);
+          b.setAttribute('aria-selected', String(ativo));
+        });
+        $('demo-pix').hidden = estado.metodo !== 'pix';
+        $('demo-cartao').hidden = estado.metodo !== 'cartao';
+        recalcular();
+      });
+    });
+
+    // ---- Cartão: formata, detecta bandeira e valida ----
+    $('demo-num').addEventListener('input', evento => {
+      const d = evento.target.value.replace(/\D/g, '').slice(0, 16);
+      evento.target.value = d.replace(/(\d{4})(?=\d)/g, '$1 ');
+
+      $('demo-bandeira').textContent = bandeira(d);
+      estado.cartaoOk = passaNoLuhn(d) && d.length >= 13;
+      $('demo-erro-num').hidden = d.length < 13 || estado.cartaoOk;
+      recalcular();
+    });
+
+    $('demo-val').addEventListener('input', evento => {
+      const d = evento.target.value.replace(/\D/g, '').slice(0, 4);
+      evento.target.value = d.length > 2 ? d.slice(0, 2) + '/' + d.slice(2) : d;
+    });
+
+    $('demo-cvv').addEventListener('input', evento => {
+      evento.target.value = evento.target.value.replace(/\D/g, '').slice(0, 4);
+    });
+
+    $('demo-preencher').addEventListener('click', () => {
+      $('demo-num').value = '4111 1111 1111 1111';
+      $('demo-num').dispatchEvent(new Event('input'));
+      $('demo-val').value = '12/30';
+      $('demo-cvv').value = '123';
+    });
+
+    // ---- QR simulado: desenhado no canvas, sem biblioteca ----
+    (function desenharQR() {
+      const ctx = $('demo-qr-canvas').getContext('2d');
+      const cel = 4, n = 33;
+      ctx.fillStyle = '#0f0f14';
+      ctx.fillRect(0, 0, n * cel, n * cel);
+      ctx.fillStyle = '#e9e6f5';
+      // Padrão determinístico: parece QR, mas não codifica nada
+      for (let y = 0; y < n; y++) {
+        for (let x = 0; x < n; x++) {
+          if (((x * 7 + y * 13) ^ (x * y)) % 3 === 0) ctx.fillRect(x * cel, y * cel, cel, cel);
+        }
+      }
+      // Os três marcadores de canto
+      [[0, 0], [n - 7, 0], [0, n - 7]].forEach(([mx, my]) => {
+        ctx.fillStyle = '#0f0f14';
+        ctx.fillRect(mx * cel, my * cel, 7 * cel, 7 * cel);
+        ctx.fillStyle = '#e9e6f5';
+        ctx.fillRect(mx * cel, my * cel, 7 * cel, cel);
+        ctx.fillRect(mx * cel, (my + 6) * cel, 7 * cel, cel);
+        ctx.fillRect(mx * cel, my * cel, cel, 7 * cel);
+        ctx.fillRect((mx + 6) * cel, my * cel, cel, 7 * cel);
+        ctx.fillRect((mx + 2) * cel, (my + 2) * cel, 3 * cel, 3 * cel);
+      });
+    })();
+
+    // ---- Contador do PIX ----
+    let restam = 300;
+    setInterval(() => {
+      if (demo.classList.contains('ativo') === false) return;
+      restam = restam > 0 ? restam - 1 : 300;
+      const m = String(Math.floor(restam / 60)).padStart(2, '0');
+      const s = String(restam % 60).padStart(2, '0');
+      $('demo-contador').textContent = `${m}:${s}`;
+    }, 1000);
+
+    $('demo-copiar').addEventListener('click', async evento => {
+      const botao = evento.currentTarget;
+      try {
+        await navigator.clipboard.writeText('SIMULACAO-NAO-E-UM-PIX-REAL-' + Date.now());
+        botao.innerHTML = '<i class="fas fa-check"></i> Copiado (simulação)';
+      } catch {
+        botao.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Sem acesso à área de transferência';
+      }
+      setTimeout(() => { botao.innerHTML = '<i class="fas fa-copy"></i> Copiar código'; }, 2500);
+    });
+
+    // ---- Finalizar ----
+    $('demo-finalizar').addEventListener('click', () => {
+      const total = recalcular();
+      $('demo-numero').textContent = '#' + String(Math.floor(Math.random() * 900000) + 100000);
+      $('demo-metodo-txt').textContent = estado.metodo === 'pix' ? 'PIX' : 'cartão de crédito';
+      $('demo-total-final').textContent = dinheiro(total);
+      document.querySelector('.demo-grid').hidden = true;
+      $('demo-sucesso').hidden = false;
+    });
+
+    $('demo-refazer').addEventListener('click', () => {
+      $('demo-sucesso').hidden = true;
+      document.querySelector('.demo-grid').hidden = false;
+    });
+
+    recalcular();
+  }
+
 }); // Fim do DOMContentLoaded
