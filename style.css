@@ -43,7 +43,7 @@
 
   /* Espaçamentos */
   --espacamento-secao: 100px;
-  --container-largura: 1100px;
+  --container-largura: 1240px;
   --navbar-altura: 70px;
 
   /* Transições (velocidade das animações) */
@@ -74,6 +74,7 @@ body {
   line-height: 1.7; /* Espaço entre linhas — melhora legibilidade */
   overflow-x: hidden; /* Esconde scroll horizontal */
   -webkit-font-smoothing: antialiased; /* Texto mais suave no Mac/Chrome */
+  counter-reset: secao; /* Numeração das seções: 01, 02, 03… */
 }
 
 a {
@@ -106,35 +107,63 @@ img {
 .section {
   padding: var(--espacamento-secao) 0;
   position: relative;
+  counter-increment: secao;
 }
 
-/* Cabeçalho padrão de cada seção */
+/* ------------------------------------------------------------------
+   LAYOUT EM TRILHO
+   Em vez do título centralizado acima de cada seção — o arranjo que
+   praticamente todo portfólio repete — o título vira uma coluna fixa
+   à esquerda que acompanha a rolagem, e o conteúdo corre à direita.
+------------------------------------------------------------------ */
+.section > .container {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0 60px;
+  align-items: start;
+}
+
 .section-header {
-  text-align: center;
-  margin-bottom: 60px;
+  position: sticky;
+  top: calc(var(--navbar-altura) + 48px);
+  text-align: left;
+  margin-bottom: 0;
+}
+
+/* Numeração editorial: 01, 02, 03… gerada pelo contador do CSS */
+.section-header::before {
+  content: counter(secao, decimal-leading-zero);
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--roxo-primario);
+  opacity: 0.55;
+  margin-bottom: 14px;
 }
 
 .section-subtitle {
   color: var(--roxo-claro);
-  font-size: 0.9rem;
+  font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: 1.85rem;
   font-weight: 800;
+  line-height: 1.2;
   margin-bottom: 16px;
 }
 
 .section-line {
-  width: 60px;
-  height: 4px;
+  width: 44px;
+  height: 3px;
   background: linear-gradient(90deg, var(--roxo-primario), var(--roxo-claro));
   border-radius: 2px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 /* Texto com gradiente roxo (usado em vários lugares) */
@@ -351,11 +380,33 @@ img {
   z-index: 1;
 }
 
+/* Hero assimétrico: texto à esquerda, retrato à direita.
+   Tira o portfólio do arranjo centralizado que todo site do tipo repete. */
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--container-largura);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 56px;
+}
+
 .hero-content {
   position: relative;
   z-index: 2; /* Fica em cima do canvas */
-  text-align: center;
-  padding: 0 24px;
+  text-align: left;
+  padding: 0;
+}
+
+.hero-foto {
+  position: relative;
+  justify-self: center;
+  width: 100%;
+  max-width: 330px;
 }
 
 .hero-greeting {
@@ -381,7 +432,7 @@ img {
   min-height: 2rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 2px;
 }
 
@@ -400,14 +451,14 @@ img {
   font-size: 1.05rem;
   color: var(--texto-secundario);
   max-width: 500px;
-  margin: 0 auto 32px;
+  margin: 0 0 32px;
   line-height: 1.8;
 }
 
 .hero-buttons {
   display: flex;
   gap: 16px;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -439,7 +490,7 @@ img {
 ==================================================================== */
 .sobre-content {
   display: grid;
-  grid-template-columns: 1fr 1.5fr; /* Foto ocupa 1 parte, texto 1.5 partes */
+  grid-template-columns: 1fr; /* A foto passou para o hero */
   gap: 60px;
   align-items: center;
 }
@@ -1310,6 +1361,42 @@ img {
 @media (max-width: 768px) {
   :root {
     --espacamento-secao: 70px;
+  }
+
+  /* Trilho vira empilhado: o titulo volta para cima do conteudo */
+  .section > .container {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .section-header {
+    position: static;
+    margin-bottom: 36px;
+  }
+
+  /* Hero empilhado: retrato acima do texto, ambos centralizados */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    text-align: center;
+  }
+
+  .hero-foto {
+    order: -1;
+    max-width: 220px;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-typing,
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-description {
+    margin: 0 auto 32px;
   }
 
   .section-title {
