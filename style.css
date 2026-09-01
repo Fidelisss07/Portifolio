@@ -99,6 +99,10 @@ ul {
   list-style: none; /* Remove bolinhas das listas */
 }
 
+/* O atributo hidden precisa vencer qualquer display declarado aqui.
+   Sem isto, .gh-estado (flex) e .caso (flex) apareceriam mesmo ocultos. */
+[hidden] { display: none !important; }
+
 img {
   max-width: 100%; /* Imagens nunca ultrapassam o container */
   display: block;
@@ -1080,6 +1084,104 @@ img {
 .c-str { color: #6ee7b7; }
 .c-kw { color: var(--roxo-claro); }
 .c-num { color: #f0b429; }
+
+/* ---- GitHub ao vivo ---- */
+.gh {
+  margin-top: 44px;
+  padding-top: 34px;
+  border-top: 1px solid var(--borda);
+}
+
+.gh-topo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.gh-titulo { font-size: 1.05rem; font-weight: 700; margin-bottom: 5px; }
+
+.gh-legenda {
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+  max-width: 56ch;
+  line-height: 1.6;
+}
+
+.gh-estado {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 18px;
+  border: 1px dashed var(--borda);
+  border-radius: 12px;
+  color: var(--texto-terciario);
+  font-size: 0.88rem;
+}
+
+.gh-estado a { color: var(--roxo-claro); text-decoration: underline; }
+
+.gh-numeros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.gh-numero {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  background: var(--bg-card);
+}
+
+.gh-numero-valor {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--roxo-claro);
+  line-height: 1.15;
+}
+
+.gh-numero-rotulo { font-size: 0.74rem; color: var(--texto-terciario); }
+
+.gh-repos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+}
+
+.gh-repo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 14px 16px;
+  position: relative;
+}
+
+.gh-repo-nome {
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 0.86rem;
+  color: var(--texto-principal);
+}
+
+.gh-repo-meta { font-size: 0.74rem; color: var(--texto-terciario); }
+
+.gh-repo-ar {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
 
 /* ====================================================================
    SKILLS — Habilidades

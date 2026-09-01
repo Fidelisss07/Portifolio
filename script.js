@@ -480,4 +480,120 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+
+  // ================================================================
+  // GITHUB AO VIVO
+  // Busca perfil e repositórios na API pública quando o painel Código
+  // abre pela primeira vez. Carregar sob demanda evita gastar o limite
+  // de 60 requisições por hora com quem nem visita a seção.
+  // ================================================================
+
+  const USUARIO = 'Fidelisss07';
+  let githubCarregado = false;
+
+  function haQuantoTempo(iso) {
+    const dias = Math.round((Date.now() - new Date(iso)) / 86400000);
+    const fmt = new Intl.RelativeTimeFormat('pt-BR', { numeric: 'auto' });
+    if (dias < 30) return fmt.format(-dias, 'day');
+    if (dias < 365) return fmt.format(-Math.round(dias / 30), 'month');
+    return fmt.format(-Math.round(dias / 365), 'year');
+  }
+
+  function cartaoNumero(valor, rotulo) {
+    const div = document.createElement('div');
+    div.className = 'gh-numero';
+    const v = document.createElement('span');
+    v.className = 'gh-numero-valor';
+    v.textContent = valor;
+    const r = document.createElement('span');
+    r.className = 'gh-numero-rotulo';
+    r.textContent = rotulo;
+    div.append(v, r);
+    return div;
+  }
+
+  async function carregarGithub() {
+    if (githubCarregado) return;
+    githubCarregado = true;
+
+    const estado = document.getElementById('gh-estado');
+    const numeros = document.getElementById('gh-numeros');
+    const lista = document.getElementById('gh-repos');
+
+    try {
+      const [perfil, repos] = await Promise.all([
+        fetch(`https://api.github.com/users/${USUARIO}`).then(r => {
+          if (!r.ok) throw new Error('perfil ' + r.status);
+          return r.json();
+        }),
+        fetch(`https://api.github.com/users/${USUARIO}/repos?sort=pushed&per_page=100`).then(r => {
+          if (!r.ok) throw new Error('repos ' + r.status);
+          return r.json();
+        })
+      ]);
+
+      const desde = new Date(perfil.created_at).getFullYear();
+      const noAr = repos.filter(r => r.homepage).length;
+      const plural = (n, um, muitos) => (n === 1 ? um : muitos);
+
+      numeros.append(
+        cartaoNumero(perfil.public_repos,
+          plural(perfil.public_repos, 'repositório público', 'repositórios públicos')),
+        cartaoNumero(noAr, plural(noAr, 'projeto no ar', 'projetos no ar')),
+        cartaoNumero(desde, 'no GitHub desde')
+      );
+
+      // Fora o repositório de perfil e os forks: só o que é trabalho
+      const relevantes = repos
+        .filter(r => !r.fork && r.name.toLowerCase() !== USUARIO.toLowerCase())
+        .filter(r => r.homepage || r.description || r.language)
+        .slice(0, 6);
+
+      relevantes.forEach(repo => {
+        const cartao = document.createElement('a');
+        cartao.className = 'gh-repo glass-card';
+        cartao.href = repo.html_url;
+        cartao.target = '_blank';
+        cartao.rel = 'noopener noreferrer';
+
+        const nome = document.createElement('span');
+        nome.className = 'gh-repo-nome';
+        nome.textContent = repo.name;
+
+        const meta = document.createElement('span');
+        meta.className = 'gh-repo-meta';
+        meta.textContent = [repo.language, 'atualizado ' + haQuantoTempo(repo.pushed_at)]
+          .filter(Boolean).join(' · ');
+
+        cartao.append(nome, meta);
+
+        if (repo.homepage) {
+          const noAr = document.createElement('span');
+          noAr.className = 'gh-repo-ar';
+          noAr.textContent = 'no ar';
+          cartao.appendChild(noAr);
+        }
+
+        lista.appendChild(cartao);
+      });
+
+      estado.hidden = true;
+      numeros.hidden = false;
+      lista.hidden = false;
+    } catch (erro) {
+      // A API limita a 60 requisições por hora por IP; falhar é previsível
+      estado.innerHTML =
+        '<i class="fas fa-triangle-exclamation"></i> Não consegui falar com a API do GitHub agora. ' +
+        '<a href="https://github.com/' + USUARIO + '" target="_blank" rel="noopener noreferrer">' +
+        'Ver o perfil direto</a>.';
+      console.error('GitHub:', erro);
+    }
+  }
+
+  // O painel Código dispara a busca na primeira abertura
+  document.querySelector('.lateral-item[data-painel="codigo"]')
+    .addEventListener('click', carregarGithub);
+
+  if (location.hash === '#codigo') carregarGithub();
+
 }); // Fim do DOMContentLoaded
