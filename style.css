@@ -38,8 +38,11 @@
   --borda: rgba(255, 255, 255, 0.06);
   --borda-hover: rgba(139, 92, 246, 0.3);
 
-  /* Fonte */
+  /* Fontes.
+     A serifada nos títulos é o que tira o site do visual padrão de
+     portfólio de dev, onde quase todo mundo usa só sans geométrica. */
   --fonte: 'Inter', sans-serif;
+  --fonte-display: 'Instrument Serif', Georgia, serif;
 
   /* Espaçamentos */
   --espacamento-secao: 100px;
@@ -429,130 +432,6 @@ img {
 /* ====================================================================
    HERO — Seção principal (primeira tela)
 ==================================================================== */
-.hero {
-  min-height: 100vh; /* Ocupa a tela inteira */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Canvas das partículas (ocupa o fundo todo) */
-#particles-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-/* Hero assimétrico: texto à esquerda, retrato à direita.
-   Tira o portfólio do arranjo centralizado que todo site do tipo repete. */
-.hero-grid {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: var(--container-largura);
-  margin: 0 auto;
-  padding: 0 24px;
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: center;
-  gap: 56px;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2; /* Fica em cima do canvas */
-  text-align: left;
-  padding: 0;
-}
-
-.hero-foto {
-  position: relative;
-  justify-self: center;
-  width: 100%;
-  max-width: 330px;
-}
-
-.hero-greeting {
-  font-size: 1.1rem;
-  color: var(--roxo-claro);
-  font-weight: 500;
-  margin-bottom: 12px;
-  letter-spacing: 1px;
-}
-
-.hero-name {
-  font-size: clamp(2.5rem, 8vw, 5rem); /* Adapta o tamanho ao dispositivo */
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 16px;
-  letter-spacing: -2px;
-}
-
-.hero-typing {
-  font-size: 1.3rem;
-  color: var(--texto-secundario);
-  margin-bottom: 24px;
-  min-height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 2px;
-}
-
-/* Cursor piscando (o "|" que aparece na digitação) */
-.typing-cursor {
-  color: var(--roxo-primario);
-  animation: blink 1s step-end infinite;
-  font-weight: 300;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
-}
-
-.hero-description {
-  font-size: 1.05rem;
-  color: var(--texto-secundario);
-  max-width: 500px;
-  margin: 0 0 32px;
-  line-height: 1.8;
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 16px;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-
-/* Seta de scroll */
-.scroll-indicator {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-}
-
-.scroll-arrow {
-  animation: bounce 2s ease infinite;
-  color: var(--roxo-primario);
-  font-size: 1.2rem;
-  opacity: 0.7;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
-}
-
-
 /* ====================================================================
    SOBRE MIM
 ==================================================================== */
@@ -1421,6 +1300,211 @@ img {
 
 
 /* ====================================================================
+   ABERTURA — Primeira tela, em chave editorial
+   Sem partículas, sem digitação, sem retrato: só tipografia e espaço.
+   O índice numerado faz as vezes de sumário de revista.
+==================================================================== */
+.abertura {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding: calc(var(--navbar-altura) + 80px) 0 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Halo roxo baixo e difuso, no lugar das partículas */
+.abertura::before {
+  content: '';
+  position: absolute;
+  left: -10%;
+  bottom: -55%;
+  width: 90%;
+  padding-bottom: 90%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.14), transparent 62%);
+  pointer-events: none;
+}
+
+.abertura-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-largura);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 60px;
+  align-items: end;
+}
+
+.abertura-etiqueta {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--texto-terciario);
+  margin-bottom: 28px;
+}
+
+/* O nome em serifada, enorme, ocupando a tela como capa */
+.abertura-nome {
+  font-family: var(--fonte-display);
+  font-weight: 400;
+  font-size: clamp(3.4rem, 11vw, 9rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+}
+
+/* O sobrenome em itálico e roxo: o contraste que dá o tom editorial */
+.abertura-nome em {
+  font-style: italic;
+  color: var(--roxo-claro);
+  padding-left: 0.09em;
+}
+
+.abertura-linha {
+  max-width: 46ch;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--texto-secundario);
+  margin-bottom: 36px;
+}
+
+.abertura-linha strong {
+  color: var(--texto-principal);
+  font-weight: 600;
+}
+
+.abertura-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.abertura-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  border: 1px solid var(--roxo-primario);
+  background: var(--roxo-bg);
+  color: var(--texto-principal);
+  font-size: 0.86rem;
+  font-weight: 600;
+  transition: var(--transicao);
+}
+
+.abertura-btn:hover {
+  background: var(--roxo-primario);
+  transform: translateY(-2px);
+}
+
+.abertura-btn--simples {
+  border-color: var(--borda);
+  background: transparent;
+  color: var(--texto-secundario);
+}
+
+.abertura-btn--simples:hover {
+  color: var(--texto-principal);
+  background: transparent;
+  border-color: var(--borda-hover);
+}
+
+/* ------------------------------------------------------------------
+   ÍNDICE — a navegação como sumário
+------------------------------------------------------------------ */
+.abertura-indice {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--borda);
+}
+
+.abertura-indice a {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 13px 4px;
+  border-bottom: 1px solid var(--borda);
+  color: var(--texto-secundario);
+  transition: var(--transicao);
+}
+
+.abertura-indice a:hover {
+  color: var(--texto-principal);
+  padding-left: 12px;
+}
+
+.indice-num {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--roxo-primario);
+  opacity: 0.7;
+}
+
+.indice-nome {
+  font-family: var(--fonte-display);
+  font-size: 1.22rem;
+  line-height: 1.2;
+}
+
+/* ------------------------------------------------------------------
+   TIPOGRAFIA SERIFADA nos títulos do resto do site
+------------------------------------------------------------------ */
+.section-title,
+.projeto-titulo,
+.timeline-title,
+.sobre-heading,
+.ia-card-titulo,
+.certificados-titulo,
+.contato-info h3,
+.footer-logo,
+.navbar-logo {
+  font-family: var(--fonte-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.section-title {
+  font-size: 2.1rem;
+  line-height: 1.12;
+}
+
+.projeto-titulo {
+  font-size: 1.6rem;
+}
+
+.sobre-heading,
+.contato-info h3 {
+  font-size: 1.7rem;
+}
+
+.timeline-title,
+.ia-card-titulo {
+  font-size: 1.24rem;
+}
+
+.certificados-titulo {
+  font-size: 1.5rem;
+}
+
+.navbar-logo,
+.footer-logo {
+  font-size: 1.6rem;
+}
+
+/* O retrato agora vive no Sobre, acima do texto e em formato editorial */
+.sobre-retrato {
+  max-width: 300px;
+  margin-bottom: 40px;
+}
+
+
+/* ====================================================================
    RESPONSIVIDADE — Adaptações para celular e tablet
    @media = "quando a tela tiver no máximo X pixels de largura, use esses estilos"
 ==================================================================== */
@@ -1441,6 +1525,23 @@ img {
     position: static;
     margin-bottom: 36px;
   }
+
+  /* Abertura empilhada: o índice vai para baixo do texto */
+  .abertura-container {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    align-items: start;
+  }
+
+  .abertura {
+    align-items: center;
+    padding: calc(var(--navbar-altura) + 56px) 0 56px;
+  }
+
+  .sobre-retrato {
+    max-width: 220px;
+  }
+
 
   /* Hero empilhado: retrato acima do texto, ambos centralizados */
   .hero-grid {

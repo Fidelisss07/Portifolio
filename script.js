@@ -2,13 +2,13 @@
    JAVASCRIPT DO PORTFÓLIO — Gustavo Fidelis
    
    O QUE ESSE ARQUIVO FAZ:
-   1. Partículas animadas no fundo do Hero (usando Canvas)
-   2. Animação de digitação (formação, stack e projetos)
-   3. Navbar que muda ao rolar a página
-   4. Menu hamburger no celular
-   5. Animações de entrada ao scrollar (Scroll Reveal)
-   6. Barras de skill animadas
-   7. Formulário de contato com feedback visual
+   1. Navbar que muda ao rolar a página
+   2. Menu hamburger no celular
+   3. Animações de entrada ao scrollar, em cascata
+   4. Foco por rolagem: o card no centro da tela acende
+   5. Barras de skill animadas
+   6. Formulário de contato com feedback visual
+   7. Inclinação 3D nos cards de projeto
    
    DICA: Leia cada seção devagar, os comentários explicam tudo!
 ==================================================================== */
@@ -21,202 +21,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ================================================================
-  // 1. PARTÍCULAS ANIMADAS NO HERO
-  // Usamos o <canvas> como uma "tela de desenho" e o JavaScript
-  // desenha círculos que se movem e se conectam com linhas
+  // A abertura editorial dispensou o canvas de partículas e o efeito
+  // de digitação. Os blocos foram removidos junto com os elementos.
   // ================================================================
-  
-  const canvas = document.getElementById('particles-canvas');
-  const ctx = canvas.getContext('2d'); // "ctx" é o pincel para desenhar no canvas
-  
-  // Variável para guardar as partículas
-  let particulas = [];
-  let mouse = { x: null, y: null }; // Posição do mouse (para interagir)
-
-  // Ajusta o canvas para o tamanho da janela
-  function ajustarCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  ajustarCanvas();
-
-  // Quando a janela muda de tamanho, ajusta o canvas
-  window.addEventListener('resize', ajustarCanvas);
-
-  // Detecta posição do mouse para as partículas reagirem
-  window.addEventListener('mousemove', (e) => {
-    mouse.x = e.x;
-    mouse.y = e.y;
-  });
-
-  // Quando o mouse sai da janela, reseta a posição
-  window.addEventListener('mouseout', () => {
-    mouse.x = null;
-    mouse.y = null;
-  });
-
-  // Classe Partícula — cada bolinha na tela é uma instância dessa classe
-  class Particula {
-    constructor() {
-      this.x = Math.random() * canvas.width;          // Posição X aleatória
-      this.y = Math.random() * canvas.height;         // Posição Y aleatória
-      this.tamanho = Math.random() * 2 + 0.5;         // Tamanho entre 0.5 e 2.5
-      this.velocidadeX = (Math.random() - 0.5) * 0.5; // Velocidade horizontal
-      this.velocidadeY = (Math.random() - 0.5) * 0.5; // Velocidade vertical
-      this.opacidade = Math.random() * 0.5 + 0.1;     // Transparência
-    }
-
-    // Desenha a partícula no canvas
-    desenhar() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.tamanho, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(139, 92, 246, ${this.opacidade})`; // Cor roxa!
-      ctx.fill();
-    }
-
-    // Atualiza a posição da partícula (move ela)
-    atualizar() {
-      this.x += this.velocidadeX;
-      this.y += this.velocidadeY;
-
-      // Se sair da tela, volta pelo outro lado
-      if (this.x > canvas.width) this.x = 0;
-      if (this.x < 0) this.x = canvas.width;
-      if (this.y > canvas.height) this.y = 0;
-      if (this.y < 0) this.y = canvas.height;
-
-      // Se o mouse estiver perto, empurra a partícula
-      if (mouse.x !== null && mouse.y !== null) {
-        const dx = this.x - mouse.x;
-        const dy = this.y - mouse.y;
-        const distancia = Math.sqrt(dx * dx + dy * dy);
-        
-        if (distancia < 100) {
-          this.x += dx * 0.02;
-          this.y += dy * 0.02;
-        }
-      }
-
-      this.desenhar();
-    }
-  }
-
-  // Cria as partículas (mais em telas maiores, menos em celulares)
-  function criarParticulas() {
-    particulas = [];
-    // Calcula quantidade baseado no tamanho da tela
-    const quantidade = Math.min(Math.floor((canvas.width * canvas.height) / 12000), 80);
-    
-    for (let i = 0; i < quantidade; i++) {
-      particulas.push(new Particula());
-    }
-  }
-  criarParticulas();
-
-  // Desenha linhas entre partículas próximas
-  function desenharConexoes() {
-    for (let i = 0; i < particulas.length; i++) {
-      for (let j = i + 1; j < particulas.length; j++) {
-        const dx = particulas[i].x - particulas[j].x;
-        const dy = particulas[i].y - particulas[j].y;
-        const distancia = Math.sqrt(dx * dx + dy * dy);
-
-        // Se estiverem a menos de 120px de distância, desenha uma linha
-        if (distancia < 120) {
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(139, 92, 246, ${0.1 * (1 - distancia / 120)})`;
-          ctx.lineWidth = 0.5;
-          ctx.moveTo(particulas[i].x, particulas[i].y);
-          ctx.lineTo(particulas[j].x, particulas[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  // Controle: só anima quando o Hero está visível (economiza bateria/CPU)
-  let heroVisivel = true;
-  let animacaoAtiva = false;
-
-  // Loop de animação — roda ~60 vezes por segundo
-  function animarParticulas() {
-    if (!heroVisivel) { animacaoAtiva = false; return; } // Pausa fora da tela
-    animacaoAtiva = true;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa o canvas
-
-    particulas.forEach(p => p.atualizar()); // Atualiza cada partícula
-    desenharConexoes();                      // Desenha as linhas
-
-    requestAnimationFrame(animarParticulas); // Repete no próximo frame
-  }
-  animarParticulas();
-
-  // Observa o Hero: pausa a animação quando sai da tela, retoma ao voltar
-  new IntersectionObserver((entradas) => {
-    heroVisivel = entradas[0].isIntersecting;
-    if (heroVisivel && !animacaoAtiva) animarParticulas();
-  }).observe(document.querySelector('.hero'));
-
-  // Recria partículas quando a tela muda de tamanho
-  window.addEventListener('resize', criarParticulas);
-
-
-  // ================================================================
-  // 2. ANIMAÇÃO DE DIGITAÇÃO
-  // Simula alguém digitando e apagando textos
-  // ================================================================
-  
-  const elementoDigitacao = document.getElementById('typing-text');
-  
-  // GUSTAVO: Mude os textos abaixo para o que quiser!
-  const textos = [
-    'Ciência da Computação · FIAP',
-    'React • Next.js • Node.js',
-    'Construindo E-commerces completos',
-    'Desenvolvendo com Claude Code',
-    'Apaixonado por Tecnologia'
-  ];
-  
-  let indiceTexto = 0;    // Qual texto está sendo digitado
-  let indiceLetra = 0;    // Qual letra está sendo digitada
-  let apagando = false;   // Está apagando ou digitando?
-  let velocidade = 100;   // Velocidade em milissegundos
-
-  function digitarTexto() {
-    const textoAtual = textos[indiceTexto];
-    
-    if (!apagando) {
-      // DIGITANDO: adiciona uma letra por vez
-      elementoDigitacao.textContent = textoAtual.substring(0, indiceLetra + 1);
-      indiceLetra++;
-      velocidade = 80 + Math.random() * 40; // Velocidade variável (mais realista)
-      
-      // Se terminou de digitar, espera 2 segundos e começa a apagar
-      if (indiceLetra === textoAtual.length) {
-        apagando = true;
-        velocidade = 2000; // Pausa antes de apagar
-      }
-    } else {
-      // APAGANDO: remove uma letra por vez
-      elementoDigitacao.textContent = textoAtual.substring(0, indiceLetra - 1);
-      indiceLetra--;
-      velocidade = 40; // Apaga mais rápido
-      
-      // Se terminou de apagar, vai para o próximo texto
-      if (indiceLetra === 0) {
-        apagando = false;
-        indiceTexto = (indiceTexto + 1) % textos.length; // Volta ao início quando acabar
-        velocidade = 500; // Pausa antes de digitar o próximo
-      }
-    }
-    
-    setTimeout(digitarTexto, velocidade); // Chama a si mesmo após o delay
-  }
-  
-  // Começa a digitação após 1 segundo
-  setTimeout(digitarTexto, 1000);
-
 
   // ================================================================
   // 3. NAVBAR — Muda de estilo ao rolar a página

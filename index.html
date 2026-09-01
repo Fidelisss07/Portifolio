@@ -31,7 +31,7 @@
   ==================================================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -52,8 +52,8 @@
 
             <!-- Links de navegação (cada um aponta para uma seção da página) -->
             <ul class="navbar-menu" id="navbar-menu">
-                <li><a href="#sobre" class="navbar-link">Sobre</a></li>
                 <li><a href="#projetos" class="navbar-link">Projetos</a></li>
+                <li><a href="#sobre" class="navbar-link">Sobre</a></li>
                 <li><a href="#ia" class="navbar-link">IA</a></li>
                 <li><a href="#skills" class="navbar-link">Skills</a></li>
                 <li><a href="#experiencia" class="navbar-link">Experiência</a></li>
@@ -77,141 +77,44 @@
 
 
     <!-- ==================================================================
-       HERO — Primeira coisa que a pessoa vê ao abrir o site
-       Ocupa a tela inteira. Tem seu nome grande e uma animação de digitação
+       ABERTURA — Primeira tela
+       Em vez do hero padrão (saudação, nome, digitação, botões e foto),
+       uma abertura editorial: nome em serifada, uma linha de posicionamento
+       e um índice numerado que também serve de navegação.
   ================================================================== -->
-    <section id="hero" class="hero">
-        <!-- Canvas: é um "quadro de pintura" onde o JavaScript desenha as partículas animadas -->
-        <canvas id="particles-canvas"></canvas>
+    <section id="hero" class="abertura">
+        <div class="abertura-container">
+            <div class="abertura-topo">
+                <p class="abertura-etiqueta">Portfólio — 2026</p>
 
-        <div class="hero-grid">
-        <div class="hero-content">
-            <!-- Saudação pequena acima do nome -->
-            <p class="hero-greeting">Olá, eu sou</p>
+                <h1 class="abertura-nome">Gustavo<br><em>Fidelis</em></h1>
 
-            <!-- Seu nome com efeito de gradiente roxo -->
-            <h1 class="hero-name">Gustavo <span class="text-gradient">Fidelis</span></h1>
+                <p class="abertura-linha">
+                    Estudante de <strong>Ciência da Computação na FIAP</strong>. Construo lojas virtuais
+                    completas com React, Next.js e TypeScript — do catálogo ao checkout, do painel
+                    administrativo às integrações de pagamento e frete.
+                </p>
 
-            <!-- Texto que simula estar sendo digitado -->
-            <div class="hero-typing">
-                <span class="typing-text" id="typing-text"></span>
-                <span class="typing-cursor">|</span>
-            </div>
-
-            <!-- Breve descrição -->
-            <p class="hero-description">
-                Transformando ideias em experiências digitais com código limpo, design moderno
-                e <strong>Claude Code</strong> como par de programação.
-            </p>
-
-            <!-- Botões de ação (CTA = Call to Action) -->
-            <div class="hero-buttons">
-                <a href="#projetos" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i> Ver Projetos
-                </a>
-                <a href="curriculo_gustavo_fidelis_final.pdf" class="btn btn-outline" target="_blank"
-                    rel="noopener noreferrer">
-                    <i class="fas fa-file-pdf"></i> Meu Currículo
-                </a>
-                <a href="#contato" class="btn btn-ghost">
-                    <i class="fas fa-envelope"></i> Contato
-                </a>
-            </div>
-        </div>
-
-            <div class="hero-foto">
-
-                <div class="sobre-image-wrapper">
-                    <div class="sobre-image">
-                        <img src="foto-gustavo.webp" alt="Gustavo Fidelis, estudante de Ciência da Computação na FIAP"
-                            class="sobre-foto" width="800" height="800" loading="lazy">
-                    </div>
-                    <!-- Decoração ao redor da foto -->
-                    <div class="sobre-image-decoration"></div>
+                <div class="abertura-acoes">
+                    <a href="curriculo_gustavo_fidelis_final.pdf" class="abertura-btn" target="_blank"
+                        rel="noopener noreferrer">
+                        <i class="fas fa-file-pdf"></i> Currículo
+                    </a>
+                    <a href="#contato" class="abertura-btn abertura-btn--simples">
+                        <i class="fas fa-envelope"></i> Falar comigo
+                    </a>
                 </div>
             </div>
-        </div>
 
-        <!-- Seta animada indicando para rolar para baixo -->
-        <a href="#sobre" class="scroll-indicator">
-            <div class="scroll-arrow">
-                <i class="fas fa-chevron-down"></i>
-            </div>
-        </a>
-    </section>
-
-
-    <!-- ==================================================================
-       SOBRE MIM — Apresentação pessoal
-       Aqui você conta quem é, o que faz e o que te motiva
-  ================================================================== -->
-    <section id="sobre" class="section sobre">
-        <div class="container">
-            <!-- Título da seção (todas as seções seguem esse padrão) -->
-            <div class="section-header">
-                <p class="section-subtitle">Conheça um pouco</p>
-                <h2 class="section-title">Sobre <span class="text-gradient">Mim</span></h2>
-                <div class="section-line"></div>
-            </div>
-
-                <div class="section-body">
-
-            <div class="sobre-content">
-                <!-- Lado direito: texto + cards de destaque -->
-                <div class="sobre-text">
-                    <h3 class="sobre-heading">Ciência da Computação na FIAP</h3>
-
-                    <p>
-                        Olá! Sou Gustavo Fidelis, estudante de Ciência da Computação na FIAP e apaixonado por
-                        transformar ideias em produtos reais. Já coloquei no ar duas lojas virtuais completas —
-                        com catálogo, checkout, pagamentos, painel administrativo e integrações de terceiros.
-                        Uma delas foi entregue como freelance para um cliente externo.
-                    </p>
-                    <p>
-                        Trabalho com React, Next.js, TypeScript, Node.js, Supabase e Firebase — e uso
-                        <strong>Claude Code</strong> como ferramenta de trabalho diária, de par de programação a
-                        revisão de código. Acredito que saber operar IA com critério é hoje tão importante quanto
-                        conhecer a linguagem: ela acelera a entrega, mas a decisão técnica continua sendo minha.
-                    </p>
-                    <p>
-                        Sou autodidata e proativo, com vivência também em montagem e manutenção de computadores
-                        de alta performance sob prazos críticos.
-                    </p>
-
-                    <!-- Cards com destaques rápidos -->
-                    <div class="sobre-cards">
-                        <div class="sobre-card glass-card">
-                            <div class="sobre-card-icon"><i class="fas fa-code"></i></div>
-                            <div class="sobre-card-info">
-                                <span class="sobre-card-number">10+</span>
-                                <span class="sobre-card-label">Tecnologias</span>
-                            </div>
-                        </div>
-                        <div class="sobre-card glass-card">
-                            <div class="sobre-card-icon"><i class="fas fa-rocket"></i></div>
-                            <div class="sobre-card-info">
-                                <span class="sobre-card-number">2</span>
-                                <span class="sobre-card-label">Lojas no Ar</span>
-                            </div>
-                        </div>
-                        <div class="sobre-card glass-card">
-                            <div class="sobre-card-icon"><i class="fas fa-graduation-cap"></i></div>
-                            <div class="sobre-card-info">
-                                <span class="sobre-card-number">CC</span>
-                                <span class="sobre-card-label">FIAP</span>
-                            </div>
-                        </div>
-                        <div class="sobre-card glass-card">
-                            <div class="sobre-card-icon"><i class="fas fa-terminal"></i></div>
-                            <div class="sobre-card-info">
-                                <span class="sobre-card-number">Claude</span>
-                                <span class="sobre-card-label">Code no fluxo</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                </div>
+            <!-- O índice é a navegação: sumário de revista, não menu de site -->
+            <nav class="abertura-indice" aria-label="Índice do portfólio">
+                <a href="#projetos"><span class="indice-num">01</span><span class="indice-nome">O trabalho</span></a>
+                <a href="#sobre"><span class="indice-num">02</span><span class="indice-nome">Quem faz</span></a>
+                <a href="#ia"><span class="indice-num">03</span><span class="indice-nome">Como faço</span></a>
+                <a href="#skills"><span class="indice-num">04</span><span class="indice-nome">Ferramentas</span></a>
+                <a href="#experiencia"><span class="indice-num">05</span><span class="indice-nome">Trajetória</span></a>
+                <a href="#contato"><span class="indice-num">06</span><span class="indice-nome">Contato</span></a>
+            </nav>
         </div>
     </section>
 
@@ -308,6 +211,92 @@
                         </div>
                     </div>
                 </article>
+            </div>
+                </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================================
+       SOBRE MIM — Apresentação pessoal
+       Aqui você conta quem é, o que faz e o que te motiva
+  ================================================================== -->
+    <section id="sobre" class="section sobre">
+        <div class="container">
+            <!-- Título da seção (todas as seções seguem esse padrão) -->
+            <div class="section-header">
+                <p class="section-subtitle">Conheça um pouco</p>
+                <h2 class="section-title">Sobre <span class="text-gradient">Mim</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+                <div class="section-body">
+
+            <div class="sobre-content">
+                <div class="sobre-retrato">
+                    <div class="sobre-image-wrapper">
+                        <div class="sobre-image">
+                            <img src="foto-gustavo.webp" alt="Gustavo Fidelis, estudante de Ciência da Computação na FIAP"
+                                class="sobre-foto" width="800" height="800" loading="lazy">
+                        </div>
+                        <!-- Decoração ao redor da foto -->
+                        <div class="sobre-image-decoration"></div>
+                    </div>
+                </div>
+
+                <!-- Texto + cards de destaque -->
+                <div class="sobre-text">
+                    <h3 class="sobre-heading">Ciência da Computação na FIAP</h3>
+
+                    <p>
+                        Olá! Sou Gustavo Fidelis, estudante de Ciência da Computação na FIAP e apaixonado por
+                        transformar ideias em produtos reais. Já coloquei no ar duas lojas virtuais completas —
+                        com catálogo, checkout, pagamentos, painel administrativo e integrações de terceiros.
+                        Uma delas foi entregue como freelance para um cliente externo.
+                    </p>
+                    <p>
+                        Trabalho com React, Next.js, TypeScript, Node.js, Supabase e Firebase — e uso
+                        <strong>Claude Code</strong> como ferramenta de trabalho diária, de par de programação a
+                        revisão de código. Acredito que saber operar IA com critério é hoje tão importante quanto
+                        conhecer a linguagem: ela acelera a entrega, mas a decisão técnica continua sendo minha.
+                    </p>
+                    <p>
+                        Sou autodidata e proativo, com vivência também em montagem e manutenção de computadores
+                        de alta performance sob prazos críticos.
+                    </p>
+
+                    <!-- Cards com destaques rápidos -->
+                    <div class="sobre-cards">
+                        <div class="sobre-card glass-card">
+                            <div class="sobre-card-icon"><i class="fas fa-code"></i></div>
+                            <div class="sobre-card-info">
+                                <span class="sobre-card-number">10+</span>
+                                <span class="sobre-card-label">Tecnologias</span>
+                            </div>
+                        </div>
+                        <div class="sobre-card glass-card">
+                            <div class="sobre-card-icon"><i class="fas fa-rocket"></i></div>
+                            <div class="sobre-card-info">
+                                <span class="sobre-card-number">2</span>
+                                <span class="sobre-card-label">Lojas no Ar</span>
+                            </div>
+                        </div>
+                        <div class="sobre-card glass-card">
+                            <div class="sobre-card-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="sobre-card-info">
+                                <span class="sobre-card-number">CC</span>
+                                <span class="sobre-card-label">FIAP</span>
+                            </div>
+                        </div>
+                        <div class="sobre-card glass-card">
+                            <div class="sobre-card-icon"><i class="fas fa-terminal"></i></div>
+                            <div class="sobre-card-info">
+                                <span class="sobre-card-number">Claude</span>
+                                <span class="sobre-card-label">Code no fluxo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
                 </div>
         </div>
@@ -959,8 +948,7 @@
             <div class="footer-content">
                 <a href="#hero" class="footer-logo">GF<span class="logo-dot">.</span></a>
                 <p class="footer-text">
-                    Feito com <span class="footer-heart">💜</span> e <strong>Claude Code</strong> por Gustavo
-                    Fidelis
+                    Feito com <span class="footer-heart">💜</span> por Gustavo Fidelis
                 </p>
                 <div class="footer-social">
                     <a href="https://github.com/Fidelisss07" target="_blank" rel="noopener noreferrer"
