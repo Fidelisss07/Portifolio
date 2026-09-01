@@ -819,4 +819,14 @@ document.addEventListener('DOMContentLoaded', () => {
     recalcular();
   }
 
+
+  // ================================================================
+  // ANÉIS DAS MÉTRICAS
+  // O preenchimento vem do próprio número medido, não de um valor fixo
+  // ================================================================
+
+  document.querySelectorAll('.nota-item').forEach(item => {
+    item.querySelector('.nota-anel').style.setProperty('--pct', item.dataset.nota);
+  });
+
 }); // Fim do DOMContentLoaded

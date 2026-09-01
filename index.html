@@ -733,6 +733,62 @@
                     <div class="gh-numeros" id="gh-numeros" hidden></div>
                     <div class="gh-repos" id="gh-repos" hidden></div>
                 </div>
+
+                <div class="metricas" id="metricas">
+                    <div class="gh-topo">
+                        <div>
+                            <h3 class="gh-titulo">Métricas deste site</h3>
+                            <p class="gh-legenda">
+                                Medido com Lighthouse 12 em 01/09/2026, perfil de celular. Números reais de uma
+                                execução real, não selo decorativo.
+                            </p>
+                        </div>
+                        <a class="trecho-link"
+                            href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fgustavofidelis.vercel.app"
+                            target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-gauge-high"></i> Medir você mesmo
+                        </a>
+                    </div>
+
+                    <div class="notas">
+                        <div class="nota-item" data-nota="77">
+                            <div class="nota-anel"><span>77</span></div>
+                            <span class="nota-rot">Performance</span>
+                        </div>
+                        <div class="nota-item" data-nota="95">
+                            <div class="nota-anel"><span>95</span></div>
+                            <span class="nota-rot">Acessibilidade</span>
+                        </div>
+                        <div class="nota-item" data-nota="100">
+                            <div class="nota-anel"><span>100</span></div>
+                            <span class="nota-rot">Boas práticas</span>
+                        </div>
+                        <div class="nota-item" data-nota="100">
+                            <div class="nota-anel"><span>100</span></div>
+                            <span class="nota-rot">SEO</span>
+                        </div>
+                    </div>
+
+                    <div class="antes-depois">
+                        <p class="antes-depois-tit">O que mudou depois de medir</p>
+                        <p class="antes-depois-txt">
+                            A primeira medição deu <strong>58 em performance</strong>, com deslocamento de layout
+                            de 0,332. O Lighthouse apontou 1,9 segundo de renderização travada pelos CSS do Font
+                            Awesome e do Google Fonts, carregados no topo do documento.
+                        </p>
+                        <p class="antes-depois-txt">
+                            Passei os dois para <code>preload</code> com troca no <code>onload</code>: a página
+                            desenha primeiro e o estilo entra depois. Performance foi para <strong>77</strong> e o
+                            deslocamento caiu para <strong>0,001</strong> — a troca de fonte era o que empurrava o
+                            conteúdo.
+                        </p>
+                        <p class="antes-depois-nota">
+                            Medir é o que separa achismo de decisão. Sem o relatório eu teria chutado o problema
+                            errado.
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>

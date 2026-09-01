@@ -1502,6 +1502,111 @@ img {
 
 .demo-refazer:hover { color: var(--texto-principal); border-color: var(--borda-hover); background: var(--roxo-bg); }
 
+/* ---- Métricas medidas com Lighthouse ---- */
+.metricas {
+  margin-top: 44px;
+  padding-top: 34px;
+  border-top: 1px solid var(--borda);
+}
+
+.notas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.nota-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 12px;
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  background: var(--bg-card);
+}
+
+/* O anel usa a mesma escala de cor do Lighthouse:
+   verde a partir de 90, laranja entre 50 e 89, vermelho abaixo. */
+.nota-anel {
+  --cor: #4ade80;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(var(--cor) calc(var(--pct) * 1%), rgba(255, 255, 255, 0.07) 0);
+  position: relative;
+}
+
+.nota-anel::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--bg-secundario);
+}
+
+.nota-anel span {
+  position: relative;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--cor);
+  font-variant-numeric: tabular-nums;
+}
+
+.nota-item[data-nota="77"] .nota-anel { --cor: #fbbf24; }
+
+.nota-rot {
+  font-size: 0.76rem;
+  color: var(--texto-terciario);
+  text-align: center;
+}
+
+.antes-depois {
+  padding: 20px 22px;
+  border: 1px solid var(--borda);
+  border-left: 2px solid var(--roxo-primario);
+  border-radius: 0 14px 14px 0;
+  background: var(--bg-card);
+}
+
+.antes-depois-tit {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--roxo-claro);
+  margin-bottom: 12px;
+}
+
+.antes-depois-txt {
+  font-size: 0.88rem;
+  color: var(--texto-secundario);
+  line-height: 1.75;
+  margin-bottom: 12px;
+  max-width: 66ch;
+}
+
+.antes-depois-txt strong { color: var(--texto-principal); }
+
+.antes-depois-txt code {
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 0.86em;
+  color: #6ee7b7;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.antes-depois-nota {
+  font-size: 0.84rem;
+  color: var(--texto-terciario);
+  font-style: italic;
+  margin: 0;
+}
+
 /* ====================================================================
    SKILLS — Habilidades
 ==================================================================== */
