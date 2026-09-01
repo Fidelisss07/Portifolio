@@ -2,604 +2,1020 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ====================================================================
+       META TAGS — Informações básicas da página
+       Essas tags dizem ao navegador como interpretar o conteúdo
+  ==================================================================== -->
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres (acentos, ç, etc) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Faz o site funcionar bem no celular -->
     <meta name="description"
-        content="Portfólio de Gustavo Fidelis — estudante de Ciência da Computação na FIAP. Desenvolvo com React, Next.js e TypeScript. Duas lojas virtuais completas em produção.">
+        content="Portfólio de Gustavo Fidelis — estudante de Ciência da Computação na FIAP. Desenvolvo com React, Next.js e TypeScript, e uso Claude Code no fluxo diário. Lojas virtuais completas no ar. Confira meus projetos!">
     <meta name="author" content="Gustavo Fidelis de Souza e Silva">
 
     <title>Gustavo Fidelis | Ciência da Computação — FIAP</title>
 
+    <!-- ====================================================================
+       FAVICON — O ícone "GF." que aparece na aba do navegador
+       O .ico traz 16, 32 e 48px; o navegador escolhe o melhor para cada tela
+  ==================================================================== -->
     <link rel="icon" href="favicon.ico" sizes="48x48">
     <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <meta name="theme-color" content="#0d0b14">
+    <meta name="theme-color" content="#8b5cf6">
 
+    <!-- ====================================================================
+       FONTES E ÍCONES EXTERNOS
+       Estamos importando a fonte "Inter" do Google Fonts e os ícones
+       do Font Awesome (para ícones de GitHub, LinkedIn, etc)
+  ==================================================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- Nosso arquivo de estilos -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <!-- ==================================================================
-       O portfólio é um editor de código. Cada assunto é um arquivo, e o
-       formato de cada arquivo combina com o conteúdo: o texto é markdown,
-       a stack é JSON, a trajetória é um log, o contato é um .env.
+       NAVBAR — Barra de navegação fixa no topo
+       Fica sempre visível enquanto você rola a página
   ================================================================== -->
-    <div class="editor">
+    <nav id="navbar" class="navbar">
+        <div class="navbar-container">
+            <!-- Logo: suas iniciais "GF" estilizadas -->
+            <a href="#hero" class="navbar-logo">GF<span class="logo-dot">.</span></a>
 
-        <!-- ---------- BARRA DE TÍTULO ---------- -->
-        <header class="titulo-barra">
-            <button class="menu-btn" id="menu-btn" aria-label="Abrir explorador de arquivos"
-                aria-expanded="false" aria-controls="explorer">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <span class="titulo-arquivo">
-                <strong>Gustavo Fidelis</strong>
-                <span class="titulo-caminho">Ciência da Computação · FIAP</span>
-            </span>
-
-            <a class="titulo-acao" href="curriculo_gustavo_fidelis_final.pdf" target="_blank"
+            <!-- Links de navegação (cada um aponta para uma seção da página) -->
+            <a href="curriculo_gustavo_fidelis_final.pdf" class="navbar-cv" target="_blank"
                 rel="noopener noreferrer">
-                <i class="fas fa-file-arrow-down"></i><span>Currículo</span>
+                <i class="fas fa-file-pdf"></i> Currículo
             </a>
-        </header>
 
-        <div class="editor-corpo">
+            <!-- Botão hamburger para celular (3 linhas que viram X) -->
+            <button class="navbar-toggle" id="navbar-toggle" aria-label="Abrir menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
 
-            <!-- ---------- EXPLORADOR ---------- -->
-            <nav class="explorer" id="explorer" aria-label="Arquivos do portfólio">
-                <ul class="explorer-lista">
-                    <li>
-                        <button class="arquivo ativo" data-arquivo="sobre" id="sobre">
-                            <i class="fab fa-markdown"></i> sobre
-                        </button>
-                    </li>
-                    <li>
-                        <button class="arquivo" data-arquivo="projetos" id="projetos">
-                            <i class="fab fa-react"></i> projetos
-                            <span class="arquivo-selo">2</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="arquivo" data-arquivo="ia" id="ia">
-                            <i class="fas fa-terminal"></i> ia com critério
-                        </button>
-                    </li>
-                    <li>
-                        <button class="arquivo" data-arquivo="stack" id="skills">
-                            <i class="fas fa-code"></i> stack
-                        </button>
-                    </li>
-                    <li>
-                        <button class="arquivo" data-arquivo="certificados" id="certificados">
-                            <i class="fas fa-folder"></i> certificados
-                            <span class="arquivo-selo">9</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="arquivo" data-arquivo="experiencia" id="experiencia">
-                            <i class="fas fa-clock-rotate-left"></i> experiência
-                        </button>
-                    </li>
-                    <li>
-                        <button class="arquivo" data-arquivo="contato" id="contato">
-                            <i class="fas fa-key"></i> contato
-                        </button>
-                    </li>
-                </ul>
 
-                <div class="explorer-rodape">
-                    <a href="https://github.com/Fidelisss07" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-github"></i> github.com/Fidelisss07
-                    </a>
-                    <a href="https://www.linkedin.com/in/gustavo-fidelis-b17051387/" target="_blank"
-                        rel="noopener noreferrer">
-                        <i class="fab fa-linkedin"></i> linkedin
-                    </a>
-                </div>
-            </nav>
 
-            <!-- Véu que escurece o conteúdo quando o explorador abre no celular -->
-            <div class="veu" id="veu" hidden></div>
+    <!-- ==================================================================
+       LATERAL — navegar escolhendo um assunto, em vez de rolar a página
+  ================================================================== -->
+    <aside class="lateral" id="lateral" aria-label="Assuntos do portfólio">
+        <p class="lateral-titulo">Portfólio</p>
 
-            <!-- ---------- PAINEL DO EDITOR ---------- -->
-            <main class="painel">
+        <nav class="lateral-lista">
+            <button class="lateral-item ativo" data-painel="hero">
+                <i class="fas fa-house"></i> <span>Início</span>
+            </button>
+            <button class="lateral-item" data-painel="sobre">
+                <i class="fas fa-user"></i> <span>Sobre</span>
+            </button>
+            <button class="lateral-item" data-painel="projetos">
+                <i class="fas fa-rocket"></i> <span>Projetos</span>
+                <span class="lateral-selo">2</span>
+            </button>
+            <button class="lateral-item" data-painel="ia">
+                <i class="fas fa-terminal"></i> <span>IA no fluxo</span>
+            </button>
+            <button class="lateral-item" data-painel="skills">
+                <i class="fas fa-code"></i> <span>Skills</span>
+            </button>
+            <button class="lateral-item" data-painel="experiencia">
+                <i class="fas fa-graduation-cap"></i> <span>Experiência</span>
+                <span class="lateral-selo">9</span>
+            </button>
+            <button class="lateral-item" data-painel="contato">
+                <i class="fas fa-envelope"></i> <span>Contato</span>
+            </button>
+        </nav>
 
-                <div class="painel-topo">
-                    <h1 class="painel-nome" id="painel-nome">sobre</h1>
-                    <p class="painel-desc" id="painel-desc">quem sou e o que já construí</p>
-                </div>
+        <div class="lateral-rodape">
+            <a href="https://github.com/Fidelisss07" target="_blank" rel="noopener noreferrer"
+                aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/gustavo-fidelis-b17051387/" target="_blank"
+                rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:gufidelis116@gmail.com" aria-label="E-mail"><i class="fas fa-envelope"></i></a>
+        </div>
+    </aside>
 
-                <div class="conteudo" id="conteudo">
+    <div class="veu-lateral" id="veu-lateral" hidden></div>
 
-                    <!-- ========== sobre.md ========== -->
-                    <article class="arq" data-conteudo="sobre">
-                        <div class="md">
-                            <h2 class="titulo-md">Gustavo Fidelis</h2>
-                            <p class="md-meta">Ciência da Computação · FIAP · São Paulo, SP</p>
+    <div class="palco">
+    <!-- ==================================================================
+       HERO — Primeira coisa que a pessoa vê ao abrir o site
+       Ocupa a tela inteira. Tem seu nome grande e uma animação de digitação
+  ================================================================== -->
+    <section id="hero" class="hero">
+        <!-- Canvas: é um "quadro de pintura" onde o JavaScript desenha as partículas animadas -->
+        <canvas id="particles-canvas"></canvas>
 
-                            <div class="sobre-linha">
-                                <img src="foto-gustavo.webp" class="retrato"
-                                    alt="Gustavo Fidelis, estudante de Ciência da Computação na FIAP" width="800"
-                                    height="800" loading="lazy">
+        <div class="hero-grid">
+        <div class="hero-content">
+            <!-- Saudação pequena acima do nome -->
+            <p class="hero-greeting">Olá, eu sou</p>
 
-                                <div class="sobre-fatos">
-                                    <div class="fato">
-                                        <span class="fato-valor">2</span>
-                                        <span class="fato-rotulo">lojas em produção</span>
-                                    </div>
-                                    <div class="fato">
-                                        <span class="fato-valor">1</span>
-                                        <span class="fato-rotulo">freelance entregue</span>
-                                    </div>
-                                    <div class="fato">
-                                        <span class="fato-valor">9</span>
-                                        <span class="fato-rotulo">certificados</span>
-                                    </div>
-                                    <div class="fato">
-                                        <span class="fato-valor">2030</span>
-                                        <span class="fato-rotulo">conclusão prevista</span>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Seu nome com efeito de gradiente roxo -->
+            <h1 class="hero-name">Gustavo <span class="text-gradient">Fidelis</span></h1>
 
-                            <p>
-                                Olá! Sou Gustavo Fidelis, estudante de Ciência da Computação na FIAP e apaixonado
-                                por transformar ideias em produtos reais. Já coloquei no ar duas lojas virtuais
-                                completas — com catálogo, checkout, pagamentos, painel administrativo e integrações
-                                de terceiros. Uma delas foi entregue como freelance para um cliente externo.
-                            </p>
-                            <p>
-                                Trabalho com React, Next.js, TypeScript, Node.js, Supabase e Firebase — e uso
-                                <strong>Claude Code</strong> como ferramenta de trabalho diária, de par de
-                                programação a revisão de código. Acredito que saber operar IA com critério é hoje
-                                tão importante quanto conhecer a linguagem: ela acelera a entrega, mas a decisão
-                                técnica continua sendo minha.
-                            </p>
-                            <p>
-                                Sou autodidata e proativo, com vivência também em montagem e manutenção de
-                                computadores de alta performance sob prazos críticos.
-                            </p>
-                        </div>
-                    </article>
+            <!-- Texto que simula estar sendo digitado -->
+            <div class="hero-typing">
+                <span class="typing-text" id="typing-text"></span>
+                <span class="typing-cursor">|</span>
+            </div>
 
-                    <!-- ========== projetos.tsx ========== -->
-                    <article class="arq" data-conteudo="projetos" hidden>
-                        <p class="nota">Duas lojas virtuais completas, do zero à produção.</p>
+            <!-- Breve descrição -->
+            <p class="hero-description">
+                Transformando ideias em experiências digitais com código limpo, design moderno
+                e <strong>Claude Code</strong> como par de programação.
+            </p>
 
-                        <div class="projetos">
-                            <article class="projeto">
-                                <div class="projeto-capa">
-                                    <img src="balu3d-logo.webp" alt="Logo BaLu 3D" loading="lazy">
-                                </div>
-                                <div class="projeto-info">
-                                    <h2 class="projeto-nome">BaLu 3D</h2>
-                                    <p class="projeto-desc">
-                                        E-commerce de impressão 3D com catálogo, checkout duplo (PIX + cartão),
-                                        painel admin e e-mails transacionais. Projeto freelance entregue para
-                                        cliente real.
-                                    </p>
-                                    <div class="tags">
-                                        <span class="tag">Next.js</span><span class="tag">TypeScript</span>
-                                        <span class="tag">Firebase</span><span class="tag">Stripe</span>
-                                        <span class="tag">Cloudinary</span>
-                                    </div>
-                                    <div class="projeto-acoes">
-                                        <span class="repo-privado" title="Código fechado por acordo com o cliente">
-                                            <i class="fas fa-lock"></i> Repositório privado
-                                        </span>
-                                        <a class="btn-linha" href="https://balu3d.com.br" target="_blank"
-                                            rel="noopener noreferrer">
-                                            <i class="fas fa-arrow-up-right-from-square"></i> Ver site
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="projeto">
-                                <div class="projeto-capa">
-                                    <img src="amxwatch-logo.webp" alt="Logo AMXWatch" loading="lazy">
-                                </div>
-                                <div class="projeto-info">
-                                    <h2 class="projeto-nome">AMXWatch</h2>
-                                    <p class="projeto-desc">
-                                        E-commerce premium de relógios com frete via Melhor Envio, painel admin,
-                                        conformidade LGPD, avaliações, favoritos, cupons e SEO avançado.
-                                    </p>
-                                    <div class="tags">
-                                        <span class="tag">Next.js</span><span class="tag">TypeScript</span>
-                                        <span class="tag">Supabase</span><span class="tag">GSAP</span>
-                                        <span class="tag">Melhor Envio</span>
-                                    </div>
-                                    <div class="projeto-acoes">
-                                        <span class="repo-privado" title="Código fechado">
-                                            <i class="fas fa-lock"></i> Repositório privado
-                                        </span>
-                                        <a class="btn-linha btn-linha--cheio" href="https://amxwatch.com.br"
-                                            target="_blank" rel="noopener noreferrer">
-                                            <i class="fas fa-arrow-up-right-from-square"></i> Ver site
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                    </article>
-
-                    <!-- ========== ia.md ========== -->
-                    <article class="arq" data-conteudo="ia" hidden>
-                        <div class="md">
-                            <h2 class="titulo-md">IA no meu fluxo</h2>
-                            <p>
-                                Uso o <strong>Claude Code</strong> — a CLI de IA da Anthropic — como par de
-                                programação no dia a dia, dos meus projetos em produção a este próprio portfólio.
-                                Não é atalho para pular o aprendizado: é a ferramenta que me deixa iterar mais
-                                rápido, revisar meu código com mais rigor e entregar mais em menos tempo.
-                                <strong>Todo código que eu entrego, eu leio, entendo e sei defender.</strong>
-                            </p>
-                        </div>
-
-                        <div class="blocos">
-                            <article class="bloco">
-                                <p class="bloco-rot">01 — dia a dia</p>
-                                <h3 class="bloco-tit">Claude Code no dia a dia</h3>
-                                <p class="bloco-txt">
-                                    Par de programação real: implementação de features, refatoração, caça a bugs e
-                                    code review. A IA propõe, eu avalio, testo e decido o que entra no projeto.
-                                </p>
-                            </article>
-                            <article class="bloco">
-                                <p class="bloco-rot">02 — contexto</p>
-                                <h3 class="bloco-tit">Engenharia de contexto</h3>
-                                <p class="bloco-txt">
-                                    Sei fornecer o contexto certo ao agente — arquivos relevantes, convenções do
-                                    projeto e regras em <code>CLAUDE.md</code> / <code>AGENTS.md</code> — para obter
-                                    resultados consistentes em vez de código genérico.
-                                </p>
-                            </article>
-                            <article class="bloco">
-                                <p class="bloco-rot">03 — automação</p>
-                                <h3 class="bloco-tit">Fluxos agênticos</h3>
-                                <p class="bloco-txt">
-                                    Configuro e opero ferramentas agênticas: CLIs próprias, skills e slash commands
-                                    que automatizam etapas repetitivas do meu processo de desenvolvimento.
-                                </p>
-                            </article>
-                            <article class="bloco">
-                                <p class="bloco-rot">04 — julgamento</p>
-                                <h3 class="bloco-tit">Revisão crítica sempre</h3>
-                                <p class="bloco-txt">
-                                    IA acelera, não substitui julgamento. Nada vai para produção sem eu ler, testar
-                                    e entender — inclusive as implicações de segurança e performance.
-                                </p>
-                            </article>
-                        </div>
-                    </article>
-
-                    <!-- ========== stack.json ========== -->
-                    <article class="arq" data-conteudo="stack" hidden>
-                        <p class="nota">Agrupado pelo que faz, não por nota. Porcentagem de domínio
-                            é número inventado — estas são as ferramentas que eu uso de verdade.</p>
-
-                        <div class="stack">
-                            <div class="stack-grupo">
-                                <p class="stack-rot">Linguagens</p>
-                                <div class="stack-itens">
-                                    <span class="tag">TypeScript</span>
-                                <span class="tag">JavaScript</span>
-                                <span class="tag">HTML</span>
-                                <span class="tag">CSS</span>
-                                <span class="tag">SQL</span>
-                                </div>
-                            </div>
-                            <div class="stack-grupo">
-                                <p class="stack-rot">Interface</p>
-                                <div class="stack-itens">
-                                    <span class="tag">React</span>
-                                <span class="tag">Next.js</span>
-                                <span class="tag">Tailwind CSS</span>
-                                <span class="tag">GSAP</span>
-                                </div>
-                            </div>
-                            <div class="stack-grupo">
-                                <p class="stack-rot">Servidor</p>
-                                <div class="stack-itens">
-                                    <span class="tag">Node.js</span>
-                                <span class="tag">Supabase</span>
-                                <span class="tag">Firebase</span>
-                                <span class="tag">PostgreSQL</span>
-                                </div>
-                            </div>
-                            <div class="stack-grupo">
-                                <p class="stack-rot">Integrações</p>
-                                <div class="stack-itens">
-                                    <span class="tag">Stripe</span>
-                                <span class="tag">PIX</span>
-                                <span class="tag">Melhor Envio</span>
-                                <span class="tag">Cloudinary</span>
-                                <span class="tag">E-mail transacional</span>
-                                </div>
-                            </div>
-                            <div class="stack-grupo">
-                                <p class="stack-rot">Ferramentas</p>
-                                <div class="stack-itens">
-                                    <span class="tag">Git</span>
-                                <span class="tag">GitHub</span>
-                                <span class="tag">Vercel</span>
-                                <span class="tag">Claude Code</span>
-                                </div>
-                            </div>
-                            <div class="stack-grupo">
-                                <p class="stack-rot">Também</p>
-                                <div class="stack-itens">
-                                    <span class="tag">LGPD</span>
-                                <span class="tag">SEO técnico</span>
-                                <span class="tag">Montagem e manutenção de hardware</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="stack-grupo stack-grupo--idiomas">
-                            <p class="stack-rot">Idiomas</p>
-                            <div class="stack-itens">
-                                <span class="tag">Português — nativo</span>
-                                <span class="tag">Inglês — intermediário, leitura técnica</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- ========== certificados/ ========== -->
-                    <article class="arq" data-conteudo="certificados" hidden>
-                        <p class="nota">Os que têm código de autenticidade trazem link de verificação.</p>
-
-                        <p class="grupo-tit"><i class="fas fa-folder-open"></i> FIAP</p>
-                        <div class="certs">
-                            <article class="cert">
-                                <a href="cert-fiap-sustentabilidade.webp" target="_blank" rel="noopener noreferrer">
-                                    <img src="cert-fiap-sustentabilidade.webp"
-                                        alt="Certificado Formação Social e Sustentabilidade — FIAP" loading="lazy">
-                                </a>
-                                <div class="cert-info">
-                                    <span class="cert-nome">Formação Social e Sustentabilidade</span>
-                                    <span class="cert-meta">80 horas · 2026</span>
-                                    <a class="cert-verificar" href="https://on.fiap.com.br/validar-certificado/"
-                                        target="_blank" rel="noopener noreferrer">
-                                        <i class="fas fa-circle-check"></i> Validar na FIAP
-                                    </a>
-                                    <span class="cert-chave">EFD06F5C033939B56E8074C87D070B1D</span>
-                                </div>
-                            </article>
-                        </div>
-
-                        <p class="grupo-tit"><i class="fas fa-folder-open"></i> Dev Club</p>
-                        <div class="certs">
-                            <article class="cert">
-                                <a href="cert-react.webp" target="_blank" rel="noopener noreferrer">
-                                    <img src="cert-react.webp" alt="Certificado React — Dev Club" loading="lazy">
-                                </a>
-                                <div class="cert-info">
-                                    <span class="cert-nome">React</span>
-                                    <span class="cert-meta">2026</span>
-                                    <a class="cert-verificar"
-                                        href="https://devclub.curseduca.pro/verify/f954790203e46d922e851ae19a5c29b7d6c9ffee"
-                                        target="_blank" rel="noopener noreferrer">
-                                        <i class="fas fa-circle-check"></i> Verificar
-                                    </a>
-                                </div>
-                            </article>
-
-                            <article class="cert">
-                                <a href="cert-node.webp" target="_blank" rel="noopener noreferrer">
-                                    <img src="cert-node.webp" alt="Certificado Node — Dev Club" loading="lazy">
-                                </a>
-                                <div class="cert-info">
-                                    <span class="cert-nome">Node.js</span>
-                                    <span class="cert-meta">2026</span>
-                                    <a class="cert-verificar"
-                                        href="https://devclub.curseduca.pro/verify/797e2e9a3a3089a539aa12b7ec6700676c49e787"
-                                        target="_blank" rel="noopener noreferrer">
-                                        <i class="fas fa-circle-check"></i> Verificar
-                                    </a>
-                                </div>
-                            </article>
-
-                            <article class="cert">
-                                <a href="cert-typescript.webp" target="_blank" rel="noopener noreferrer">
-                                    <img src="cert-typescript.webp" alt="Certificado TypeScript — Dev Club"
-                                        loading="lazy">
-                                </a>
-                                <div class="cert-info">
-                                    <span class="cert-nome">TypeScript — Back-end</span>
-                                    <span class="cert-meta">2026</span>
-                                    <a class="cert-verificar"
-                                        href="https://devclub.curseduca.pro/verify/decd93bc96204611c3fc85acc12aede6399d094e"
-                                        target="_blank" rel="noopener noreferrer">
-                                        <i class="fas fa-circle-check"></i> Verificar
-                                    </a>
-                                </div>
-                            </article>
-
-                            <article class="cert">
-                                <a href="cert-js-async.webp" target="_blank" rel="noopener noreferrer">
-                                    <img src="cert-js-async.webp" alt="Certificado JavaScript pt. VI — Dev Club"
-                                        loading="lazy">
-                                </a>
-                                <div class="cert-info">
-                                    <span class="cert-nome">JavaScript pt. VI — Async/Await</span>
-                                    <span class="cert-meta">2026</span>
-                                    <a class="cert-verificar"
-                                        href="https://devclub.curseduca.pro/verify/81e50f21c311d3439e3a75546a50d6d3f7751396"
-                                        target="_blank" rel="noopener noreferrer">
-                                        <i class="fas fa-circle-check"></i> Verificar
-                                    </a>
-                                </div>
-                            </article>
-
-                            <article class="cert">
-                                <a href="cert-css-grid.webp" target="_blank" rel="noopener noreferrer">
-                                    <img src="cert-css-grid.webp" alt="Certificado CSS Display Grid — Dev Club"
-                                        loading="lazy">
-                                </a>
-                                <div class="cert-info">
-                                    <span class="cert-nome">CSS — Display Grid</span>
-                                    <span class="cert-meta">2026</span>
-                                    <a class="cert-verificar"
-                                        href="https://devclub.curseduca.pro/verify/0adb5e43de52bc32e9c9383515a56d2cadbd6471"
-                                        target="_blank" rel="noopener noreferrer">
-                                        <i class="fas fa-circle-check"></i> Verificar
-                                    </a>
-                                </div>
-                            </article>
-
-                            <article class="cert">
-                                <a href="cert-javascript.webp" target="_blank" rel="noopener noreferrer">
-                                    <img src="cert-javascript.webp" alt="Certificado JavaScript pt. V — Dev Club"
-                                        loading="lazy">
-                                </a>
-                                <div class="cert-info">
-                                    <span class="cert-nome">JavaScript pt. V — A Nova Ordem de Dados</span>
-                                    <span class="cert-meta">2026</span>
-                                </div>
-                            </article>
-
-                            <article class="cert">
-                                <a href="cert-css.webp" target="_blank" rel="noopener noreferrer">
-                                    <img src="cert-css.webp" alt="Certificado CSS Intermediário — Dev Club"
-                                        loading="lazy">
-                                </a>
-                                <div class="cert-info">
-                                    <span class="cert-nome">CSS Intermediário</span>
-                                    <span class="cert-meta">2025</span>
-                                </div>
-                            </article>
-
-                            <article class="cert">
-                                <a href="cert-git.webp" target="_blank" rel="noopener noreferrer">
-                                    <img src="cert-git.webp" alt="Certificado Git e GitHub — Dev Club"
-                                        loading="lazy">
-                                </a>
-                                <div class="cert-info">
-                                    <span class="cert-nome">Git &amp; GitHub</span>
-                                    <span class="cert-meta">2025</span>
-                                </div>
-                            </article>
-                        </div>
-                    </article>
-
-                    <!-- ========== experiencia.log ========== -->
-                    <article class="arq" data-conteudo="experiencia" hidden>
-                        <p class="nota">Do mais recente para o mais antigo.</p>
-
-                        <div class="log">
-                            <div class="log-linha">
-                                <span class="log-data">2026-08 → 2030-07</span>
-                                <span class="log-nivel log-nivel--info">FORMAÇÃO</span>
-                                <div class="log-corpo">
-                                    <span class="log-tit">Bacharelado em Ciência da Computação</span>
-                                    <span class="log-org">FIAP · São Paulo, SP</span>
-                                    <p>Cursando o 1º semestre. Fundamentos de computação, algoritmos, estruturas de
-                                        dados e engenharia de software.</p>
-                                </div>
-                            </div>
-
-                            <div class="log-linha">
-                                <span class="log-data">2026-04 → 2027-08</span>
-                                <span class="log-nivel log-nivel--ativo">ATUAL</span>
-                                <div class="log-corpo">
-                                    <span class="log-tit">Jovem Aprendiz — Gestão, Qualidade e Atendimento</span>
-                                    <span class="log-org">Associação de Ensino Social Profissionalizante · São
-                                        Paulo, SP</span>
-                                    <p>Contrato de aprendizagem (CLT) com formação técnico-profissional em gestão,
-                                        qualidade, atendimento e serviços.</p>
-                                </div>
-                            </div>
-
-                            <div class="log-linha">
-                                <span class="log-data">2025-08 → 2025-10</span>
-                                <span class="log-nivel">ENCERRADO</span>
-                                <div class="log-corpo">
-                                    <span class="log-tit">Técnico de Informática</span>
-                                    <span class="log-org">SNE Eventos · São Paulo, SP</span>
-                                    <p>Montagem e configuração de computadores de alta performance para eventos,
-                                        sob prazos críticos. Manutenção do parque de máquinas, diagnóstico de
-                                        defeitos e troca de peças.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- ========== contato.env ========== -->
-                    <article class="arq" data-conteudo="contato" hidden>
-                        <p class="nota">Aberto a vagas de estágio e júnior, em São Paulo ou remoto.</p>
-
-                        <div class="env">
-                            <a class="env-linha" href="mailto:gufidelis116@gmail.com">
-                                <span class="env-chave">EMAIL</span><span class="env-igual">=</span>
-                                <span class="env-valor">gufidelis116@gmail.com</span>
-                            </a>
-                            <a class="env-linha" href="https://wa.me/5511970684205" target="_blank"
-                                rel="noopener noreferrer">
-                                <span class="env-chave">TELEFONE</span><span class="env-igual">=</span>
-                                <span class="env-valor">+55 11 97068-4205</span>
-                            </a>
-                            <a class="env-linha" href="https://github.com/Fidelisss07" target="_blank"
-                                rel="noopener noreferrer">
-                                <span class="env-chave">GITHUB</span><span class="env-igual">=</span>
-                                <span class="env-valor">github.com/Fidelisss07</span>
-                            </a>
-                            <a class="env-linha" href="https://www.linkedin.com/in/gustavo-fidelis-b17051387/"
-                                target="_blank" rel="noopener noreferrer">
-                                <span class="env-chave">LINKEDIN</span><span class="env-igual">=</span>
-                                <span class="env-valor">in/gustavo-fidelis-b17051387</span>
-                            </a>
-                            <div class="env-linha env-linha--estatica">
-                                <span class="env-chave">LOCAL</span><span class="env-igual">=</span>
-                                <span class="env-valor">São Paulo, SP — Brasil</span>
-                            </div>
-                        </div>
-
-                        <form class="form" id="contato-form" action="https://formspree.io/f/mwvzoyro" method="POST">
-                            <p class="form-tit">Ou mande a mensagem por aqui</p>
-                            <div class="campo">
-                                <label for="nome">nome</label>
-                                <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
-                            </div>
-                            <div class="campo">
-                                <label for="email">email</label>
-                                <input type="email" id="email" name="email" placeholder="seu@email.com" required>
-                            </div>
-                            <div class="campo">
-                                <label for="mensagem">mensagem</label>
-                                <textarea id="mensagem" name="mensagem" rows="4"
-                                    placeholder="Escreva sua mensagem..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn-enviar">
-                                <i class="fas fa-paper-plane"></i> Enviar
-                            </button>
-                        </form>
-                    </article>
-
-                </div>
-            </main>
+            <!-- Botões de ação (CTA = Call to Action) -->
+            <div class="hero-buttons">
+                <a href="#projetos" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> Ver Projetos
+                </a>
+                <a href="curriculo_gustavo_fidelis_final.pdf" class="btn btn-outline" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fas fa-file-pdf"></i> Meu Currículo
+                </a>
+                <a href="#contato" class="btn btn-ghost">
+                    <i class="fas fa-envelope"></i> Contato
+                </a>
+            </div>
         </div>
 
-        <!-- ---------- BARRA DE STATUS ---------- -->
-        <footer class="status">
-            <span class="status-item status-online"><span class="ponto"></span> 2 lojas no ar</span>
-            <span class="status-esp"></span>
-            <a class="status-item" href="mailto:gufidelis116@gmail.com">gufidelis116@gmail.com</a>
-            <span class="status-item">© 2026 Gustavo Fidelis</span>
-        </footer>
+            <div class="hero-foto">
+
+                <div class="sobre-image-wrapper">
+                    <div class="sobre-image">
+                        <img src="foto-gustavo.webp" alt="Gustavo Fidelis, estudante de Ciência da Computação na FIAP"
+                            class="sobre-foto" width="800" height="800" loading="lazy">
+                    </div>
+                    <!-- Decoração ao redor da foto -->
+                    <div class="sobre-image-decoration"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seta animada indicando para rolar para baixo -->
+        <a href="#sobre" class="scroll-indicator">
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </a>
+    </section>
+
+
+    <!-- ==================================================================
+       SOBRE MIM — Apresentação pessoal
+       Aqui você conta quem é, o que faz e o que te motiva
+  ================================================================== -->
+    <section id="sobre" class="section sobre">
+        <div class="container">
+            <!-- Título da seção (todas as seções seguem esse padrão) -->
+            <div class="section-header">
+                <p class="section-subtitle">Conheça um pouco</p>
+                <h2 class="section-title">Sobre <span class="text-gradient">Mim</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+                <div class="section-body">
+
+            <div class="sobre-content">
+                <!-- Lado direito: texto + cards de destaque -->
+                <div class="sobre-text">
+                    <h3 class="sobre-heading">Ciência da Computação na FIAP</h3>
+
+                    <p>
+                        Olá! Sou Gustavo Fidelis, estudante de Ciência da Computação na FIAP e apaixonado por
+                        transformar ideias em produtos reais. Já coloquei no ar duas lojas virtuais completas —
+                        com catálogo, checkout, pagamentos, painel administrativo e integrações de terceiros.
+                        Uma delas foi entregue como freelance para um cliente externo.
+                    </p>
+                    <p>
+                        Trabalho com React, Next.js, TypeScript, Node.js, Supabase e Firebase — e uso
+                        <strong>Claude Code</strong> como ferramenta de trabalho diária, de par de programação a
+                        revisão de código. Acredito que saber operar IA com critério é hoje tão importante quanto
+                        conhecer a linguagem: ela acelera a entrega, mas a decisão técnica continua sendo minha.
+                    </p>
+                    <p>
+                        Sou autodidata e proativo, com vivência também em montagem e manutenção de computadores
+                        de alta performance sob prazos críticos.
+                    </p>
+
+                    <!-- Cards com destaques rápidos -->
+                    <div class="sobre-cards">
+                        <div class="sobre-card glass-card">
+                            <div class="sobre-card-icon"><i class="fas fa-code"></i></div>
+                            <div class="sobre-card-info">
+                                <span class="sobre-card-number">10+</span>
+                                <span class="sobre-card-label">Tecnologias</span>
+                            </div>
+                        </div>
+                        <div class="sobre-card glass-card">
+                            <div class="sobre-card-icon"><i class="fas fa-rocket"></i></div>
+                            <div class="sobre-card-info">
+                                <span class="sobre-card-number">2</span>
+                                <span class="sobre-card-label">Lojas no Ar</span>
+                            </div>
+                        </div>
+                        <div class="sobre-card glass-card">
+                            <div class="sobre-card-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="sobre-card-info">
+                                <span class="sobre-card-number">CC</span>
+                                <span class="sobre-card-label">FIAP</span>
+                            </div>
+                        </div>
+                        <div class="sobre-card glass-card">
+                            <div class="sobre-card-icon"><i class="fas fa-terminal"></i></div>
+                            <div class="sobre-card-info">
+                                <span class="sobre-card-number">Claude</span>
+                                <span class="sobre-card-label">Code no fluxo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================================
+       PROJETOS — Seus trabalhos
+       Cards com efeito hover 3D. Troque pelos seus projetos reais!
+  ================================================================== -->
+    <section id="projetos" class="section projetos">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Meus trabalhos</p>
+                <h2 class="section-title"><span class="text-gradient">Projetos</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+                <div class="section-body">
+
+            <div class="projetos-grid">
+                <!-- PROJETO 1 — BaLu 3D -->
+                <article class="projeto-card glass-card" data-tilt>
+                    <div class="projeto-image">
+                        <img src="balu3d-logo.webp" alt="Logo BaLu 3D" class="projeto-logo" loading="lazy">
+                        <div class="projeto-overlay">
+                            <div class="projeto-links">
+                                <a href="https://balu3d.com.br" class="projeto-link" title="Ver demo ao vivo"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="projeto-info">
+                        <h3 class="projeto-titulo">BaLu 3D</h3>
+                        <p class="projeto-descricao">
+                            E-commerce de impressão 3D com catálogo, checkout duplo (PIX + cartão), painel admin e
+                            e-mails transacionais. Projeto freelance entregue para cliente real.
+                        </p>
+                        <div class="projeto-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Firebase</span>
+                            <span class="tag">Stripe</span>
+                            <span class="tag">Cloudinary</span>
+                        </div>
+
+                        <div class="projeto-acoes">
+                            <span class="projeto-repo projeto-repo--privado" title="Código fechado por acordo com o cliente">
+                                <i class="fas fa-lock"></i> Repositório privado
+                            </span>
+                            <a href="https://balu3d.com.br" class="projeto-btn" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fas fa-arrow-up-right-from-square"></i> Ver site
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROJETO 2 — AMXWatch -->
+                <article class="projeto-card glass-card" data-tilt>
+                    <div class="projeto-image">
+                        <img src="amxwatch-logo.webp" alt="Logo AMXWatch" class="projeto-logo" loading="lazy">
+                        <div class="projeto-overlay">
+                            <div class="projeto-links">
+                                <a href="https://amxwatch.com.br" class="projeto-link" title="Ver demo ao vivo"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="projeto-info">
+                        <h3 class="projeto-titulo">AMXWatch</h3>
+                        <p class="projeto-descricao">
+                            E-commerce premium de relógios com frete via Melhor Envio, painel admin, conformidade
+                            LGPD, avaliações, favoritos, cupons e SEO avançado.
+                        </p>
+                        <div class="projeto-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Supabase</span>
+                            <span class="tag">GSAP</span>
+                            <span class="tag">Melhor Envio</span>
+                        </div>
+
+                        <div class="projeto-acoes">
+                            <span class="projeto-repo projeto-repo--privado" title="Código fechado">
+                                <i class="fas fa-lock"></i> Repositório privado
+                            </span>
+                            <a href="https://amxwatch.com.br" class="projeto-btn projeto-btn--destaque"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-arrow-up-right-from-square"></i> Ver site
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+                </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================================
+       IA NO FLUXO — Como eu trabalho com Claude Code
+       Diferencial competitivo: saber operar IA com critério técnico
+  ================================================================== -->
+    <section id="ia" class="section ia">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Como eu trabalho</p>
+                <h2 class="section-title">IA no meu <span class="text-gradient">fluxo</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+                <div class="section-body">
+
+            <p class="ia-intro">
+                Uso o <strong>Claude Code</strong> — a CLI de IA da Anthropic — como par de programação no dia a
+                dia, dos meus projetos em produção a este próprio portfólio. Não é atalho para pular o
+                aprendizado: é a ferramenta que me deixa iterar mais rápido, revisar meu código com mais rigor e
+                entregar mais em menos tempo. <strong>Todo código que eu entrego, eu leio, entendo e sei
+                    defender.</strong>
+            </p>
+
+            <div class="ia-grid">
+                <article class="ia-card glass-card">
+                    <div class="ia-card-icon"><i class="fas fa-terminal"></i></div>
+                    <h3 class="ia-card-titulo">Claude Code no dia a dia</h3>
+                    <p class="ia-card-texto">
+                        Par de programação real: implementação de features, refatoração, caça a bugs e code
+                        review. A IA propõe, eu avalio, testo e decido o que entra no projeto.
+                    </p>
+                </article>
+
+                <article class="ia-card glass-card">
+                    <div class="ia-card-icon"><i class="fas fa-sitemap"></i></div>
+                    <h3 class="ia-card-titulo">Engenharia de contexto</h3>
+                    <p class="ia-card-texto">
+                        Sei fornecer o contexto certo ao agente — arquivos relevantes, convenções do projeto e
+                        regras em <code>CLAUDE.md</code> / <code>AGENTS.md</code> — para obter resultados
+                        consistentes em vez de código genérico.
+                    </p>
+                </article>
+
+                <article class="ia-card glass-card">
+                    <div class="ia-card-icon"><i class="fas fa-robot"></i></div>
+                    <h3 class="ia-card-titulo">Fluxos agênticos</h3>
+                    <p class="ia-card-texto">
+                        Configuro e opero ferramentas agênticas: CLIs próprias, skills e slash commands que
+                        automatizam etapas repetitivas do meu processo de desenvolvimento.
+                    </p>
+                </article>
+
+                <article class="ia-card glass-card">
+                    <div class="ia-card-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3 class="ia-card-titulo">Revisão crítica sempre</h3>
+                    <p class="ia-card-texto">
+                        IA acelera, não substitui julgamento. Nada vai para produção sem eu ler, testar e
+                        entender — inclusive as implicações de segurança e performance.
+                    </p>
+                </article>
+            </div>
+                </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================================
+       SKILLS — Suas habilidades técnicas
+       Barras de progresso animadas quando a seção aparece na tela
+  ================================================================== -->
+    <section id="skills" class="section skills">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Minhas habilidades</p>
+                <h2 class="section-title"><span class="text-gradient">Skills</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+                <div class="section-body">
+
+            <div class="skills-container">
+                <!-- Categoria: Front-End -->
+                <div class="skills-category">
+                    <h3 class="skills-category-title">
+                        <i class="fas fa-laptop-code"></i> Front-End
+                    </h3>
+                    <div class="skills-list">
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fab fa-react"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">React</span>
+                                    <span class="skill-percent">88%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="88"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-forward"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Next.js</span>
+                                    <span class="skill-percent">82%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="82"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-code"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">TypeScript</span>
+                                    <span class="skill-percent">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="80"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fab fa-js-square"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">JavaScript</span>
+                                    <span class="skill-percent">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="85"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-wind"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Tailwind CSS</span>
+                                    <span class="skill-percent">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="90"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">HTML5 &amp; CSS3</span>
+                                    <span class="skill-percent">92%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="92"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categoria: Back-End & Ferramentas -->
+                <div class="skills-category">
+                    <h3 class="skills-category-title">
+                        <i class="fas fa-server"></i> Back-End &amp; Ferramentas
+                    </h3>
+                    <div class="skills-list">
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Node.js</span>
+                                    <span class="skill-percent">78%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="78"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Supabase</span>
+                                    <span class="skill-percent">82%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="82"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-fire"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Firebase</span>
+                                    <span class="skill-percent">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="80"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-credit-card"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Stripe &amp; Pagamentos</span>
+                                    <span class="skill-percent">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="80"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Git &amp; GitHub</span>
+                                    <span class="skill-percent">82%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="82"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-microchip"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Hardware &amp; Infra</span>
+                                    <span class="skill-percent">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="90"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categoria: IA no Desenvolvimento (ocupa a linha inteira) -->
+                <div class="skills-category skills-category--full">
+                    <h3 class="skills-category-title">
+                        <i class="fas fa-wand-magic-sparkles"></i> IA no Desenvolvimento
+                    </h3>
+                    <div class="skills-list skills-list--grid">
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-terminal"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Claude Code</span>
+                                    <span class="skill-percent">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="85"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-sitemap"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Engenharia de Contexto</span>
+                                    <span class="skill-percent">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="80"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-robot"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">Fluxos Agênticos &amp; CLIs</span>
+                                    <span class="skill-percent">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="75"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item glass-card">
+                            <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                            <div class="skill-details">
+                                <div class="skill-header">
+                                    <span class="skill-name">IA aplicada ao código</span>
+                                    <span class="skill-percent">82%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="82"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================================
+       EXPERIÊNCIA / FORMAÇÃO — Timeline vertical
+       Uma linha do tempo bonita mostrando sua trajetória
+  ================================================================== -->
+    <section id="experiencia" class="section experiencia">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Minha trajetória</p>
+                <h2 class="section-title"><span class="text-gradient">Experiência</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+                <div class="section-body">
+
+            <div class="timeline">
+                <!-- Item 1: Formação -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-badge">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <span class="timeline-date">Ago/2026 — Conclusão prevista: Jul/2030</span>
+                        <h3 class="timeline-title">Bacharelado em Ciência da Computação — FIAP</h3>
+                        <p class="timeline-description">
+                            Graduação em andamento na FIAP, em São Paulo. Formação em fundamentos de computação,
+                            algoritmos, estruturas de dados e engenharia de software.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 2: Emprego atual -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-badge">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <span class="timeline-date">Abr/2026 — Ago/2027</span>
+                        <h3 class="timeline-title">Jovem Aprendiz — Gestão, Qualidade e Atendimento</h3>
+                        <p class="timeline-description">
+                            Associação de Ensino Social Profissionalizante, São Paulo. Contrato de aprendizagem
+                            (CLT) com formação técnico-profissional em gestão, qualidade, atendimento e serviços.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 3: Experiência anterior -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-badge">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <span class="timeline-date">Ago/2025 — Out/2025</span>
+                        <h3 class="timeline-title">Técnico de Informática (SNE Eventos)</h3>
+                        <p class="timeline-description">
+                            Responsável pela gestão e manutenção de máquinas da empresa. Configuração e montagem de
+                            computadores de
+                            alta performance para uso em eventos, garantindo o funcionamento do hardware e sistema
+                            operacionais sob prazos críticos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificados — clique para ver em tamanho real -->
+            <div class="certificados">
+                <h3 class="certificados-titulo">
+                    <i class="fas fa-certificate"></i> Certificados
+                </h3>
+
+                <!-- Grupo: FIAP -->
+                <div class="certificados-grupo">
+                    <div class="certificados-grupo-header">
+                        <span class="certificados-grupo-nome">FIAP</span>
+                        <span class="certificados-grupo-meta">Centro Universitário · 1 certificado</span>
+                    </div>
+                    <div class="certificados-grid certificados-grid--unico">
+                        <article class="certificado-card glass-card">
+                            <a href="cert-fiap-sustentabilidade.webp" target="_blank" rel="noopener noreferrer"
+                                aria-label="Ver o certificado de Formação Social e Sustentabilidade em tamanho real">
+                                <img src="cert-fiap-sustentabilidade.webp"
+                                    alt="Certificado Formação Social e Sustentabilidade — FIAP" loading="lazy">
+                            </a>
+                            <div class="certificado-info">
+                                <span class="certificado-nome">Formação Social e Sustentabilidade</span>
+                                <span class="certificado-emissor">FIAP · 80 horas · 2026</span>
+                                <a class="certificado-verificar" href="https://on.fiap.com.br/validar-certificado/"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-circle-check"></i> Validar na FIAP
+                                </a>
+                                <span class="certificado-chave">chave EFD06F5C033939B56E8074C87D070B1D</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Grupo: Dev Club -->
+                <div class="certificados-grupo">
+                    <div class="certificados-grupo-header">
+                        <span class="certificados-grupo-nome">Dev Club</span>
+                        <span class="certificados-grupo-meta">Formação Full Stack · 8 certificados</span>
+                    </div>
+                    <div class="certificados-grid">
+                        <article class="certificado-card glass-card">
+                            <a href="cert-react.webp" target="_blank" rel="noopener noreferrer"
+                                aria-label="Ver o certificado de React em tamanho real">
+                                <img src="cert-react.webp" alt="Certificado React — Dev Club" loading="lazy">
+                            </a>
+                            <div class="certificado-info">
+                                <span class="certificado-nome">React</span>
+                                <span class="certificado-emissor">2026</span>
+                                <a class="certificado-verificar"
+                                    href="https://devclub.curseduca.pro/verify/f954790203e46d922e851ae19a5c29b7d6c9ffee"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-circle-check"></i> Verificar autenticidade
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="certificado-card glass-card">
+                            <a href="cert-node.webp" target="_blank" rel="noopener noreferrer"
+                                aria-label="Ver o certificado de Node.js em tamanho real">
+                                <img src="cert-node.webp" alt="Certificado Node — Dev Club" loading="lazy">
+                            </a>
+                            <div class="certificado-info">
+                                <span class="certificado-nome">Node.js</span>
+                                <span class="certificado-emissor">2026</span>
+                                <a class="certificado-verificar"
+                                    href="https://devclub.curseduca.pro/verify/797e2e9a3a3089a539aa12b7ec6700676c49e787"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-circle-check"></i> Verificar autenticidade
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="certificado-card glass-card">
+                            <a href="cert-typescript.webp" target="_blank" rel="noopener noreferrer"
+                                aria-label="Ver o certificado de TypeScript em tamanho real">
+                                <img src="cert-typescript.webp" alt="Certificado TypeScript — Dev Club"
+                                    loading="lazy">
+                            </a>
+                            <div class="certificado-info">
+                                <span class="certificado-nome">TypeScript — Back-end</span>
+                                <span class="certificado-emissor">2026</span>
+                                <a class="certificado-verificar"
+                                    href="https://devclub.curseduca.pro/verify/decd93bc96204611c3fc85acc12aede6399d094e"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-circle-check"></i> Verificar autenticidade
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="certificado-card glass-card">
+                            <a href="cert-js-async.webp" target="_blank" rel="noopener noreferrer"
+                                aria-label="Ver o certificado de JavaScript pt. VI em tamanho real">
+                                <img src="cert-js-async.webp" alt="Certificado JavaScript pt. VI — Dev Club"
+                                    loading="lazy">
+                            </a>
+                            <div class="certificado-info">
+                                <span class="certificado-nome">JavaScript pt. VI — Async/Await</span>
+                                <span class="certificado-emissor">2026</span>
+                                <a class="certificado-verificar"
+                                    href="https://devclub.curseduca.pro/verify/81e50f21c311d3439e3a75546a50d6d3f7751396"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-circle-check"></i> Verificar autenticidade
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="certificado-card glass-card">
+                            <a href="cert-css-grid.webp" target="_blank" rel="noopener noreferrer"
+                                aria-label="Ver o certificado de CSS Display Grid em tamanho real">
+                                <img src="cert-css-grid.webp" alt="Certificado CSS Display Grid — Dev Club"
+                                    loading="lazy">
+                            </a>
+                            <div class="certificado-info">
+                                <span class="certificado-nome">CSS — Display Grid</span>
+                                <span class="certificado-emissor">2026</span>
+                                <a class="certificado-verificar"
+                                    href="https://devclub.curseduca.pro/verify/0adb5e43de52bc32e9c9383515a56d2cadbd6471"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-circle-check"></i> Verificar autenticidade
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="certificado-card glass-card">
+                            <a href="cert-javascript.webp" target="_blank" rel="noopener noreferrer"
+                                aria-label="Ver o certificado de JavaScript pt. V em tamanho real">
+                                <img src="cert-javascript.webp" alt="Certificado JavaScript pt. V — Dev Club"
+                                    loading="lazy">
+                            </a>
+                            <div class="certificado-info">
+                                <span class="certificado-nome">JavaScript pt. V — A Nova Ordem de Dados</span>
+                                <span class="certificado-emissor">2026</span>
+                            </div>
+                        </article>
+
+                        <article class="certificado-card glass-card">
+                            <a href="cert-css.webp" target="_blank" rel="noopener noreferrer"
+                                aria-label="Ver o certificado de CSS Intermediário em tamanho real">
+                                <img src="cert-css.webp" alt="Certificado CSS Intermediário — Dev Club"
+                                    loading="lazy">
+                            </a>
+                            <div class="certificado-info">
+                                <span class="certificado-nome">CSS Intermediário</span>
+                                <span class="certificado-emissor">2025</span>
+                            </div>
+                        </article>
+
+                        <article class="certificado-card glass-card">
+                            <a href="cert-git.webp" target="_blank" rel="noopener noreferrer"
+                                aria-label="Ver o certificado de Git e GitHub em tamanho real">
+                                <img src="cert-git.webp" alt="Certificado Git &amp; GitHub — Dev Club"
+                                    loading="lazy">
+                            </a>
+                            <div class="certificado-info">
+                                <span class="certificado-nome">Git &amp; GitHub</span>
+                                <span class="certificado-emissor">2025</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+                </div>
+        </div>
+    </section>
+
+
+    <!-- ==================================================================
+       CONTATO — Formulário para entrarem em contato com você
+       Também tem links para suas redes sociais
+  ================================================================== -->
+    <section id="contato" class="section contato">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Fale comigo</p>
+                <h2 class="section-title"><span class="text-gradient">Contato</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+                <div class="section-body">
+
+            <div class="contato-wrapper">
+                <!-- Lado esquerdo: informações de contato -->
+                <div class="contato-info">
+                    <h3>Vamos conversar!</h3>
+                    <p>
+                        Estou sempre aberto a novas oportunidades, colaborações e conversas sobre
+                        tecnologia. Sinta-se à vontade para entrar em contato!
+                    </p>
+
+                    <div class="contato-links">
+                        <a href="https://github.com/Fidelisss07" class="contato-link glass-card" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                            <div>
+                                <span class="contato-link-label">GitHub</span>
+                                <span class="contato-link-value">github.com/Fidelisss07</span>
+                            </div>
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/gustavo-fidelis-b17051387/" class="contato-link glass-card"
+                            target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                            <div>
+                                <span class="contato-link-label">LinkedIn</span>
+                                <span class="contato-link-value">linkedin.com/in/gustavo-fidelis-b17051387</span>
+                            </div>
+                        </a>
+
+                        <a href="mailto:gufidelis116@gmail.com" class="contato-link glass-card">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <span class="contato-link-label">E-mail</span>
+                                <span class="contato-link-value">gufidelis116@gmail.com</span>
+                            </div>
+                        </a>
+
+                        <div class="contato-link glass-card">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <span class="contato-link-label">Telefone</span>
+                                <span class="contato-link-value">(11) 97068-4205 | SP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lado direito: formulário -->
+                <form class="contato-form glass-card" id="contato-form"
+                    action="https://formspree.io/f/mwvzoyro" method="POST">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+                </div>
+        </div>
+    </section>
+
 
     </div>
 
+    <!-- ==================================================================
+       FOOTER — Rodapé do site
+  ================================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <a href="#hero" class="footer-logo">GF<span class="logo-dot">.</span></a>
+                <p class="footer-text">
+                    Feito com <span class="footer-heart">💜</span> por Gustavo Fidelis
+                </p>
+                <div class="footer-social">
+                    <a href="https://github.com/Fidelisss07" target="_blank" rel="noopener noreferrer"
+                        aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/gustavo-fidelis-b17051387/" target="_blank" rel="noopener noreferrer"
+                        aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Gustavo Fidelis. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Nosso arquivo de JavaScript -->
     <script src="script.js"></script>
 </body>
 
