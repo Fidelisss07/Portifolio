@@ -1012,6 +1012,76 @@ img {
 .caso-estado--pausado i { color: var(--texto-terciario); }
 
 /* ====================================================================
+   CÓDIGO — trechos reais do próprio site
+==================================================================== */
+.codigo-intro {
+  max-width: 62ch;
+  color: var(--texto-secundario);
+  margin-bottom: 32px;
+}
+
+.trecho { padding: 22px 24px; margin-bottom: 20px; }
+
+.trecho-topo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.trecho-titulo { font-size: 1.05rem; font-weight: 700; margin-bottom: 5px; }
+
+.trecho-explica {
+  font-size: 0.88rem;
+  color: var(--texto-secundario);
+  max-width: 58ch;
+  line-height: 1.65;
+}
+
+.trecho-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 7px 13px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  color: var(--texto-secundario);
+  transition: var(--transicao);
+}
+
+.trecho-link:hover {
+  color: var(--texto-principal);
+  border-color: var(--borda-hover);
+  background: var(--roxo-bg);
+}
+
+.trecho-cod {
+  margin: 0;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--borda);
+  overflow-x: auto;
+  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
+  font-size: 0.8rem;
+  line-height: 1.75;
+  color: #d6d3e6;
+  tab-size: 2;
+}
+
+.trecho-cod code { white-space: pre; }
+
+.c-cmt { color: #5b5478; font-style: italic; }
+.c-str { color: #6ee7b7; }
+.c-kw { color: var(--roxo-claro); }
+.c-num { color: #f0b429; }
+
+/* ====================================================================
    SKILLS — Habilidades
 ==================================================================== */
 .skills-container {

@@ -84,6 +84,9 @@
                 <i class="fas fa-rocket"></i> <span>Projetos</span>
                 <span class="lateral-selo">2</span>
             </button>
+            <button class="lateral-item" data-painel="codigo">
+                <i class="fas fa-file-code"></i> <span>Código</span>
+            </button>
             <button class="lateral-item" data-painel="ia">
                 <i class="fas fa-terminal"></i> <span>IA no fluxo</span>
             </button>
@@ -456,6 +459,91 @@
         </div>
     </section>
 
+
+    <!-- ==================================================================
+       CÓDIGO — trechos reais, extraídos do próprio arquivo do site
+  ================================================================== -->
+    <section id="codigo" class="section codigo">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Como eu escrevo</p>
+                <h2 class="section-title"><span class="text-gradient">Código</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="section-body">
+                <p class="codigo-intro">
+                    Estes trechos são deste site, não exemplo de tutorial. Cada um abre no GitHub, na linha
+                    exata, para quem quiser conferir. Os projetos maiores estão em repositórios privados,
+                    então o que dá para mostrar aberto é o código desta página.
+                </p>
+
+                <article class="trecho glass-card">
+                    <div class="trecho-topo">
+                        <div>
+                            <h3 class="trecho-titulo">Troca de painel sem recarregar</h3>
+                            <p class="trecho-explica">Mostra um assunto e esconde os outros, reanima o conteúdo que entra e atualiza o endereço — para que #projetos abra direto naquele painel quando alguém compartilha o link.</p>
+                        </div>
+                        <a class="trecho-link" href="https://github.com/Fidelisss07/Portifolio/blob/main/script.js#L207-L227" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> linhas 207–227
+                        </a>
+                    </div>
+                    <pre class="trecho-cod"><code>  <span class="c-kw">function</span> mostrarPainel(id, opcoes = {}) {
+    <span class="c-kw">const</span> alvo = document.getElementById(id);
+    <span class="c-kw">if</span> (!alvo) <span class="c-kw">return</span>;
+
+    palco.querySelectorAll(&#x27;:scope &gt; section&#x27;).<span class="c-kw">forEach</span>(secao =&gt; {
+      secao.classList.toggle(<span class="c-str">&#x27;ativo&#x27;</span>, secao === alvo);
+    });
+
+    itens.<span class="c-kw">forEach</span>(item =&gt; item.classList.toggle(<span class="c-str">&#x27;ativo&#x27;</span>, item.dataset.painel === id));
+
+    <span class="c-cmt">// O painel entra do zero: reanima o que estava escondido</span>
+    alvo.querySelectorAll(<span class="c-str">&#x27;.reveal&#x27;</span>).<span class="c-kw">forEach</span>(el =&gt; el.classList.remove(<span class="c-str">&#x27;active&#x27;</span>));
+    requestAnimationFrame(() =&gt; {
+      alvo.querySelectorAll(<span class="c-str">&#x27;.reveal&#x27;</span>).<span class="c-kw">forEach</span>(el =&gt; el.classList.add(<span class="c-str">&#x27;active&#x27;</span>));
+    });
+
+    window.scrollTo({ top: <span class="c-num">0</span>, behavior: <span class="c-str">&#x27;auto&#x27;</span> });
+    navbar.classList.remove(<span class="c-str">&#x27;scrolled&#x27;</span>);
+
+    <span class="c-kw">if</span> (!opcoes.semHistorico) history.replaceState(<span class="c-kw">null</span>, <span class="c-str">&#x27;&#x27;</span>, <span class="c-str">&#x27;#&#x27;</span> + id);
+  }</code></pre>
+                </article>
+
+                <article class="trecho glass-card">
+                    <div class="trecho-topo">
+                        <div>
+                            <h3 class="trecho-titulo">As linhas entre as partículas</h3>
+                            <p class="trecho-explica">Cada partícula é comparada com as seguintes; se estiverem perto, nasce uma linha cuja opacidade cai com a distância. Comparar só com as seguintes evita desenhar a mesma linha duas vezes.</p>
+                        </div>
+                        <a class="trecho-link" href="https://github.com/Fidelisss07/Portifolio/blob/main/script.js#L92-L110" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> linhas 92–110
+                        </a>
+                    </div>
+                    <pre class="trecho-cod"><code>  <span class="c-kw">function</span> desenharConexoes() {
+    <span class="c-kw">for</span> (<span class="c-kw">let</span> i = <span class="c-num">0</span>; i &lt; particulas.length; i++) {
+      <span class="c-kw">for</span> (<span class="c-kw">let</span> j = i + <span class="c-num">1</span>; j &lt; particulas.length; j++) {
+        <span class="c-kw">const</span> dx = particulas[i].x - particulas[j].x;
+        <span class="c-kw">const</span> dy = particulas[i].y - particulas[j].y;
+        <span class="c-kw">const</span> distancia = Math.sqrt(dx * dx + dy * dy);
+
+        <span class="c-cmt">// Se estiverem a menos de 120px de distância, desenha uma linha</span>
+        <span class="c-kw">if</span> (distancia &lt; <span class="c-num">120</span>) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(<span class="c-num">139</span>, <span class="c-num">92</span>, <span class="c-num">246</span>, ${<span class="c-num">0.1</span> * (<span class="c-num">1</span> - distancia / <span class="c-num">120</span>)})`;
+          ctx.lineWidth = <span class="c-num">0.5</span>;
+          ctx.moveTo(particulas[i].x, particulas[i].y);
+          ctx.lineTo(particulas[j].x, particulas[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }</code></pre>
+                </article>
+            </div>
+        </div>
+    </section>
 
     <!-- ==================================================================
        SKILLS — Suas habilidades técnicas
