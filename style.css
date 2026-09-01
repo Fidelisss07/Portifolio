@@ -75,7 +75,6 @@ body {
   line-height: 1.7; /* Espaço entre linhas — melhora legibilidade */
   overflow-x: hidden; /* Esconde scroll horizontal */
   -webkit-font-smoothing: antialiased; /* Texto mais suave no Mac/Chrome */
-  counter-reset: secao; /* Numeração das seções: 01, 02, 03… */
 }
 
 /* Grão de filme sobre o site inteiro.
@@ -121,39 +120,13 @@ img {
 .section {
   padding: var(--espacamento-secao) 0;
   position: relative;
-  counter-increment: secao;
 }
 
-/* ------------------------------------------------------------------
-   LAYOUT EM TRILHO
-   Em vez do título centralizado acima de cada seção — o arranjo que
-   praticamente todo portfólio repete — o título vira uma coluna fixa
-   à esquerda que acompanha a rolagem, e o conteúdo corre à direita.
------------------------------------------------------------------- */
-.section > .container {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 0 60px;
-  align-items: start;
-}
-
+/* O título fica acima do conteúdo, alinhado à esquerda. Não precisa de
+   trilho fixo: a lateral já diz o tempo todo em que assunto você está. */
 .section-header {
-  position: sticky;
-  top: calc(var(--navbar-altura) + 48px);
   text-align: left;
-  margin-bottom: 0;
-}
-
-/* Numeração editorial: 01, 02, 03… gerada pelo contador do CSS */
-.section-header::before {
-  content: counter(secao, decimal-leading-zero);
-  display: block;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  color: var(--roxo-primario);
-  opacity: 0.55;
-  margin-bottom: 14px;
+  margin-bottom: 44px;
 }
 
 .section-subtitle {
@@ -166,7 +139,7 @@ img {
 }
 
 .section-title {
-  font-size: 1.85rem;
+  font-size: 2.3rem;
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 16px;
@@ -1559,16 +1532,7 @@ img {
     --espacamento-secao: 70px;
   }
 
-  /* Trilho vira empilhado: o titulo volta para cima do conteudo */
-  .section > .container {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .section-header {
-    position: static;
-    margin-bottom: 36px;
-  }
+  .section-header { margin-bottom: 30px; }
 
   /* Hero empilhado: retrato acima do texto, ambos centralizados */
   .hero-grid {
