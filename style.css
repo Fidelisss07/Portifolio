@@ -649,6 +649,65 @@ img {
   line-height: 1.6;
 }
 
+/* Ações do card: status do repositório + link para o site no ar */
+.projeto-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--borda);
+}
+
+.projeto-repo,
+.projeto-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border-radius: 9px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: var(--transicao);
+}
+
+/* Repositório fechado: informativo, sem parecer botão clicável */
+.projeto-repo--privado {
+  color: var(--texto-terciario);
+  border: 1px dashed var(--borda);
+  cursor: default;
+}
+
+.projeto-repo--privado i {
+  font-size: 0.85em;
+}
+
+.projeto-btn {
+  color: var(--texto-principal);
+  border: 1px solid var(--borda);
+  background: var(--bg-card);
+}
+
+.projeto-btn:hover {
+  border-color: var(--borda-hover);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+/* Variante cheia para o projeto que está em produção */
+.projeto-btn--destaque {
+  background: linear-gradient(135deg, var(--roxo-primario), var(--roxo-escuro));
+  border-color: transparent;
+  color: #fff;
+}
+
+.projeto-btn--destaque:hover {
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.35);
+  background: linear-gradient(135deg, var(--roxo-claro), var(--roxo-primario));
+}
+
 .projeto-tags {
   display: flex;
   flex-wrap: wrap;
