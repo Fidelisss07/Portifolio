@@ -1,442 +1,239 @@
 /* ====================================================================
-   JAVASCRIPT DO PORTFÓLIO — Gustavo Fidelis
-   
-   O QUE ESSE ARQUIVO FAZ:
-   1. Partículas animadas no fundo do Hero (usando Canvas)
-   2. Animação de digitação (formação, stack e projetos)
-   3. Navbar que muda ao rolar a página
-   4. Menu hamburger no celular
-   5. Animações de entrada ao scrollar (Scroll Reveal)
-   6. Barras de skill animadas
-   7. Formulário de contato com feedback visual
-   
-   DICA: Leia cada seção devagar, os comentários explicam tudo!
+   PORTFÓLIO — Gustavo Fidelis
+
+   O site se comporta como um editor de código:
+   1. Clicar num arquivo do explorador abre esse arquivo no painel
+   2. Cada arquivo aberto vira uma aba, que pode ser fechada
+   3. A barra de status mostra a linguagem do arquivo atual
+   4. No celular o explorador vira uma gaveta
+   5. O formulário de contato envia sem recarregar a página
+
+   Todo o conteúdo já vem no HTML: trocar de arquivo apenas mostra e
+   esconde. Isso mantém o site legível para buscadores e funcionando
+   mesmo se o JavaScript falhar.
 ==================================================================== */
 
-
-/* ====================================================================
-   CUIDADO: Todo o código só roda depois que o HTML carrega
-   DOMContentLoaded = "DOM (HTML) Carregou e está pronto para ser manipulado"
-==================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ================================================================
-  // 1. PARTÍCULAS ANIMADAS NO HERO
-  // Usamos o <canvas> como uma "tela de desenho" e o JavaScript
-  // desenha círculos que se movem e se conectam com linhas
-  // ================================================================
-  
-  const canvas = document.getElementById('particles-canvas');
-  const ctx = canvas.getContext('2d'); // "ctx" é o pincel para desenhar no canvas
-  
-  // Variável para guardar as partículas
-  let particulas = [];
+  // ==================================================================
+  // Cada arquivo tem um rótulo, um ícone e uma linguagem para o status
+  // ==================================================================
+  const ARQUIVOS = {
+    sobre:        { rotulo: 'sobre.md',         icone: 'fab fa-markdown',           linguagem: 'Markdown' },
+    projetos:     { rotulo: 'projetos.tsx',     icone: 'fab fa-react',              linguagem: 'TypeScript React' },
+    ia:           { rotulo: 'ia.md',            icone: 'fas fa-terminal',           linguagem: 'Markdown' },
+    stack:        { rotulo: 'stack.json',       icone: 'fas fa-code',               linguagem: 'JSON' },
+    certificados: { rotulo: 'certificados/',    icone: 'fas fa-folder',             linguagem: '9 arquivos' },
+    experiencia:  { rotulo: 'experiencia.log',  icone: 'fas fa-clock-rotate-left',  linguagem: 'Log' },
+    contato:      { rotulo: 'contato.env',      icone: 'fas fa-key',                linguagem: 'Env' }
+  };
 
-  // Ajusta o canvas para o tamanho da janela
-  function ajustarCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  ajustarCanvas();
+  const explorer = document.getElementById('explorer');
+  const veu = document.getElementById('veu');
+  const abasEl = document.getElementById('abas');
+  const conteudo = document.getElementById('conteudo');
+  const statusLinguagem = document.getElementById('status-linguagem');
 
-  // Quando a janela muda de tamanho, ajusta o canvas
-  window.addEventListener('resize', ajustarCanvas);
-
-  // Classe Partícula — cada bolinha na tela é uma instância dessa classe
-  class Particula {
-    constructor() {
-      this.x = Math.random() * canvas.width;          // Posição X aleatória
-      this.y = Math.random() * canvas.height;         // Posição Y aleatória
-      this.tamanho = Math.random() * 2 + 0.5;         // Tamanho entre 0.5 e 2.5
-      this.velocidadeX = (Math.random() - 0.5) * 0.5; // Velocidade horizontal
-      this.velocidadeY = (Math.random() - 0.5) * 0.5; // Velocidade vertical
-      this.opacidade = Math.random() * 0.5 + 0.1;     // Transparência
-    }
-
-    // Desenha a partícula no canvas
-    desenhar() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.tamanho, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(139, 92, 246, ${this.opacidade})`; // Cor roxa!
-      ctx.fill();
-    }
-
-    // Atualiza a posição da partícula (move ela)
-    atualizar() {
-      this.x += this.velocidadeX;
-      this.y += this.velocidadeY;
-
-      // Se sair da tela, volta pelo outro lado
-      if (this.x > canvas.width) this.x = 0;
-      if (this.x < 0) this.x = canvas.width;
-      if (this.y > canvas.height) this.y = 0;
-      if (this.y < 0) this.y = canvas.height;
-
-      this.desenhar();
-    }
-  }
-
-  // Cria as partículas (mais em telas maiores, menos em celulares)
-  function criarParticulas() {
-    particulas = [];
-    // Calcula quantidade baseado no tamanho da tela
-    const quantidade = Math.min(Math.floor((canvas.width * canvas.height) / 12000), 80);
-    
-    for (let i = 0; i < quantidade; i++) {
-      particulas.push(new Particula());
-    }
-  }
-  criarParticulas();
-
-  // Desenha linhas entre partículas próximas
-  function desenharConexoes() {
-    for (let i = 0; i < particulas.length; i++) {
-      for (let j = i + 1; j < particulas.length; j++) {
-        const dx = particulas[i].x - particulas[j].x;
-        const dy = particulas[i].y - particulas[j].y;
-        const distancia = Math.sqrt(dx * dx + dy * dy);
-
-        // Se estiverem a menos de 120px de distância, desenha uma linha
-        if (distancia < 120) {
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(139, 92, 246, ${0.1 * (1 - distancia / 120)})`;
-          ctx.lineWidth = 0.5;
-          ctx.moveTo(particulas[i].x, particulas[i].y);
-          ctx.lineTo(particulas[j].x, particulas[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  // Controle: só anima quando o Hero está visível (economiza bateria/CPU)
-  let heroVisivel = true;
-  let animacaoAtiva = false;
-
-  // Loop de animação — roda ~60 vezes por segundo
-  function animarParticulas() {
-    if (!heroVisivel) { animacaoAtiva = false; return; } // Pausa fora da tela
-    animacaoAtiva = true;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa o canvas
-
-    particulas.forEach(p => p.atualizar()); // Atualiza cada partícula
-    desenharConexoes();                      // Desenha as linhas
-
-    requestAnimationFrame(animarParticulas); // Repete no próximo frame
-  }
-  animarParticulas();
-
-  // Observa o Hero: pausa a animação quando sai da tela, retoma ao voltar
-  new IntersectionObserver((entradas) => {
-    heroVisivel = entradas[0].isIntersecting;
-    if (heroVisivel && !animacaoAtiva) animarParticulas();
-  }).observe(document.querySelector('.hero'));
-
-  // Recria partículas quando a tela muda de tamanho
-  window.addEventListener('resize', criarParticulas);
+  // Arquivos abertos, na ordem em que apareceram nas abas
+  let abertos = ['sobre'];
+  let atual = 'sobre';
 
 
-  // ================================================================
-  // 2. ANIMAÇÃO DE DIGITAÇÃO
-  // Simula alguém digitando e apagando textos
-  // ================================================================
-  
-  const elementoDigitacao = document.getElementById('typing-text');
-  
-  // GUSTAVO: Mude os textos abaixo para o que quiser!
-  const textos = [
-    'Ciência da Computação · FIAP',
-    'React • Next.js • Node.js',
-    'Construindo E-commerces completos',
-    'Desenvolvendo com Claude Code',
-    'Apaixonado por Tecnologia'
-  ];
-  
-  let indiceTexto = 0;    // Qual texto está sendo digitado
-  let indiceLetra = 0;    // Qual letra está sendo digitada
-  let apagando = false;   // Está apagando ou digitando?
-  let velocidade = 100;   // Velocidade em milissegundos
+  // ==================================================================
+  // 1. TROCAR DE ARQUIVO
+  // ==================================================================
+  function abrirArquivo(id, opcoes = {}) {
+    if (!ARQUIVOS[id]) return;
 
-  function digitarTexto() {
-    const textoAtual = textos[indiceTexto];
-    
-    if (!apagando) {
-      // DIGITANDO: adiciona uma letra por vez
-      elementoDigitacao.textContent = textoAtual.substring(0, indiceLetra + 1);
-      indiceLetra++;
-      velocidade = 80 + Math.random() * 40; // Velocidade variável (mais realista)
-      
-      // Se terminou de digitar, espera 2 segundos e começa a apagar
-      if (indiceLetra === textoAtual.length) {
-        apagando = true;
-        velocidade = 2000; // Pausa antes de apagar
-      }
-    } else {
-      // APAGANDO: remove uma letra por vez
-      elementoDigitacao.textContent = textoAtual.substring(0, indiceLetra - 1);
-      indiceLetra--;
-      velocidade = 40; // Apaga mais rápido
-      
-      // Se terminou de apagar, vai para o próximo texto
-      if (indiceLetra === 0) {
-        apagando = false;
-        indiceTexto = (indiceTexto + 1) % textos.length; // Volta ao início quando acabar
-        velocidade = 500; // Pausa antes de digitar o próximo
-      }
-    }
-    
-    setTimeout(digitarTexto, velocidade); // Chama a si mesmo após o delay
-  }
-  
-  // Começa a digitação após 1 segundo
-  setTimeout(digitarTexto, 1000);
+    atual = id;
+    if (!abertos.includes(id)) abertos.push(id);
 
-
-  // ================================================================
-  // 3. NAVBAR — Muda de estilo ao rolar a página
-  // ================================================================
-  
-  const navbar = document.getElementById('navbar');
-  const navLinks = document.querySelectorAll('.navbar-link');
-  const secoes = document.querySelectorAll('.section');
-
-  window.addEventListener('scroll', () => {
-    // Adiciona classe "scrolled" quando rolar mais de 50px
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-
-    // Destaca o link da seção que está visível na tela
-    let secaoAtual = '';
-    secoes.forEach(secao => {
-      const topo = secao.offsetTop - 100;
-      const altura = secao.offsetHeight;
-      if (window.scrollY >= topo && window.scrollY < topo + altura) {
-        secaoAtual = secao.getAttribute('id');
+    // Painel: mostra só o arquivo atual
+    conteudo.querySelectorAll('.arq').forEach(arq => {
+      const ativo = arq.dataset.conteudo === id;
+      arq.hidden = !ativo;
+      if (ativo) {
+        // Reinicia a animação de entrada a cada abertura
+        arq.style.animation = 'none';
+        void arq.offsetWidth;
+        arq.style.animation = '';
       }
     });
 
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${secaoAtual}`) {
-        link.classList.add('active');
-      }
+    // Explorador: destaca o arquivo
+    document.querySelectorAll('.arquivo').forEach(botao => {
+      botao.classList.toggle('ativo', botao.dataset.arquivo === id);
     });
-  });
 
+    statusLinguagem.textContent = ARQUIVOS[id].linguagem;
+    conteudo.scrollTop = 0;
+    desenharAbas();
 
-  // ================================================================
-  // 4. MENU HAMBURGER (celular)
-  // ================================================================
-  
-  const navbarToggle = document.getElementById('navbar-toggle');
-  const navbarMenu = document.getElementById('navbar-menu');
-
-  navbarToggle.addEventListener('click', () => {
-    navbarToggle.classList.toggle('active');
-    navbarMenu.classList.toggle('open');
-  });
-
-  // Fecha o menu ao clicar em um link
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      navbarToggle.classList.remove('active');
-      navbarMenu.classList.remove('open');
-    });
-  });
-
-
-  // ================================================================
-  // 5. SCROLL REVEAL — Animação de entrada ao scrollar
-  // Quando um elemento com a classe "reveal" entra na tela,
-  // ele ganha a classe "active" e aparece com uma animação suave
-  // ================================================================
-  
-  // Adiciona a classe "reveal" em todos os elementos que devem animar
-  const elementosParaAnimar = document.querySelectorAll(
-    '.section-header, .sobre-content, .projeto-card, .skills-category, ' +
-    '.ia-intro, .ia-card, ' +
-    '.timeline-item, .certificados-grupo-header, .certificado-card, .contato-wrapper'
-  );
-  
-  elementosParaAnimar.forEach(el => el.classList.add('reveal'));
-
-  // ESCALONAMENTO: irmãos entram em cascata, não todos de uma vez.
-  // Sem isso, oito certificados aparecem juntos e parece um bloco piscando.
-  document.querySelectorAll('.reveal').forEach(el => {
-    const irmaos = Array.from(el.parentElement.children)
-      .filter(filho => filho.classList.contains('reveal'));
-    const posicao = irmaos.indexOf(el);
-    if (posicao > 0) {
-      // 70ms entre cada um, com teto para listas longas não demorarem demais
-      el.style.setProperty('--atraso-reveal', Math.min(posicao * 70, 560) + 'ms');
+    // Mantém o endereço compartilhável sem dar salto na página
+    if (!opcoes.semHistorico) {
+      history.replaceState(null, '', '#' + id);
     }
-  });
-
-  // IntersectionObserver: "observa" quando um elemento entra na tela
-  const observadorScroll = new IntersectionObserver((entradas) => {
-    entradas.forEach(entrada => {
-      if (entrada.isIntersecting) {
-        const alvo = entrada.target;
-        alvo.classList.add('active');
-        observadorScroll.unobserve(alvo); // anima uma vez só
-
-        // Ao terminar, tira as classes: o elemento volta ao estado natural
-        // e os efeitos de hover do card voltam a funcionar sem disputa.
-        alvo.addEventListener('animationend', () => {
-          alvo.classList.remove('reveal', 'active');
-          alvo.style.removeProperty('--atraso-reveal');
-        }, { once: true });
-      }
-    });
-  }, {
-    threshold: 0.1,   // O trigger acontece quando 10% do elemento é visível
-    rootMargin: '0px 0px -50px 0px' // Começa a animação um pouco antes
-  });
-
-  // Observa cada elemento
-  document.querySelectorAll('.reveal').forEach(el => {
-    observadorScroll.observe(el);
-  });
+  }
 
 
-  // ================================================================
-  // 5b. FOCO POR ROLAGEM
-  // O card que está no centro da tela ganha destaque. Diferente de um
-  // efeito de mouse, isso também funciona no celular.
-  // ================================================================
+  // ==================================================================
+  // 2. ABAS
+  // ==================================================================
+  function desenharAbas() {
+    abasEl.textContent = '';
 
-  const cardsFocaveis = document.querySelectorAll(
-    '.projeto-card, .ia-card, .certificado-card, .skill-item, .timeline-content'
-  );
+    abertos.forEach(id => {
+      const dados = ARQUIVOS[id];
 
-  const observadorFoco = new IntersectionObserver((entradas) => {
-    entradas.forEach(entrada => {
-      entrada.target.classList.toggle('em-foco', entrada.isIntersecting);
-    });
-  }, {
-    // Faixa estreita no meio da tela: só o que passa por ali acende
-    rootMargin: '-42% 0px -42% 0px'
-  });
+      const aba = document.createElement('button');
+      aba.className = 'aba' + (id === atual ? ' ativa' : '');
+      aba.setAttribute('role', 'tab');
+      aba.setAttribute('aria-selected', String(id === atual));
+      aba.addEventListener('click', () => abrirArquivo(id));
 
-  cardsFocaveis.forEach(el => observadorFoco.observe(el));
+      const icone = document.createElement('i');
+      icone.className = dados.icone;
+      aba.appendChild(icone);
+      aba.appendChild(document.createTextNode(dados.rotulo));
 
-
-  // ================================================================
-  // 6. BARRAS DE SKILL ANIMADAS
-  // Quando a seção de skills aparece na tela, as barras se preenchem
-  // ================================================================
-  
-  const barrasSkill = document.querySelectorAll('.skill-progress');
-  let skillsAnimadas = false;
-
-  const observadorSkills = new IntersectionObserver((entradas) => {
-    entradas.forEach(entrada => {
-      if (entrada.isIntersecting && !skillsAnimadas) {
-        skillsAnimadas = true;
-        barrasSkill.forEach((barra, indice) => {
-          // Anima cada barra com um pequeno atraso entre elas
-          setTimeout(() => {
-            const progresso = barra.getAttribute('data-progress');
-            barra.style.width = `${progresso}%`;
-          }, indice * 200); // 200ms de delay entre cada uma
+      // A última aba não pode ser fechada: o painel ficaria vazio
+      if (abertos.length > 1) {
+        const fechar = document.createElement('span');
+        fechar.className = 'aba-fechar';
+        fechar.textContent = '×';
+        fechar.setAttribute('role', 'button');
+        fechar.setAttribute('aria-label', 'Fechar ' + dados.rotulo);
+        fechar.addEventListener('click', evento => {
+          evento.stopPropagation();
+          fecharAba(id);
         });
+        aba.appendChild(fechar);
       }
-    });
-  }, { threshold: 0.3 });
 
-  // Observa a seção de skills
-  const secaoSkills = document.querySelector('.skills');
-  if (secaoSkills) {
-    observadorSkills.observe(secaoSkills);
+      abasEl.appendChild(aba);
+    });
+
+    const ativa = abasEl.querySelector('.aba.ativa');
+    if (ativa) ativa.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+
+  function fecharAba(id) {
+    const posicao = abertos.indexOf(id);
+    abertos = abertos.filter(a => a !== id);
+
+    // Fechando a aba atual, vai para a vizinha
+    if (atual === id) {
+      abrirArquivo(abertos[Math.max(0, posicao - 1)]);
+    } else {
+      desenharAbas();
+    }
   }
 
 
-  // ================================================================
-  // 7. FORMULÁRIO DE CONTATO (envio real via Formspree)
-  // O formulário envia os dados para o Formspree, que repassa a
-  // mensagem para o e-mail do Gustavo. O ID fica no atributo
-  // "action" do <form> no index.html.
-  // ================================================================
+  // ==================================================================
+  // 3. EXPLORADOR
+  // ==================================================================
+  document.querySelectorAll('.arquivo').forEach(botao => {
+    botao.addEventListener('click', () => {
+      abrirArquivo(botao.dataset.arquivo);
+      fecharGaveta();
+    });
+  });
 
-  const formulario = document.getElementById('contato-form');
 
-  formulario.addEventListener('submit', async (e) => {
-    e.preventDefault(); // Impede o reload padrão da página
+  // ==================================================================
+  // 4. GAVETA NO CELULAR
+  // ==================================================================
+  const menuBtn = document.getElementById('menu-btn');
 
-    const botao = formulario.querySelector('button[type="submit"]');
-    const textoOriginal = botao.innerHTML;
+  function abrirGaveta() {
+    explorer.classList.add('aberto');
+    veu.hidden = false;
+    menuBtn.setAttribute('aria-expanded', 'true');
+  }
 
-    // Feedback visual: mostra que está "enviando"
-    botao.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+  function fecharGaveta() {
+    explorer.classList.remove('aberto');
+    veu.hidden = true;
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  menuBtn.addEventListener('click', () => {
+    if (explorer.classList.contains('aberto')) fecharGaveta();
+    else abrirGaveta();
+  });
+
+  veu.addEventListener('click', fecharGaveta);
+
+  document.addEventListener('keydown', evento => {
+    if (evento.key === 'Escape') fecharGaveta();
+  });
+
+
+  // ==================================================================
+  // 5. ATALHOS DE TECLADO
+  // Alt + seta troca de arquivo, como em editor de verdade
+  // ==================================================================
+  const ordem = Object.keys(ARQUIVOS);
+
+  document.addEventListener('keydown', evento => {
+    if (!evento.altKey) return;
+    if (evento.key !== 'ArrowRight' && evento.key !== 'ArrowLeft') return;
+
+    evento.preventDefault();
+    const passo = evento.key === 'ArrowRight' ? 1 : -1;
+    const indice = (ordem.indexOf(atual) + passo + ordem.length) % ordem.length;
+    abrirArquivo(ordem[indice]);
+  });
+
+
+  // ==================================================================
+  // 6. FORMULÁRIO DE CONTATO
+  // ==================================================================
+  const form = document.getElementById('contato-form');
+
+  form.addEventListener('submit', async evento => {
+    evento.preventDefault();
+
+    const botao = form.querySelector('.btn-enviar');
+    const original = botao.innerHTML;
     botao.disabled = true;
-    botao.style.opacity = '0.7';
+    botao.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Enviando';
 
     try {
-      // Envia os dados do formulário para o Formspree
-      const resposta = await fetch(formulario.action, {
+      const resposta = await fetch(form.action, {
         method: 'POST',
-        body: new FormData(formulario),
-        headers: { 'Accept': 'application/json' }
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
       });
 
-      if (!resposta.ok) throw new Error('Falha no envio');
+      if (!resposta.ok) throw new Error('Formspree respondeu ' + resposta.status);
 
-      // Sucesso: mensagem enviada de verdade
-      botao.innerHTML = '<i class="fas fa-check"></i> Enviado!';
-      botao.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
-      formulario.reset(); // Limpa o formulário
+      botao.innerHTML = '<i class="fas fa-check"></i> Mensagem enviada';
+      form.reset();
     } catch (erro) {
-      // Erro: algo deu errado no envio
-      botao.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Erro ao enviar';
-      botao.style.background = 'linear-gradient(135deg, #ef4444, #b91c1c)';
+      // Se o envio falhar, o e-mail direto continua sendo um caminho
+      botao.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Falhou — use o e-mail';
+      console.error('Envio do formulário falhou:', erro);
     }
 
-    // Volta o botão ao normal após 3 segundos
     setTimeout(() => {
-      botao.innerHTML = textoOriginal;
       botao.disabled = false;
-      botao.style.opacity = '1';
-      botao.style.background = '';
-    }, 3000);
+      botao.innerHTML = original;
+    }, 4000);
   });
 
 
-  // ================================================================
-  // 8. HOVER 3D NOS CARDS DE PROJETO
-  // Quando passa o mouse sobre o card, ele inclina suavemente
-  // ================================================================
-  
-  const cardsComTilt = document.querySelectorAll('[data-tilt]');
-  
-  cardsComTilt.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;  // Posição X do mouse dentro do card
-      const y = e.clientY - rect.top;   // Posição Y do mouse dentro do card
-      
-      // Calcula o ângulo de inclinação baseado na posição do mouse
-      const centroX = rect.width / 2;
-      const centroY = rect.height / 2;
-      const rotateX = (y - centroY) / 20; // Inclinação vertical
-      const rotateY = (centroX - x) / 20; // Inclinação horizontal
-      
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-    });
+  // ==================================================================
+  // 7. ABERTURA
+  // Respeita o endereço compartilhado (#projetos, #contato…)
+  // ==================================================================
+  const inicial = location.hash.replace('#', '');
+  abrirArquivo(ARQUIVOS[inicial] ? inicial : 'sobre', { semHistorico: true });
 
-    // Quando o mouse sai, volta ao normal suavemente
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
-      card.style.transition = 'transform 0.5s ease';
-    });
-
-    // Quando o mouse entra, remove a transição para ser responsivo
-    card.addEventListener('mouseenter', () => {
-      card.style.transition = 'none';
-    });
+  window.addEventListener('hashchange', () => {
+    const alvo = location.hash.replace('#', '');
+    if (ARQUIVOS[alvo] && alvo !== atual) abrirArquivo(alvo, { semHistorico: true });
   });
 
-}); // Fim do DOMContentLoaded
+});
