@@ -1,8 +1,7 @@
-# Imagens originais dos certificados.
-# O site usa apenas as versoes otimizadas em .webp (cert-*.webp), que sao
-# versionadas. Os PNGs originais ficam na maquina local como backup.
-Certificado*.png
-Certificado*.lnk
+# Arquivos originais dos certificados: .png, .pdf, .lnk e ate sem extensao
+# (o da FIAP veio assim). Ficam na maquina local como backup; o site serve
+# apenas as versoes otimizadas em .webp (cert-*.webp), essas sim versionadas.
+Certificado*
 cert-*-intermediario.png
 
 # Arquivos de sistema do Windows/macOS
