@@ -298,6 +298,30 @@
                             </a>
                         </div>
                     </div>
+                        <button class="caso-btn" data-caso="balu" aria-expanded="false">
+                            <i class="fas fa-chevron-down"></i> Ver estudo de caso
+                        </button>
+
+                        <div class="caso" id="caso-balu" hidden>
+                                <div class="caso-bloco">
+                                    <p class="caso-rot">O contexto</p>
+                                    <p class="caso-txt">Primeiro projeto freelance pago: uma loja virtual de impressão 3D encomendada por uma cliente externa, construída do zero até o ar.</p>
+                                </div>
+                                <div class="caso-bloco">
+                                    <p class="caso-rot">O que construí</p>
+                                    <p class="caso-txt">Catálogo de produtos, checkout com dois meios de pagamento, painel administrativo para gerir produtos e pedidos, upload com otimização de imagens e disparo de e-mails de confirmação.</p>
+                                </div>
+                                <div class="caso-bloco">
+                                    <p class="caso-rot">Por que essa stack</p>
+                                    <p class="caso-txt">Firebase para não manter servidor próprio — Firestore, Auth e Storage num só lugar, adequado ao orçamento de um projeto pequeno. Stripe para cartão, Cloudinary para servir imagem leve, já que loja de produto vive de foto.</p>
+                                </div>
+                                <div class="caso-bloco">
+                                    <p class="caso-rot">O desafio</p>
+                                    <p class="caso-txt">Checkout duplo: PIX e cartão têm fluxos de confirmação diferentes. O cartão retorna na hora; o PIX depende de conciliação. Os dois precisam terminar no mesmo estado de pedido.</p>
+                                </div>
+                            <p class="caso-estado caso-estado--pausado"><i class="fas fa-circle"></i> Entregue e no ar. O catálogo nunca foi populado pela cliente e o projeto está sem manutenção ativa.</p>
+                        </div>
+
                 </article>
 
                 <!-- PROJETO 2 — AMXWatch -->
@@ -337,6 +361,30 @@
                             </a>
                         </div>
                     </div>
+                        <button class="caso-btn" data-caso="amx" aria-expanded="false">
+                            <i class="fas fa-chevron-down"></i> Ver estudo de caso
+                        </button>
+
+                        <div class="caso" id="caso-amx" hidden>
+                                <div class="caso-bloco">
+                                    <p class="caso-rot">O contexto</p>
+                                    <p class="caso-txt">E-commerce completo para uma loja de relógios em fase de abertura, com necessidade de vender e enviar para todo o Brasil desde o primeiro dia.</p>
+                                </div>
+                                <div class="caso-bloco">
+                                    <p class="caso-rot">O que construí</p>
+                                    <p class="caso-txt">Catálogo, checkout, painel administrativo com produtos, pedidos e cupons, sistema de avaliações e favoritos, fluxos de consentimento exigidos pela LGPD e otimização de SEO técnico.</p>
+                                </div>
+                                <div class="caso-bloco">
+                                    <p class="caso-rot">Por que essa stack</p>
+                                    <p class="caso-txt">Supabase por dar PostgreSQL de verdade com autenticação embutida — diferente do BaLu 3D, aqui as consultas de catálogo e pedido pediam relação entre tabelas. GSAP para as animações de interface sem pesar o carregamento.</p>
+                                </div>
+                                <div class="caso-bloco">
+                                    <p class="caso-rot">O desafio</p>
+                                    <p class="caso-txt">Frete em tempo real: a API do Melhor Envio precisa responder dentro do checkout, sem travar a compra se demorar ou falhar. Foram quatro serviços externos conversando no mesmo fluxo.</p>
+                                </div>
+                            <p class="caso-estado caso-estado--ativo"><i class="fas fa-circle"></i> Em produção. A loja está em fase de abertura.</p>
+                        </div>
+
                 </article>
             </div>
                 </div>

@@ -465,4 +465,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+
+  // ================================================================
+  // ESTUDO DE CASO — abre e fecha o raciocínio de cada projeto
+  // ================================================================
+
+  document.querySelectorAll('.caso-btn').forEach(botao => {
+    botao.addEventListener('click', () => {
+      const caso = document.getElementById('caso-' + botao.dataset.caso);
+      const abrindo = caso.hidden;
+      caso.hidden = !abrindo;
+      botao.setAttribute('aria-expanded', String(abrindo));
+      botao.lastChild.textContent = abrindo ? ' Fechar estudo de caso' : ' Ver estudo de caso';
+    });
+  });
+
 }); // Fim do DOMContentLoaded

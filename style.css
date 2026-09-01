@@ -941,6 +941,77 @@ img {
 
 
 /* ====================================================================
+   ESTUDO DE CASO — o raciocínio por trás de cada projeto
+==================================================================== */
+.caso-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 14px;
+  padding: 9px 15px;
+  background: transparent;
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  color: var(--texto-secundario);
+  font-family: var(--fonte);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transicao);
+}
+
+.caso-btn:hover {
+  color: var(--texto-principal);
+  border-color: var(--borda-hover);
+  background: var(--roxo-bg);
+}
+
+.caso-btn i { font-size: 0.72rem; transition: transform var(--transicao); }
+.caso-btn[aria-expanded="true"] i { transform: rotate(180deg); }
+
+.caso {
+  margin-top: 16px;
+  padding-top: 18px;
+  border-top: 1px solid var(--borda);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: casoAbre 0.35s ease both;
+}
+
+@keyframes casoAbre {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.caso-rot {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--roxo-claro);
+  margin-bottom: 5px;
+}
+
+.caso-txt { font-size: 0.9rem; color: var(--texto-secundario); line-height: 1.7; }
+
+.caso-estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.82rem;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--borda);
+  background: var(--bg-card);
+  color: var(--texto-secundario);
+}
+
+.caso-estado i { font-size: 0.5rem; }
+.caso-estado--ativo i { color: #4ade80; }
+.caso-estado--pausado i { color: var(--texto-terciario); }
+
+/* ====================================================================
    SKILLS — Habilidades
 ==================================================================== */
 .skills-container {
