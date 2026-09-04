@@ -223,6 +223,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'auto' });
     navbar.classList.remove('scrolled');
 
+    // Na home o proprio hero ja tem o botao "Meu Curriculo". O da barra so
+    // aparece nos outros paineis, onde nao existe outro caminho para o PDF.
+    navbar.classList.toggle('na-home', id === 'hero');
+
     if (!opcoes.semHistorico) history.replaceState(null, '', '#' + id);
   }
 

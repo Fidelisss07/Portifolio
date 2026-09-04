@@ -358,6 +358,11 @@ img {
   transition: var(--transicao);
 }
 
+/* Escondido na home: o hero ja oferece o mesmo link em destaque */
+.navbar.na-home .navbar-cv {
+  display: none;
+}
+
 .navbar-cv:hover {
   background: var(--roxo-primario);
   color: #ffffff;
