@@ -409,84 +409,75 @@
 
                 </article>
 
-                <!-- PROJETO 3 — Radar de Vagas -->
-                <article class="projeto-card projeto-card--largo glass-card">
+                <!-- PROJETO 3 — DebugArena -->
+                <article class="projeto-card glass-card" data-tilt>
+                    <div class="projeto-image">
+                        <img src="debugarena-logo.webp" alt="Mascote do DebugArena" class="projeto-logo" loading="lazy">
+                        <div class="projeto-overlay">
+                            <div class="projeto-links">
+                                <a href="https://debugarena-omega.vercel.app" class="projeto-link" title="Ver demo ao vivo"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="https://github.com/Fidelisss07/DebugArena" class="projeto-link" title="Ver código"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="projeto-info">
-                        <div class="radar-topo">
-                            <div>
-                                <h3 class="projeto-titulo">Radar de Vagas</h3>
-                                <p class="radar-sub">Agregador de vagas com coleta automática</p>
-                            </div>
-                            <span class="radar-estado">
-                                <i class="fas fa-circle"></i> Em construção · fase 1 de 4
-                            </span>
-                        </div>
-
-                        <div class="radar-blocos">
-                            <div class="radar-bloco">
-                                <p class="radar-rot">O problema</p>
-                                <p class="radar-txt">
-                                    Quem procura estágio abre seis sites por dia e relê as mesmas vagas. Os
-                                    portais não conversam entre si, não avisam quando entra vaga nova e não
-                                    deixam filtrar por contrato de entrada — estágio e Jovem Aprendiz ficam
-                                    perdidos no meio de 80 mil anúncios.
-                                </p>
-                            </div>
-
-                            <div class="radar-bloco">
-                                <p class="radar-rot">Como resolvo</p>
-                                <p class="radar-txt">
-                                    Um coletor roda sozinho de hora em hora e guarda só o que é novo. A API
-                                    trava em 10.000 resultados por consulta, então a varredura é fatiada:
-                                    centenas de buscas estreitas cruzando cargo, cidade e tipo de contrato,
-                                    unidas depois sem repetição. Quem usa filtra por área, lugar, contrato e
-                                    modelo — e salva o filtro para ser avisado.
-                                </p>
-                            </div>
-
-                            <div class="radar-bloco">
-                                <p class="radar-rot">Onde quero chegar</p>
-                                <p class="radar-txt">
-                                    Cobrir todos os setores, não só tecnologia: a base tem vagas de enfermagem
-                                    a motorista, e limitar a TI jogaria fora a maior parte dela. A meta é que
-                                    um estudante configure o filtro uma vez e nunca mais precise abrir portal
-                                    de vaga.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="radar-numeros">
-                            <div><span class="radar-n">80 mil</span><span class="radar-l">vagas na base</span></div>
-                            <div><span class="radar-n">6</span><span class="radar-l">tipos de contrato</span></div>
-                            <div><span class="radar-n">12</span><span class="radar-l">setores mapeados</span></div>
-                            <div><span class="radar-n">27</span><span class="radar-l">estados cobertos</span></div>
-                        </div>
-
-                        <div class="projeto-tags">
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">Node</span>
-                            <span class="tag">SQLite</span>
-                            <span class="tag">Next.js</span>
-                            <span class="tag">Supabase</span>
-                            <span class="tag">Coleta agendada</span>
-                        </div>
-
-                        <p class="radar-nota">
-                            Sem dependências externas: roda no TypeScript e no SQLite nativos do Node. Só usa
-                            fonte que permite coleta — portais que bloqueiam robôs ficaram de fora de propósito.
+                        <h3 class="projeto-titulo">DebugArena</h3>
+                        <p class="projeto-descricao">
+                            Plataforma em português para aprender programação investigando bugs. São 24 investigações
+                            em áreas como Front-end, Back-end, Cybersecurity e DevOps, com pistas progressivas e
+                            correção conferida no servidor.
                         </p>
+                        <div class="projeto-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Tailwind</span>
+                            <span class="tag">Supabase</span>
+                            <span class="tag">Canvas</span>
+                        </div>
 
                         <div class="projeto-acoes">
-                            <span class="projeto-repo projeto-repo--aberto">
-                                <i class="fas fa-unlock"></i> Código aberto
-                            </span>
-                            <a href="https://github.com/Fidelisss07/radar-de-vagas" class="projeto-btn"
+                            <a href="https://github.com/Fidelisss07/DebugArena" class="projeto-repo projeto-repo--aberto"
                                 target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-github"></i> Ver no GitHub
+                                <i class="fas fa-unlock"></i> Código aberto
+                            </a>
+                            <a href="https://debugarena-omega.vercel.app" class="projeto-btn" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fas fa-arrow-up-right-from-square"></i> Ver site
                             </a>
                         </div>
                     </div>
+                        <button class="caso-btn" data-caso="debugarena" aria-expanded="false">
+                            <i class="fas fa-chevron-down"></i> Ver estudo de caso
+                        </button>
+
+                        <div class="caso" id="caso-debugarena" hidden>
+                                <div class="caso-bloco">
+                                    <p class="caso-rot">O contexto</p>
+                                    <p class="caso-txt">Curso ensina a escrever código; ninguém ensina a ler código quebrado. Mas na vaga real o dia começa com um bug que já está no ar, e é essa a habilidade que falta em quem está entrando.</p>
+                                </div>
+                                <div class="caso-bloco">
+                                    <p class="caso-rot">O que construí</p>
+                                    <p class="caso-txt">24 investigações em dois níveis. Cada uma entrega o código, a evidência do erro e o que era esperado; quem investiga pode abrir pistas aos poucos antes de responder. A correção acontece no servidor — o gabarito nunca é enviado ao navegador, senão bastava abrir o DevTools para vencer.</p>
+                                </div>
+                                <div class="caso-bloco">
+                                    <p class="caso-rot">Por que essa stack</p>
+                                    <p class="caso-txt">React com TypeScript e Tailwind pela velocidade de montar interface. Supabase porque a avaliação precisa de Postgres: gabarito e tentativa ficam em tabelas privadas, com a conferência dentro do banco. As fontes são servidas do próprio domínio, sem depender do Google.</p>
+                                </div>
+                                <div class="caso-bloco">
+                                    <p class="caso-rot">O desafio</p>
+                                    <p class="caso-txt">A home monta o mascote em 240 quadros conforme você rola. Baixar 240 imagens seria inviável, então elas vêm num pacote só, com no máximo quatro decodificando por vez e 32 quadros vivos na memória. Quem pede movimento reduzido ou economia de dados recebe uma imagem estática no lugar.</p>
+                                </div>
+                            <p class="caso-estado caso-estado--pausado"><i class="fas fa-circle"></i> Em construção. As investigações já funcionam sem cadastro; login e progresso salvo estão prontos no código, esperando o banco ser ligado.</p>
+                        </div>
+
                 </article>
+
             </div>
                 </div>
         </div>
