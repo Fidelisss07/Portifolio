@@ -938,9 +938,11 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  /* Irmão de .projeto-info, então não herda os 24px dela: sem esta margem o
-     botão encosta na borda do card. */
-  margin: 14px 24px 0;
+  /* Irmão de .projeto-info, então não herda os 24px dela: sem estas margens o
+     botão encosta nas bordas do card. A de cima é zero porque o padding de
+     .projeto-info já dá 24px; somar 14 abria o dobro do respiro usado entre os
+     outros blocos. */
+  margin: 0 24px 16px;
   padding: 9px 15px;
   background: transparent;
   border: 1px solid var(--borda);
