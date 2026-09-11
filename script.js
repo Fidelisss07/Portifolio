@@ -443,7 +443,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const cardsComTilt = document.querySelectorAll('[data-tilt]');
   
   cardsComTilt.forEach(card => {
+    // Card com estudo de caso aberto fica parado: inclinar um bloco de
+    // texto longo em 3D atrapalha a leitura
     card.addEventListener('mousemove', (e) => {
+      if (card.querySelector('.caso:not([hidden])')) return;
+
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;  // Posição X do mouse dentro do card
       const y = e.clientY - rect.top;   // Posição Y do mouse dentro do card
@@ -451,8 +455,11 @@ document.addEventListener('DOMContentLoaded', () => {
       // Calcula o ângulo de inclinação baseado na posição do mouse
       const centroX = rect.width / 2;
       const centroY = rect.height / 2;
-      const rotateX = (y - centroY) / 20; // Inclinação vertical
-      const rotateY = (centroX - x) / 20; // Inclinação horizontal
+      // Proporção em vez de divisão fixa: dividir por 20 fazia o ângulo
+      // crescer junto com o card, e um card alto chegava a inclinar 30 graus
+      const LIMITE = 6; // graus no canto
+      const rotateX = ((y - centroY) / centroY) * LIMITE;
+      const rotateY = ((centroX - x) / centroX) * LIMITE;
       
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
     });
