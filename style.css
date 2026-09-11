@@ -938,7 +938,9 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  margin-top: 14px;
+  /* Irmão de .projeto-info, então não herda os 24px dela: sem esta margem o
+     botão encosta na borda do card. */
+  margin: 14px 24px 0;
   padding: 9px 15px;
   background: transparent;
   border: 1px solid var(--borda);
@@ -962,7 +964,9 @@ img {
 
 .caso {
   margin-top: 16px;
-  padding-top: 18px;
+  /* Mesmo recuo lateral de .projeto-info, mais respiro no rodapé: o painel ia
+     de um canto ao outro do card, com o texto colado nos dois lados. */
+  padding: 18px 24px 24px;
   border-top: 1px solid var(--borda);
   display: flex;
   flex-direction: column;
