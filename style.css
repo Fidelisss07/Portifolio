@@ -741,6 +741,11 @@ img {
 .projeto-card {
   overflow: hidden;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  /* Coluna para o botão de estudo de caso encostar no rodapé. Os cards têm a
+     mesma altura pelo grid, mas o conteúdo só escorria: descrição uma linha
+     mais longa já desalinhava o botão em relação aos vizinhos. */
+  display: flex;
+  flex-direction: column;
 }
 
 .projeto-card:hover {
@@ -751,6 +756,7 @@ img {
 .projeto-image {
   position: relative;
   height: 200px;
+  flex: none; /* num container flex, a altura fixa seria espremida */
   overflow: hidden;
 }
 
@@ -935,7 +941,7 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  margin-top: 14px;
+  margin-top: auto; /* empurra para o rodapé: alinha entre cards vizinhos */
   padding: 9px 15px;
   background: transparent;
   border: 1px solid var(--borda);
